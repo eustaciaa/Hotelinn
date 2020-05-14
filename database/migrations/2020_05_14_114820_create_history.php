@@ -15,6 +15,12 @@ class CreateHistory extends Migration
     {
         Schema::create('history', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('hotel_id')->constrained('hotel');
+            $table->integer('total');
+            $table->date('bookdate');
+            $table->date('checkIn')->nullable($value = true);
+            $table->date('checkOut')->nullable($value = true);
+            $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });
     }
