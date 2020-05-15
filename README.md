@@ -22,3 +22,6 @@ php artisan migrate:fresh --seed
 # Update List
 - sudah ada buat check hotel berdasarkan provinsi
 - sudah ada buat check untuk liat room
+- sudah bisa rent room
+- sudah bisa check history
+- penambahan history di header

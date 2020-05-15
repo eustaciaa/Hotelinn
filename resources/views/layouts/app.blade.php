@@ -64,6 +64,15 @@
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>
+                                    <a class="dropdown-item"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('history-form').submit();">
+                                        {{ __('history') }}
+                                    </a>
+
+                                    <form id="history-form" action="/history" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
                                 </div>
                             </li>
                         @endguest
