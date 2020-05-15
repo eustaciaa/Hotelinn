@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\alamat;
+use App\provinsi;
+use App\hotel;
+use App\room_details;
 
 class HomeController extends Controller
 {
@@ -23,10 +27,23 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $provinsi = provinsi::all();
+
+        return view('home')->with('provinsis',$provinsi);
+
     }
 
     public function getHotel(Request $request){
-        return dd($request);
+        $id = $request->input('kotaId');
+        $alamat = alamat::where('provinsi_id',$id)->get();
+
+        return view('list')->with('alamats',$alamat);
+    }
+
+    public function rentHotel(Request $request){
+        $id = $request->input('hotelId');
+        $rooms = room_details::where('hotel_id',$id)->get();
+
+        return view('room')->with('roomdetails',$rooms);
     }
 }

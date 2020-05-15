@@ -21,3 +21,5 @@ Route::get('/','HomeController@index');
 
 Route::get('/getHotel','HomeController@getHotel');
 
+Route::get('/rentHotel','HomeController@rentHotel');
+
