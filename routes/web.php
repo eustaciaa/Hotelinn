@@ -13,4 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/home', 'HomeController@index');
+
+
+Auth::routes();
+
+Route::get('/home','HomeController@showHome');
+
+Route::get('/','HomeController@index');
+
