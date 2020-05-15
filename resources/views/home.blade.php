@@ -4,17 +4,33 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Dashboard</div>
+                <div class="card">
+                    <div class="card-header">Search For Hotel</div>
 
                 <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+                    <form method="GET" action="/getHotel">
+                        @csrf
 
-                    You are logged in!
+                        <div class="form-group row">
+                            <label for="kota" class="col-md-4 col-form-label text-md-right">Kota</label>
+
+                            <div class="col-md-6">
+                                <select class="form-control" name="kotaId" id="kota">
+                                    @foreach ($provinsis as $provinsi)
+                                        <option value="{{ $provinsi->id }}"> {{ $provinsi->namaProvinsi }} </option>
+                                    @endforeach
+                                  </select>
+                            </div>
+
+                        </div>
+
+                        <div class="form-group row mb-0">
+                            <div class="col-md-6 offset-md-4">
+                                <button type="submit" class="btn btn-primary">
+                                    Search
+                                </button>
+                            </div>
+                    </form>
                 </div>
             </div>
         </div>
