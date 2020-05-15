@@ -17,5 +17,14 @@ class hotel extends Model
         'name', 'rate', 'photo', 'review'
     ];
 
+    public function alamat()
+    {
+        return $this->hasOne('App\alamat');
+    }
+
+    public function room()
+    {
+        return $this->hasMany('App\room_details');
+    }
 
 }
