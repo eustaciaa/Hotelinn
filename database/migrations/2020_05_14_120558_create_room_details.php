@@ -15,7 +15,7 @@ class CreateRoomDetails extends Migration
     {
         Schema::create('room_details', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('hotel_id')->constrained('hotel');
+            $table->foreignId('hotel_id')->constrained('hotel')->onDelete('cascade');
             $table->string('name')->unique();
             $table->integer('capacity');
             $table->integer('cost');

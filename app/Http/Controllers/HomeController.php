@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\user;
+use App\hotel;
 
 class HomeController extends Controller
 {
@@ -14,9 +14,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $user = App\user;
-        $user->history()->get();
-        return view('welcome');
+        $hotel = Hotel::all();
+        return view('components.home')->with('hotel',$hotel);
+
     }
 
     /**

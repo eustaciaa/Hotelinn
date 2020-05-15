@@ -19,6 +19,7 @@ class CreateHotel extends Migration
             $table->integer('rate');
             $table->string('photo');
             $table->string('review');
+            $table->timestamps();
         });
     }
 
