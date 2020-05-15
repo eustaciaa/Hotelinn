@@ -17,8 +17,8 @@ class CreateHotel extends Migration
             $table->id();
             $table->string('name');
             $table->integer('rate');
-            $table->string('photo');
-            $table->string('review');
+            $table->string('photo')->nullable();
+            $table->string('review')->nullable();
             $table->timestamps();
         });
     }

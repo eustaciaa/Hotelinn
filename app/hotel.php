@@ -17,5 +17,8 @@ class hotel extends Model
         'name', 'rate', 'photo', 'review'
     ];
 
-
+    public function alamat()
+    {
+        return $this->hasOne('App\alamat');
+    }
 }

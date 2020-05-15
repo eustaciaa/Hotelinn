@@ -23,10 +23,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('welcome');
+        return view('home');
     }
 
-    public function showHome(){
-        return view('home');
+    public function getHotel(Request $request){
+        return dd($request);
     }
 }

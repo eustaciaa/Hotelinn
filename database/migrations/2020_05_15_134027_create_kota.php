@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAlamat extends Migration
+class CreateKota extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateAlamat extends Migration
      */
     public function up()
     {
-        Schema::create('alamat', function (Blueprint $table) {
-            $table->foreignId('hotel_id')->constrained('hotel');
+        Schema::create('kota', function (Blueprint $table) {
+            $table->id();
             $table->foreignId('provinsi_id')->constrained('provinsi');
-            $table->foreignId('kota_id')->constrained('kota');
-            $table->string('detailLengkap');
+            $table->string('namaKota');
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ class CreateAlamat extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('alamat');
+        Schema::dropIfExists('kota');
     }
 }
