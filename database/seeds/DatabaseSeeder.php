@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -16,7 +17,7 @@ class DatabaseSeeder extends Seeder
         $user->name = "test";
         $user->fName = "tester";
         $user->lName = "account";
-        $user->password = "testtesttest";
+        $user->password = Hash::make("testtesttest");
         $user->tgl_lahir = "2012-12-12";
         $user->save();
 
