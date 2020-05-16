@@ -25,4 +25,3 @@ php artisan migrate:fresh --seed
 - sudah bisa rent room
 - sudah bisa check history
 - penambahan history di header
-=======
