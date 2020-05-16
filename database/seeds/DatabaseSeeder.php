@@ -76,7 +76,7 @@ class DatabaseSeeder extends Seeder
         $room->name = "Studio Premiere";
         $room->cost = 1500000;
         $room->capacity = 2;
-        $room->available = 2;
+        $room->available = 3;
         $hotel->room()->save($room);
 
         $room = new App\room_details;
