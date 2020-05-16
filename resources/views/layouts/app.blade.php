@@ -21,7 +21,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
     <!-- Icon -->
-    <link rel="icon" href="{{ asset('images/logo_circle.png') }}">
+    <link rel="icon" href="{{ asset('images/hotelinn/logo_circle.png') }}">
 </head>
 <body>
     <div id="app">
@@ -29,7 +29,7 @@
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     <!-- {{ config('app.name', 'Laravel') }} -->
-                    <img src="{{ asset('images/brand.png') }}" width="100" height="100%" alt="">
+                    <img src="{{ asset('images/hotelinn/brand.png') }}" width="100" height="100%" alt="">
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -86,7 +86,7 @@
             </div>
         </nav>
 
-        <main class="py-4">
+        <main class="pb-4">
             @yield('content')
         </main>
     </div>
