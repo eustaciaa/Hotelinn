@@ -83,7 +83,7 @@ class DatabaseSeeder extends Seeder
         $room->name = "Apartment Executive";
         $room->cost = 2500000;
         $room->capacity = 4;
-        $room->available = 3;
+        $room->available = 2;
         $hotel->room()->save($room);
 
 
@@ -104,14 +104,14 @@ class DatabaseSeeder extends Seeder
         $room->name = "Standard Double Room";
         $room->cost = 225000;
         $room->capacity = 2;
-        $room->available = 3;
+        $room->available = 5;
         $hotel->room()->save($room);
 
         $room = new App\room_details;
         $room->name = "Studio";
         $room->cost = 175000;
         $room->capacity = 1;
-        $room->available = 3;
+        $room->available = 7;
         $hotel->room()->save($room);
 
         $hotel = new App\hotel;
