@@ -17,6 +17,7 @@ class CreateRoomDetails extends Migration
             $table->id();
             $table->foreignId('hotel_id')->constrained('hotel')->onDelete('cascade');
             $table->string('name')->unique();
+            $table->integer('available');
             $table->integer('capacity');
             $table->integer('cost');
             $table->timestamps();

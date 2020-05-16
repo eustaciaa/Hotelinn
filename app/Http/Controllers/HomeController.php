@@ -46,10 +46,17 @@ class HomeController extends Controller
 
     public function rentHotel(Request $request)
     {
+        if($request->input('order'))
+        {
+            $order = $request->input('order');
+        }
+        else{
+            $order = 'asc';
+        }
         $id = $request->input('hotelId');
-        $rooms = room_details::where('hotel_id',$id)->get();
+        $rooms = room_details::where('hotel_id',$id)->orderBy('cost',$order)->get();
 
-        return view('room')->with('roomdetails',$rooms);
+        return view('room')->with(['roomdetails' => $rooms,'hotelId' => $id]);
     }
 
     public function rentRoom (Request $request)
@@ -84,7 +91,7 @@ class HomeController extends Controller
         $history->bookDate = Carbon::now();
         $history->save();
 
-        return view('home');
+        return redirect('/');
 
     }
 }
