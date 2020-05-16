@@ -1,10 +1,17 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
+<div class="bg py-4" style="height:70%; background-image: url('{{ asset('images/login/viceroy-bali-tonedowned.jpg') }}');">
+<div class="container mh-100">
+    <div class="row justify-content-center mh-100" style="color: white;">
+        <div class="col-md-7 mh-100">
+            <br><br><br><br><br>
+            <h1 style="font-size:500%;">
+                <b>Welcome</b>
+            </h1>
+        </div>
+        <div class="col-md-5 pl-3">
+            <div class="mt-5 card" style="background-color: rgba(193, 232, 247, 0.4);">
                 <div class="card-header">{{ __('Login') }}</div>
 
                 <div class="card-body">
@@ -53,12 +60,12 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-outline-light">
                                     {{ __('Login') }}
                                 </button>
 
                                 @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
+                                    <a id="forgot-password" class="btn btn-link" href="{{ route('password.request') }}">
                                         {{ __('Forgot Your Password?') }}
                                     </a>
                                 @endif
@@ -69,5 +76,6 @@
             </div>
         </div>
     </div>
+</div>
 </div>
 @endsection
