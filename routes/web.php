@@ -23,12 +23,9 @@ Route::get('/getHotel','HomeController@getHotel');
 
 Route::get('/rentHotel','HomeController@rentHotel');
 
-<<<<<<< HEAD
 Route::get('/rentRoom','HomeController@rentRoom');
 
 Route::post('/rentFinal','HomeController@rentFinal');
 
 Route::post('/history','UserController@history');
 
-=======
->>>>>>> fb91618c4f87c0abe708f14b37981d686b684929

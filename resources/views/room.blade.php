@@ -4,7 +4,6 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-<<<<<<< HEAD
             <form action="/rentHotel" method="GET">
                 <div class="row">
                     <div class="col-md-6">
@@ -19,9 +18,6 @@
                     </div>
                 </div>
             </form>
-=======
-
->>>>>>> fb91618c4f87c0abe708f14b37981d686b684929
                 @foreach ($roomdetails as $room)
                 <div class="card my-5">
                     <div class="card-header justify-content-center">{{$room->hotel->name}}</div>
