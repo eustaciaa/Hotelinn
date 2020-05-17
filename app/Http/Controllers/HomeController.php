@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\alamat;
 use App\provinsi;
 use App\room_details;
-use App\history;
 
 class HomeController extends Controller
 {
