@@ -19,7 +19,7 @@
     </div>
 </div>
 @endif
-<!-- <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+<div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active">
         <div class="d-block h-100" style="background-image: url('{{ asset('images/login/viceroy-bali-tonedowned.jpg') }}');"></div>
@@ -34,7 +34,7 @@
 </div>
 <script type="text/javascript">
     $('.carousel').carousel();
-</script> -->
+</script>
 <div class="container">
     <div class="row justify-content-center" id="searchRow">
         <div class="col-md-8">
