@@ -13,6 +13,6 @@ class UserController extends Controller
     {
         $history = history::where('user_id',Auth::user()->id)->orderBy('id','asc')->get()->all();
 
-        return view('history')->with('histories',$history);
+        return view('user.history')->with('histories',$history);
     }
 }

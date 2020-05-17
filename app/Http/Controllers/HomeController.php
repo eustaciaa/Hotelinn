@@ -5,11 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\alamat;
 use App\provinsi;
-use App\hotel;
 use App\room_details;
 use App\history;
-use Illuminate\Support\Facades\Auth;
-use Carbon\Carbon;
 
 class HomeController extends Controller
 {
@@ -20,7 +17,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        //
     }
 
     /**
@@ -41,7 +38,7 @@ class HomeController extends Controller
         $id = $request->input('kotaId');
         $alamat = alamat::where('provinsi_id',$id)->get();
 
-        return view('list')->with('alamats',$alamat);
+        return view('hotel.list')->with('alamats',$alamat);
     }
 
     public function rentHotel(Request $request)
@@ -56,42 +53,7 @@ class HomeController extends Controller
         $id = $request->input('hotelId');
         $rooms = room_details::where('hotel_id',$id)->orderBy('cost',$order)->get();
 
-        return view('room')->with(['roomdetails' => $rooms,'hotelId' => $id]);
+        return view('hotel.room')->with(['roomdetails' => $rooms,'hotelId' => $id]);
     }
 
-    public function rentRoom (Request $request)
-    {
-        $id = $request->input('hotelId');
-        $roomId = $request->input('roomId');
-        $hotel = hotel::where('id',$id)->first();
-        $room = $hotel->room->where('id',$roomId)->first();
-        return view('rent')->with( ['hotel' => $hotel,'room'=> $room]);
-    }
-
-    public function rentFinal (Request $request)
-    {
-        $fName = $request->input('fName');
-        $lName = $request->input('lName');
-        $checkIn = $request->input('checkIn');
-        $jumlah = $request->input('jmlh');
-        $id = $request->input('hotelId');
-        $roomId = $request->input('roomId');
-        $checkOut = $request->input('checkOut');
-        $hotel = hotel::where('id',$id)->first();
-        $room = $hotel->room->where('id',$roomId)->first();
-        $total = $room->cost * $jumlah;
-
-        $history = new history;
-        $history->user_id = Auth::user()->id;
-        $history->total = $total;
-        $history->checkIn = $checkIn;
-        $history->checkOut = $checkOut;
-        $history->hotel_id = $hotel->id;
-        $history->room_id = $room->id;
-        $history->bookDate = Carbon::now();
-        $history->save();
-
-        return redirect('/');
-
-    }
 }
