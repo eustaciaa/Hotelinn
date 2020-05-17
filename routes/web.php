@@ -17,15 +17,17 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::get('/','HomeController@index');
+Route::get('/','MainController@index');
 
-Route::get('/getHotel','HomeController@getHotel');
+Route::get('/getHotel','MainController@getHotel');
 
-Route::get('/rentHotel','HomeController@rentHotel');
+Route::get('/rentHotel','MainController@rentHotel');
 
-Route::get('/rentRoom','HomeController@rentRoom');
+Route::get('/rentRoom','MainController@rentRoom');
 
-Route::post('/rentFinal','HomeController@rentFinal');
+Route::post('/rentFinal','MainController@rentFinal');
 
 Route::post('/history','UserController@history');
+
+Route::post('/getKota','AJAXController@getKota');
 

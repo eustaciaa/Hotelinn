@@ -12,4 +12,5 @@ class room_details extends Model
     {
         return $this->belongsTo('App\hotel');
     }
+
 }

@@ -3,24 +3,27 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
+
+/* Model Imports */
 use App\alamat;
 use App\provinsi;
 use App\hotel;
 use App\room_details;
 use App\history;
-use Illuminate\Support\Facades\Auth;
-use Carbon\Carbon;
 
-class HomeController extends Controller
+
+class MainController extends Controller
 {
-    /**
+     /**
      * Create a new controller instance.
      *
      * @return void
      */
     public function __construct()
     {
-        $this->middleware('auth');
+
     }
 
     /**
@@ -30,19 +33,23 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $provinsi = provinsi::all();
-
-        return view('home')->with('provinsis',$provinsi);
-
+        return view('home')->with(['hotels' => alamat::all(), 'provinsis' => provinsi::all()]);
     }
 
+    /**
+     * Show The Hotel List
+     */
     public function getHotel(Request $request)
     {
-        $id = $request->input('kotaId');
-        $alamat = alamat::where('provinsi_id',$id)->get();
+        $kotaId = $request->input('kotaId');
+        $provinsiId = $request->input('provinsiId');
+        $query = ['provinsi_id'=> $provinsiId, 'kota_id' => $kotaId];
+        $alamat = alamat::where($query)->join('hotel','alamat.hotel_id','=','hotel.id')->get();
+        return json_encode($alamat, JSON_HEX_TAG);
 
-        return view('list')->with('alamats',$alamat);
+
     }
+
 
     public function rentHotel(Request $request)
     {
