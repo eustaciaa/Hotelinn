@@ -20,8 +20,10 @@ php artisan migrate:fresh --seed
 ```
 
 # Update List
-- sudah ada buat check hotel berdasarkan provinsi
-- sudah ada buat check untuk liat room
-- sudah bisa rent room
+- sudah ada home yang menggunakan ajax
 - sudah bisa check history
 - penambahan history di header
+
+# TODO
+- admin dashboard dan admin login
+- admin auth
