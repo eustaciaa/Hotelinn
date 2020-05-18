@@ -23,11 +23,13 @@ Route::get('/getHotel','MainController@getHotel');
 
 Route::get('/rentHotel','MainController@rentHotel');
 
-Route::get('/rentRoom','RentController@rentRoom');
+Route::get('/rent','RentController@rent');
 
 Route::post('/rentFinal','RentController@rentFinal');
 
 Route::post('/history','UserController@history');
 
 Route::post('/getKota','AJAXController@getKota');
+
+Route::get('/showRoom','MainController@showRoom');
 
