@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 
 /* Model Imports */
@@ -44,6 +43,17 @@ class MainController extends Controller
         return json_encode($alamat, JSON_HEX_TAG);
     }
 
+    /**
+     * Show Room Available
+     */
+
+    public function showRoom(Request $request){
+        $hotelId = $request->input('hotelId');
+
+        $rooms = room_details::where('hotel_id', $hotelId)->get();
+
+        return view('hotel.list')->with(['rooms' => $rooms, 'hotelId', $hotelId]);
+    }
 
     public function rentHotel(Request $request)
     {

@@ -7,9 +7,9 @@
         <div class="col-md-8">
             <div class="alert alert-success mt-5">
                 {{ session('success') }}
-                Klik <a href="/history" 
+                Klik <a href="/history"
                         onclick="event.preventDefault();
-                                document.getElementById('history-form').submit();">disini</a> 
+                                document.getElementById('history-form').submit();">disini</a>
                 untuk menuju ke Riwayat Pemesanan Anda.
             </div>
             <form id="history-form" action="/history" method="POST" style="display: none;">
@@ -38,7 +38,7 @@
 <div class="container">
     <div class="row justify-content-center" id="searchRow">
         <div class="col-md-8">
-              
+
             <div class="card my-5 content-wrapper">
                 <div class="card-header">Search For Hotel</div>
 
@@ -92,9 +92,10 @@
                         </p>
                     </div>
                     <div class="row justify-content-center">
-                        <form method="get" action="/rentHotel">
+                        <form method="get" action="/showRoom">
+                            @csrf
                         <input type="hidden" id="hotelId" name="hotelId" value="{{$hotel->hotel->id}}">
-                        <button type="submit" class="btn btn-primary show-room" action="rentHotel" id="hotel{{$hotel->hotel->id}}">Show
+                        <button type="submit" class="btn btn-primary">Show
                             Room</button>
                         </form>
                     </div>
@@ -174,29 +175,15 @@
                               '<div class="card-body"><div class="row">'+
                               '<p class="mx-3">'+hotel.detailLengkap+'</p></div>' +
                               '<div class="row justify-content-center">'+
-                              '<button type="button" class="btn btn-primary show-room" id="hotel'+hotel.id+'">Show Room</button>'+
-                              '</div></div></div></div></div>');
+                              '<form method="get" action="/showRoom">@csrf'+
+                              '<input type="hidden" id="hotelId" name="hotelId" value="'+hotel.id+'">'+
+                              '<button type="submit" class="btn btn-primary">ShowRoom</button>'+
+                              '</form></div></div></div></div></div>');
                     })
 
                 }
             })
         });
-        $( '.show-room' ).on('click', function (){
-            var hotelId = $('.showroom').attr("id").replace('hotel',"");
-            $.ajaxSetup({
-                  headers: {
-                      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                  }
-            });
-            $.ajax({
-                type: 'POST',
-                url: '/getRoom',
-                data: { provinsiId: hotelId},
-                success: (result) => {
-                    console.log(result);
-                }
-            })
-        })
     });
 
 </script>

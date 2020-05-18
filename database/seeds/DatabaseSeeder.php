@@ -111,7 +111,7 @@ class DatabaseSeeder extends Seeder
         $room->name = "Studio";
         $room->cost = 175000;
         $room->capacity = 1;
-        $room->available = 7;
+        $room->available = 0;
         $hotel->room()->save($room);
 
         $hotel = new App\hotel;
@@ -121,7 +121,7 @@ class DatabaseSeeder extends Seeder
 
         $alamat = new App\Alamat;
         $alamat->provinsi_id = 2;
-        $alamat->kota_id = 1;
+        $alamat->kota_id = 2;
         $alamat->detailLengkap = "Jl. Gajah Mada No. 67, 55112, Yogyakarta, Indonesia";
         $hotel->alamat()->save($alamat);
 
