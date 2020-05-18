@@ -1,11 +1,6 @@
-@import url(https://fonts.googleapis.com/css?family=Raleway);@import url(https://fonts.googleapis.com/css?family=Lato);@charset "UTF-8";
+@import url(https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;
 
-/*!
- * Bootstrap v4.5.0 (https://getbootstrap.com/)
- * Copyright 2011-2020 The Bootstrap Authors
- * Copyright 2011-2020 Twitter, Inc.
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
- */
+0,700;1,400;1,700&family=Raleway:ital,wght@0,400;0,700;1,400;1,700&display=swap);@charset "UTF-8";
 
 :root {
   --blue: #3490dc;
@@ -10981,5 +10976,19 @@ h6 {
 
 #forgot-password {
   color: #c1d0f7;
+}
+
+#background-carousel {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+#content-wrapper {
+  position: absolute;
+  z-index: 1 !important;
+  min-width: 100%;
+  min-height: 100%;
 }
 

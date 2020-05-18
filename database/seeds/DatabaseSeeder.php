@@ -14,11 +14,11 @@ class DatabaseSeeder extends Seeder
     {
         $user = new App\User;
         $user->email = "test@test.com";
-        $user->name = "test";
         $user->fName = "tester";
         $user->lName = "account";
         $user->password = Hash::make("test");
-        $user->tgl_lahir = "2012-12-12";
+        $user->birthdate = "2012-12-12";
+        $user->gender = 'M';
         $user->save();
 
         $provinsi = new App\provinsi;

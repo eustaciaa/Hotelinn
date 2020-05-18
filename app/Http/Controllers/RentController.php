@@ -48,7 +48,7 @@ class RentController extends Controller
         $history->bookDate = Carbon::now();
         $history->save();
 
-        return redirect('/');
+        return redirect('/')->with('success', 'Asyik! Ruangan hotel berhasil dipesan! Pemesanan yang telah berhasil dilakukan dapat dilihat pada Riwayat Pemesanan Anda.');
 
     }
 }
