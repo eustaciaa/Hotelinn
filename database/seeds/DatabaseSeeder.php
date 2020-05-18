@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,11 +14,11 @@ class DatabaseSeeder extends Seeder
     {
         $user = new App\User;
         $user->email = "test@test.com";
-        $user->name = "test";
         $user->fName = "tester";
         $user->lName = "account";
-        $user->password = "testtesttest";
-        $user->tgl_lahir = "2012-12-12";
+        $user->password = Hash::make("test");
+        $user->birthdate = "2012-12-12";
+        $user->gender = 'M';
         $user->save();
 
         $provinsi = new App\provinsi;
@@ -68,18 +69,21 @@ class DatabaseSeeder extends Seeder
         $room->name = "Studio Executive";
         $room->cost = 1200000;
         $room->capacity = 1;
+        $room->available = 3;
         $hotel->room()->save($room);
 
         $room = new App\room_details;
         $room->name = "Studio Premiere";
         $room->cost = 1500000;
         $room->capacity = 2;
+        $room->available = 3;
         $hotel->room()->save($room);
 
         $room = new App\room_details;
         $room->name = "Apartment Executive";
         $room->cost = 2500000;
         $room->capacity = 4;
+        $room->available = 2;
         $hotel->room()->save($room);
 
 
@@ -100,12 +104,14 @@ class DatabaseSeeder extends Seeder
         $room->name = "Standard Double Room";
         $room->cost = 225000;
         $room->capacity = 2;
+        $room->available = 5;
         $hotel->room()->save($room);
 
         $room = new App\room_details;
         $room->name = "Studio";
         $room->cost = 175000;
         $room->capacity = 1;
+        $room->available = 7;
         $hotel->room()->save($room);
 
         $hotel = new App\hotel;

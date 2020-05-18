@@ -4,7 +4,20 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-
+            <form action="/rentHotel" method="GET">
+                <div class="row">
+                    <div class="col-md-6">
+                        <input type="hidden" name="hotelId" value="{{$hotelId}}">
+                        <select class="form-control" name="order" id="order">
+                            <option value="asc">Ascending</option>
+                            <option value="desc">Descending</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <button type="submit" class="btn btn-primary">Sort</button>
+                    </div>
+                </div>
+            </form>
                 @foreach ($roomdetails as $room)
                 <div class="card my-5">
                     <div class="card-header justify-content-center">{{$room->hotel->name}}</div>

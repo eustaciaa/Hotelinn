@@ -16,6 +16,7 @@ class CreateHistory extends Migration
         Schema::create('history', function (Blueprint $table) {
             $table->id();
             $table->foreignId('hotel_id')->constrained('hotel');
+            $table->foreignId('room_id')->constrained('room_details');
             $table->integer('total');
             $table->date('bookdate');
             $table->date('checkIn')->nullable($value = true);
