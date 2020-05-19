@@ -19,7 +19,7 @@
     </div>
 </div>
 @endif
-<div class="slider">
+<div class="slider fade">
     <div class="load"></div>
     <div class="content">
         <div class="principal">
