@@ -5,7 +5,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="alert alert-success mt-5">
+            <div class="alert alert-success my-5">
                 {{ session('success') }}
                 Klik <a href="/history"
                         onclick="event.preventDefault();
@@ -22,7 +22,11 @@
 <div class="slider fade">
     <div class="load"></div>
     <div class="content">
-        <div class="principal">
+        @if (session('success'))
+        <div class="principal" style="top: 60%;">
+        @else
+        <div class="principal" style="top: 40%;">
+        @endif
             <h1>Bingung mau nginep di mana?<br><b>hotelinn</b> aja.</h1>
         </div>
     </div>
