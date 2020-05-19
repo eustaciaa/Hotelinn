@@ -22,6 +22,27 @@ body, p{
     background-size: cover;
 }
 
+.bg-white {
+  background-color: #fff !important;
+}
+
+.bg-lightgray{
+  background: $lightgray;
+}
+
+.bg-lightblue {
+  background-color: $lightblue;
+}
+
+.bg-purple{
+  background-color: $purple;
+}
+
+.btn{
+  color: $lightblack;
+  font-weight: bold;
+}
+
 h1,h2,h3,h4,h5,h6{
     font-family: 'Raleway', sans-serif;
 }
