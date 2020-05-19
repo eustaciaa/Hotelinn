@@ -9,7 +9,7 @@
                 {{ session('success') }}
                 Klik <a href="/history"
                         onclick="event.preventDefault();
-                                document.getElementById('history-form').submit();">disini</a>
+                                document.getElementById('history-form').submit();">di sini</a>
                 untuk menuju ke Riwayat Pemesanan Anda.
             </div>
             <form id="history-form" action="/history" method="POST" style="display: none;">
@@ -19,22 +19,14 @@
     </div>
 </div>
 @endif
-<div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-        <div class="d-block h-100" style="background-image: url('{{ asset('images/login/viceroy-bali-tonedowned.jpg') }}');"></div>
+<div class="slider">
+    <div class="load"></div>
+    <div class="content">
+        <div class="principal">
+            <h1>Bingung mau nginep di mana?<br><b>hotelinn</b> aja.</h1>
+        </div>
     </div>
-    <div class="carousel-item">
-      <img class="d-block w-100" src="" alt="Second slide">
-    </div>
-    <div class="carousel-item">
-      <img class="d-block w-100" src="" alt="Third slide">
-    </div>
-  </div>
 </div>
-<script type="text/javascript">
-    $('.carousel').carousel();
-</script>
 <div class="container">
     <div class="row justify-content-center" id="searchRow">
         <div class="col-md-8">
