@@ -50,7 +50,7 @@
                                 <option value="null"> Pilih kota </option>
                             </select>
                         </div>
-                        <div class="col">
+                        <div class="col d-flex justify-content-end">
                             <button type="submit" class="btn btn-primary" id="search">
                                 Search
                             </button>
