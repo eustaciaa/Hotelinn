@@ -62,25 +62,27 @@
     </div>
 </div>
 <div class="container">
-
     <div class='row justify-content-center' >
         <div class='col-md-8' id='hotel-row'>
             @foreach($hotels as $hotel)
-            <div class='card my-5 card-hotel'>
-                <div class='card-header'>{{ $hotel->hotel->name }}</div>
-                <div class="card-body">
-                    <div class="row">
-                        <p class="mx-3">
-                            {{$hotel->detailLengkap}}
-                        </p>
+            <div class="card my-5">
+                <div class="row no-gutters">
+                    <div class="col-md-4">
+                    <img src="{{$hotel->hotel->photo}}" class="card-img" alt="{{$hotel->hotel->photo}}">
                     </div>
-                    <div class="row justify-content-center">
-                        <form method="get" action="/showRoom">
-                            @csrf
-                        <input type="hidden" id="hotelId" name="hotelId" value="{{$hotel->hotel->id}}">
-                        <button type="submit" class="btn btn-primary">Show
-                            Room</button>
-                        </form>
+                    <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ $hotel->hotel->name }}</h5>
+                        <p class="card-text">{{$hotel->detailLengkap}}</p>
+                        <div class="row justify-content-start">
+                            <form method="get" action="/showRoom">
+                                @csrf
+                            <input type="hidden" id="hotelId" name="hotelId" value="{{$hotel->hotel->id}}">
+                            <button type="submit" class="btn btn-primary ml-3">Show
+                                Room</button>
+                            </form>
+                        </div>
+                    </div>
                     </div>
                 </div>
             </div>
