@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFasilitasRelation extends Migration
+class CreateRoomDescription extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class CreateFasilitasRelation extends Migration
      */
     public function up()
     {
-        Schema::create('fasilitas_relation', function (Blueprint $table) {
-            $table->foreignId('hotel_id')->constrained('hotel');
-            $table->foreignId('fasilitas_id')->constrained();
+        Schema::create('room_description', function (Blueprint $table) {
+            $table->id();
+            $table->string('descName');
+            $table->string('descValue');
             $table->timestamps();
         });
     }
@@ -27,6 +28,6 @@ class CreateFasilitasRelation extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('fasilitas_relation');
+        Schema::dropIfExists('room_description');
     }
 }

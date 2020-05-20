@@ -4,15 +4,15 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class provinsi extends Model
+class Provinsi extends Model
 {
     protected $table = 'provinsi';
 
     public function alamat(){
-        return $this->hasMany('App\alamat');
+        return $this->hasMany('App\Alamat');
     }
 
     public function kota(){
-        return $this->hasMany('App\kota');
+        return $this->hasMany('App\Kota');
     }
 }

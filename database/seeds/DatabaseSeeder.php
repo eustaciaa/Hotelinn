@@ -56,7 +56,7 @@ class DatabaseSeeder extends Seeder
         $hotel = new App\hotel;
         $hotel->name = "Fraser Residence Menteng";
         $hotel->rate = "5";
-        $hotel->photo = "/images/hotel/fraser-residence-menteng.jpg";
+        $hotel->photo = "/images/hotel/fraser-residence-menteng/home.jpg";
         $hotel->save();
 
         $alamat = new App\alamat;
@@ -71,6 +71,7 @@ class DatabaseSeeder extends Seeder
         $room->cost = 1200000;
         $room->capacity = 1;
         $room->available = 3;
+        $room->photo = "/images/hotel/fraser-residence-menteng/studio-executive.jpg";
         $hotel->room()->save($room);
 
         $room = new App\room_details;
@@ -78,6 +79,7 @@ class DatabaseSeeder extends Seeder
         $room->cost = 1500000;
         $room->capacity = 2;
         $room->available = 3;
+        $room->photo = "/images/hotel/fraser-residence-menteng/studio-premiere.jpeg";
         $hotel->room()->save($room);
 
         $room = new App\room_details;
@@ -85,12 +87,14 @@ class DatabaseSeeder extends Seeder
         $room->cost = 2500000;
         $room->capacity = 4;
         $room->available = 2;
+        $room->photo = "/images/hotel/fraser-residence-menteng/apartment-executive.jpg";
         $hotel->room()->save($room);
 
 
         $hotel = new App\hotel;
         $hotel->name = "Business Tomang";
         $hotel->rate = "3";
+        $hotel->photo = '/images/hotel/business-tomang/home.jpeg';
         $hotel->save();
 
 
@@ -106,18 +110,21 @@ class DatabaseSeeder extends Seeder
         $room->cost = 225000;
         $room->capacity = 2;
         $room->available = 5;
+        $room->photo = '/images/hotel/business-tomang/standard-double-room.jpeg';
         $hotel->room()->save($room);
 
         $room = new App\room_details;
-        $room->name = "Studio";
+        $room->name = "Deluxe Twin Room";
         $room->cost = 175000;
         $room->capacity = 1;
         $room->available = 0;
-        $hotel->room()->save($room);
+        $room->photo = '/images/hotel/business-tomang/deluxe-twin-room.jpg';
+        $hotel->room()->save($room);    
 
         $hotel = new App\hotel;
         $hotel->name = "Jambuluwuk Malioboro";
         $hotel->rate = "5";
+        $hotel->photo = "/images/hotel/jambuluwuk-malioboro/home.jpeg";
         $hotel->save();
 
         $alamat = new App\Alamat;
@@ -126,6 +133,6 @@ class DatabaseSeeder extends Seeder
         $alamat->detailLengkap = "Jl. Gajah Mada No. 67, 55112, Yogyakarta, Indonesia";
         $hotel->alamat()->save($alamat);
 
-
+        
     }
 }

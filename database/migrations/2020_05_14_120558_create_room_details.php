@@ -20,6 +20,7 @@ class CreateRoomDetails extends Migration
             $table->integer('available');
             $table->integer('capacity');
             $table->integer('cost');
+            $table->string('photo');
             $table->timestamps();
         });
     }
