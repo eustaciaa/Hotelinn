@@ -94,7 +94,7 @@ class DatabaseSeeder extends Seeder
         $hotel = new App\hotel;
         $hotel->name = "Business Tomang";
         $hotel->rate = "3";
-        $hotel->photo = '/images/hotel/business-tomang/home.jpeg';
+        $hotel->photo = '/images/hotel/business-tomang/home.jpg';
         $hotel->save();
 
 
@@ -124,7 +124,7 @@ class DatabaseSeeder extends Seeder
         $hotel = new App\hotel;
         $hotel->name = "Jambuluwuk Malioboro";
         $hotel->rate = "5";
-        $hotel->photo = "/images/hotel/jambuluwuk-malioboro/home.jpeg";
+        $hotel->photo = "/images/hotel/jambuluwuk-malioboro/home.jpg";
         $hotel->save();
 
         $alamat = new App\Alamat;
@@ -133,6 +133,6 @@ class DatabaseSeeder extends Seeder
         $alamat->detailLengkap = "Jl. Gajah Mada No. 67, 55112, Yogyakarta, Indonesia";
         $hotel->alamat()->save($alamat);
 
-        
+
     }
 }
