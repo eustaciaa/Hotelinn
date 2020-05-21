@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Hotel extends Model
+class hotel extends Model
 {
     /**
      * The table associated with the model.
@@ -19,15 +19,12 @@ class Hotel extends Model
 
     public function alamat()
     {
-        return $this->hasOne('App\Alamat');
+        return $this->hasOne('App\alamat');
     }
 
     public function room()
     {
-        return $this->hasMany('App\Room_details');
+        return $this->hasMany('App\room_details');
     }
 
-    public function fasilitas(){
-        return $this->hasMany('App\Fasilitas');
-    }
 }

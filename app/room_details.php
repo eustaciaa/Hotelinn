@@ -10,10 +10,7 @@ class room_details extends Model
 
     public function hotel()
     {
-        return $this->belongsTo('App\Hotel');
+        return $this->belongsTo('App\hotel');
     }
 
-    public function room_description(){
-        return $this->hasMany('App\Room_description');
-    }
 }
