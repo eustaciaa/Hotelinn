@@ -68,11 +68,19 @@
             <div class="card my-5 card-hotel">
                 <div class="row no-gutters">
                     <div class="col-md-4">
-                    <img src="{{$hotel->hotel->photo}}" class="card-img" alt="{{$hotel->hotel->photo}}">
+                    <img src="{{$hotel->hotel->photo}}" width="100%" style="height: 20vh; object-fit: cover;" class="card-img" alt="{{$hotel->hotel->photo}}">
                     </div>
                     <div class="col-md-8">
                     <div class="card-body">
                         <h5 class="card-title">{{ $hotel->hotel->name }}</h5>
+                        @for ($i = 0; $i < $hotel->hotel->star; $i++)
+                            <i class="fas fa-star"></i>
+                        @endfor
+                        @if (is_null($hotel->hotel->rating))
+                            <h6>Belum ada penilaian</h6>
+                        @else
+                            <h6><b>{{ $hotel->hotel->rating }}/10 </b>({{ $hotel->hotel->reviewers }})</h6>
+                        @endif
                         <p class="card-text">{{$hotel->detailLengkap}}</p>
                         <div class="row justify-content-start">
                             <form method="get" action="/showRoom">
