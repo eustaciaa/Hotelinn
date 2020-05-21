@@ -63,23 +63,23 @@
 </div>
 <div class="container">
     <div class='row justify-content-center' >
-        <div class='col-md-8' id='hotel-row'>
+        <div class='col-md-9' id='hotel-row'>
             @foreach($hotels as $hotel)
             <div class="card my-5 card-hotel">
                 <div class="row no-gutters">
-                    <div class="col-md-4">
-                    <img src="{{$hotel->hotel->photo}}" width="100%" style="height: 20vh; object-fit: cover;" class="card-img" alt="{{$hotel->hotel->photo}}">
+                    <div class="col-md-5">
+                    <img src="{{$hotel->hotel->photo}}" style="height:25vh; object-fit: cover;" class="card-img" alt="{{$hotel->hotel->photo}}">
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-7">
                     <div class="card-body">
-                        <h5 class="card-title">{{ $hotel->hotel->name }}</h5>
+                        <h5 class="card-title mb-0">{{ $hotel->hotel->name }}</h5>
                         @for ($i = 0; $i < $hotel->hotel->star; $i++)
                             <i class="fas fa-star"></i>
                         @endfor
                         @if (is_null($hotel->hotel->rating))
-                            <h6>Belum ada penilaian</h6>
+                            <br><small class="text-muted my-2">Belum ada penilaian</small>
                         @else
-                            <h6><b>{{ $hotel->hotel->rating }}/10 </b>({{ $hotel->hotel->reviewers }})</h6>
+                            <h5 class="my-2"><b>{{ $hotel->hotel->rating }}/10 </b>({{ $hotel->hotel->reviewers }} ulasan)</h6>
                         @endif
                         <p class="card-text">{{$hotel->detailLengkap}}</p>
                         <div class="row justify-content-start">
@@ -166,10 +166,10 @@
                         $('#hotel-row').append(
                               "<div class='card my-5 card-hotel'>" +
                               '<div class="row no-gutters">'+
-                              '<div class="col-md-4">'+
-                              '<img src="'+hotel.photo+'" class="card-img" alt="No Photo">'+
+                              '<div class="col-md-5">'+
+                              '<img src="'+hotel.photo+'" style="height:25vh; object-fit: cover;" class="card-img" alt="No Photo">'+
                               '</div>'+
-                              '<div class="col-md-8">'+
+                              '<div class="col-md-7">'+
                               '<div class="card-body">'+
                               '<h5 class="card-title">'+hotel.name+'</h5>'+
                               '<p class="card-text">'+hotel.detailLengkap+'</p>'+

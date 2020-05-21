@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use App\alamat;
 use App\provinsi;
 use App\room_details;
+use App\hotel;
 
 class MainController extends Controller
 {
@@ -50,9 +51,11 @@ class MainController extends Controller
     public function showRoom(Request $request){
         $hotelId = $request->input('hotelId');
 
+        $hotel = hotel::find($hotelId);
+
         $rooms = room_details::where('hotel_id', $hotelId)->get();
 
-        return view('hotel.list')->with(['rooms' => $rooms, 'hotelId', $hotelId]);
+        return view('hotel.list')->with(['rooms' => $rooms, 'hotel' => $hotel]);
     }
 
     public function rentHotel(Request $request)
