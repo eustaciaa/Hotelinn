@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFasilitasRelation extends Migration
+class CreateAdminsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,13 @@ class CreateFasilitasRelation extends Migration
      */
     public function up()
     {
-        Schema::create('fasilitas_relation', function (Blueprint $table) {
-            $table->foreignId('room_details_id')->constrained('room_details');
-            $table->foreignId('fasilitas_id')->constrained();
+        Schema::create('admins', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name');
+            $table->string('username')->unique();
+            $table->string('email')->unique();
+            $table->string('password');
+            $table->rememberToken();
             $table->timestamps();
         });
     }
@@ -27,6 +31,6 @@ class CreateFasilitasRelation extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('fasilitas_relation');
+        Schema::dropIfExists('admins');
     }
 }
