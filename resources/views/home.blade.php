@@ -52,7 +52,7 @@
                         </div>
                         <div class="col d-flex justify-content-end">
                             <button type="button" class="btn btn-primary" id="search">
-                                Search
+                                Cari
                             </button>
                         </div>
                     </div>
@@ -78,8 +78,9 @@
                             <form method="get" action="/showRoom">
                                 @csrf
                             <input type="hidden" id="hotelId" name="hotelId" value="{{$hotel->hotel->id}}">
-                            <button type="submit" class="btn btn-primary ml-3">Show
-                                Room</button>
+                            <button type="submit" class="btn btn-primary ml-3">
+                                Lihat Detail
+                            </button>
                             </form>
                         </div>
                     </div>
