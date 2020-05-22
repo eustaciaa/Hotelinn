@@ -23047,11 +23047,6 @@ h6 {
   color: #c1d0f7;
 }
 
-.form-control {
-  border-radius: 0em;
-  border: 3px solid #c1d0f7;
-}
-
 .load {
   -webkit-animation: slide 2s;
           animation: slide 2s;
