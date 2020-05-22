@@ -25,9 +25,16 @@ Route::get('/rentHotel','MainController@rentHotel');
 
 Route::get('/rentRoom','RentController@rentRoom');
 
+Route::post('/updateProfile','UserController@updateProfile');
+
+Route::post('/profile','UserController@profile');
+
 Route::post('/rentFinal','RentController@rentFinal');
 
 Route::post('/history','UserController@history');
 
+
 Route::post('/getKota','AJAXController@getKota');
+
+
 

@@ -62,6 +62,18 @@
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                 
+
+                                <a class="dropdown-item"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('profile-form').submit();">
+                                        {{ __('Ubah Profil') }}
+                                    </a>
+                                    <form id="profile-form" action="/profile" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+
+                                    <div class="dropdown-divider"></div>
+
                                     <a class="dropdown-item"
                                        onclick="event.preventDefault();
                                                      document.getElementById('history-form').submit();">

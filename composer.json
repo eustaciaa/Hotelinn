@@ -13,17 +13,8 @@
         "fruitcake/laravel-cors": "^1.0",
         "guzzlehttp/guzzle": "^6.3",
         "laravel/framework": "^7.0",
-<<<<<<< HEAD
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.0"
-=======
-<<<<<<< HEAD
-        "laravel/tinker": "^2.0",
-        "laravel/ui": "^2.0"
-=======
-        "laravel/tinker": "^2.0"
->>>>>>> aac88bb663170e49d2e828e19eafec1b1b9b83ce
->>>>>>> 87c21ace0e4dabb6e8811c4d156d5f86f0048d32
     },
     "require-dev": {
         "facade/ignition": "^2.0",
