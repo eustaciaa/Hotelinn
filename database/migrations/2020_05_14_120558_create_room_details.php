@@ -22,14 +22,15 @@ class CreateRoomDetails extends Migration
             $table->integer('cost');
             $table->boolean('freeWifi')->default(false);
             $table->boolean('noSmoking')->default(false);
-            $table->boolean('shower')->default(false);
+            $table->string('shower')->nullable();
             $table->string('scenery')->nullable();
             $table->string('entertainment')->nullable();
-            $table->string('comfort')->nullable();
             $table->string('convenience')->nullable();
             $table->string('furniture')->nullable();
             $table->string('service')->nullable();
             $table->string('security_safety')->nullable();
+            $table->string('laundry')->nullable();
+            $table->string('food')->nullable();
             $table->string('photo');
             $table->timestamps();
         });
