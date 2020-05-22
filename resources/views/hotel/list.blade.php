@@ -30,6 +30,18 @@
                         <h5 class="card-title">{{$room->name}}</h5>
                         <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
                         <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                        @if ($room->available > 0)
+                        <form method="get" action="/rent">
+                            @csrf
+                            <input type="hidden" id="hotelId" name="hotelId" value="{{$room->hotel_id}}">
+                            <input type="hidden" id="roomId" name="roomId" value="{{$room->id}}">
+                            <button type="submit" class="btn btn-primary">Check Room</button>
+                        </form>
+                        @else
+                        <div class="col-1">
+                            <button type="submit" class="btn btn-secondary" disabled>Check Room</button>
+                        </div>
+                        @endif
                         </div>
                     </div>
                 @if ($loop->iteration%2 == 0)
@@ -54,20 +66,7 @@
                                 <br>
                             </p>
                         </div>
-                        @if ($room->available > 0)
-                        <form method="get" action="/rent">
-                            @csrf
-                            <input type="hidden" id="hotelId" name="hotelId" value="{{$room->hotel_id}}">
-                            <input type="hidden" id="roomId" name="roomId" value="{{$room->id}}">
-                            <div class="col-1">
-                                <button type="submit" class="btn btn-primary">Check Room</button>
-                            </div>
-                        </form>
-                        @else
-                        <div class="col-1">
-                            <button type="submit" class="btn btn-secondary" disabled>Check Room</button>
-                        </div>
-                        @endif
+                        
                     </div>
                 </div>
             </div>
