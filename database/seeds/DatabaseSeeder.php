@@ -21,6 +21,13 @@ class DatabaseSeeder extends Seeder
         $user->gender = 'M';
         $user->save();
 
+        $user = new App\Admin;
+        $user->name = "admin";
+        $user->username = "admin";
+        $user->email = "admin@test.com";
+        $user->password = Hash::make("admin");
+        $user->save();
+
         $provinsi = new App\provinsi;
         $provinsi->namaProvinsi = "DKI Jakarta";
         $provinsi->save();
@@ -168,7 +175,7 @@ class DatabaseSeeder extends Seeder
         $room->security_safety = "Pemadam api, brankas";
         $room->available = 0;
         $room->photo = '/images/hotel/business-tomang/deluxe-twin-room.jpg';
-        $hotel->room()->save($room);    
+        $hotel->room()->save($room);
 
         $hotel = new App\hotel;
         $hotel->name = "Jambuluwuk Malioboro";
