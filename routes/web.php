@@ -43,6 +43,3 @@ Route::post('/getKota','AJAXController@getKota');
 Route::get('/showRoom','MainController@showRoom');
 
 
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
