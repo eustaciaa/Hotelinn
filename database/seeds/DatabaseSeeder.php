@@ -73,6 +73,7 @@ class DatabaseSeeder extends Seeder
         $room->cost = 1200000;
         $room->capacity = 1;
         $room->available = 3;
+        $room->photo = "/images/hotel/fraser-residence-menteng/studio-executive.jpg";
         $hotel->room()->save($room);
 
         $room = new App\room_details;
@@ -80,6 +81,7 @@ class DatabaseSeeder extends Seeder
         $room->cost = 1500000;
         $room->capacity = 2;
         $room->available = 3;
+        $room->photo = "/images/hotel/fraser-residence-menteng/studio-premiere.jpeg";
         $hotel->room()->save($room);
 
         $room = new App\room_details;
@@ -87,6 +89,7 @@ class DatabaseSeeder extends Seeder
         $room->cost = 2500000;
         $room->capacity = 4;
         $room->available = 2;
+        $room->photo = "/images/hotel/fraser-residence-menteng/apartment-executive.jpg";
         $hotel->room()->save($room);
 
 
@@ -109,14 +112,16 @@ class DatabaseSeeder extends Seeder
         $room->cost = 225000;
         $room->capacity = 2;
         $room->available = 5;
+        $room->photo = '/images/hotel/business-tomang/standard-double-room.jpeg';
         $hotel->room()->save($room);
 
         $room = new App\room_details;
-        $room->name = "Studio";
+        $room->name = "Deluxe Twin Room";
         $room->cost = 175000;
         $room->capacity = 1;
         $room->available = 0;
-        $hotel->room()->save($room);
+        $room->photo = '/images/hotel/business-tomang/deluxe-twin-room.jpg';
+        $hotel->room()->save($room);    
 
         $hotel = new App\hotel;
         $hotel->name = "Jambuluwuk Malioboro";
