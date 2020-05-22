@@ -19,19 +19,20 @@ Auth::routes();
 
 Route::get('/','MainController@index');
 
-    Route::prefix('admin')->group(function(){
-        Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
-
-        Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
-
-        Route::get('/','AdminController@index')->name('admin.dashboard');
-    });
 
 Route::get('/getHotel','MainController@getHotel');
 
 Route::get('/rentHotel','MainController@rentHotel');
 
 Route::get('/rent','RentController@rent');
+
+Route::prefix('admin')->group(function(){
+    Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
+
+    Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
+
+    Route::get('/','AdminController@index')->name('admin.dashboard');
+});
 
 Route::post('/rentFinal','RentController@rentFinal');
 
