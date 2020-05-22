@@ -34,12 +34,18 @@ Route::prefix('admin')->group(function(){
     Route::get('/','AdminController@index')->name('admin.dashboard');
 });
 
+Route::post('/updateProfile','UserController@updateProfile');
+
+Route::post('/profile','UserController@profile');
+
 Route::post('/rentFinal','RentController@rentFinal');
 
 Route::post('/history','UserController@history');
 
+
 Route::post('/getKota','AJAXController@getKota');
 
 Route::get('/showRoom','MainController@showRoom');
+
 
 
