@@ -21,6 +21,8 @@ class CreateHistory extends Migration
             $table->date('bookdate');
             $table->date('checkIn')->nullable($value = true);
             $table->date('checkOut')->nullable($value = true);
+            $table->boolean('finished')->default(false);
+            $table->boolean('confirmed')->default(false);
             $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });

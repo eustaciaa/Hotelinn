@@ -13,7 +13,7 @@
 
                                 <div class="form-group row">
                                     <label for="fName" class="col-md-4 col-form-label text-md-right">{{ __('Nama Depan') }}</label>
-                            
+
                                     <div class="col-md-6">
                                         <input id="fName" type="text" class="form-control" name="fName" value="{{ Auth::user()->fName }}" required autofocus>
                                     </div>
@@ -31,7 +31,7 @@
                                     <label for="checkIn" class="col-md-4 col-form-label text-md-right"><i>{{ __('Check In') }}</i></label>
 
                                     <div class="col-md-6">
-                                        <input id="checkIn" type="date" class="form-control" name="checkIn" required>
+                                        <input id="checkIn" type="date" class="form-control" name="checkIn" min="1-1-2020" required>
                                     </div>
                                 </div>
 
@@ -47,7 +47,7 @@
                                     <label for="jumlah" class="col-md-4 col-form-label text-md-right">{{ __('Jumlah') }}</label>
 
                                     <div class="col-md-6">
-                                        <input id="jmlh" type="number" class="form-control" name="jmlh" value="{{ 1 }}" required>
+                                        <input id="jmlh" type="number" class="form-control" name="jmlh" value="{{ 1 }}" min="1" required>
                                     </div>
                                 </div>
 
@@ -62,4 +62,7 @@
         </div>
     </div>
 </div>
+<script>
+    $('#checkIn').attr('min', new Date().toISOString().split("T")[0]);
+</script>
 @endsection

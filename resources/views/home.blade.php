@@ -5,11 +5,11 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="alert alert-success mt-5">
+            <div class="alert alert-success my-5">
                 {{ session('success') }}
-                Klik <a href="/history" 
+                Klik <a href="/history"
                         onclick="event.preventDefault();
-                                document.getElementById('history-form').submit();">disini</a> 
+                                document.getElementById('history-form').submit();">di sini</a>
                 untuk menuju ke Riwayat Pemesanan Anda.
             </div>
             <form id="history-form" action="/history" method="POST" style="display: none;">
@@ -19,84 +19,79 @@
     </div>
 </div>
 @endif
-<div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-        <div class="d-block h-100" style="background-image: url('{{ asset('images/login/viceroy-bali-tonedowned.jpg') }}');"></div>
+<div class="slider fade">
+    <div class="load"></div>
+    <div class="content">
+        @if (session('success'))
+        <div class="principal" style="top: 60%;">
+        @else
+        <div class="principal" style="top: 40%;">
+        @endif
+            <h1>Bingung mau nginep di mana?<br><b>hotelinn</b> aja.</h1>
+        </div>
     </div>
-    <div class="carousel-item">
-      <img class="d-block w-100" src="" alt="Second slide">
-    </div>
-    <div class="carousel-item">
-      <img class="d-block w-100" src="" alt="Third slide">
-    </div>
-  </div>
 </div>
-<script type="text/javascript">
-    $('.carousel').carousel();
-</script>
-<div class="container">
-    <div class="row justify-content-center" id="searchRow">
-        <div class="col-md-8">
-              
-            <div class="card my-5 content-wrapper">
-                <div class="card-header">Search For Hotel</div>
-
-                <div class="card-body">
-
-                    <div class="form-group row">
-                        <label for="provinsi" class="col-md-4 col-form-label text-md-right">Provinsi</label>
-
-                        <div class="col-md-6">
+<div class="bg-lightblue">
+    <div class="container">
+        <div class="row justify-content-center" id="searchRow">
+            <div class="col-md-8 my-5">
+                <form>
+                    <div class="row justify-content-center">
+                        <div class="col">
                             <select class="form-control" name="provinsiId" id="provinsi">
-                                <option value="all" selected> Pilih... </option>
+                                <option value="all" selected> Pilih provinsi </option>
                                 @foreach ($provinsis as $provinsi)
                                 <option value="{{ $provinsi->id }}"> {{ $provinsi->namaProvinsi }} </option>
                                 @endforeach
                             </select>
                         </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label for="kota" class="col-md-4 col-form-label text-md-right">Kota</label>
-
-                        <div class="col-md-6">
+                        <div class="col">
                             <select class="form-control" name="kotaId" id="kota">
-                                <option value="null"> Pilih.. </option>
+                                <option value="null"> Pilih kota </option>
                             </select>
                         </div>
-                    </div>
-
-                    <div class="form-group row mb-0">
-                        <div class="col-md-6 offset-md-4">
-                            <button type="submit" class="btn btn-primary" id="search">
-                                Search
+                        <div class="col d-flex justify-content-end">
+                            <button type="button" class="btn btn-primary" id="search">
+                                Cari
                             </button>
                         </div>
                     </div>
-
-                </div>
+                </form>
             </div>
         </div>
     </div>
-
+</div>
+<div class="container">
     <div class='row justify-content-center' >
-        <div class='col-md-8' id='hotel-row'>
+        <div class='col-md-9' id='hotel-row'>
             @foreach($hotels as $hotel)
-            <div class='card my-5 card-hotel'>
-                <div class='card-header'>{{ $hotel->hotel->name }}</div>
-                <div class="card-body">
-                    <div class="row">
-                        <p class="mx-3">
-                            {{$hotel->detailLengkap}}
-                        </p>
+            <div class="card my-5 card-hotel">
+                <div class="row no-gutters">
+                    <div class="col-md-5">
+                    <img src="{{$hotel->hotel->photo}}" style="height:25vh; object-fit: cover;" class="card-img" alt="{{$hotel->hotel->photo}}">
                     </div>
-                    <div class="row justify-content-center">
-                        <form method="get" action="/rentHotel">
-                        <input type="hidden" id="hotelId" name="hotelId" value="{{$hotel->hotel->id}}">
-                        <button type="submit" class="btn btn-primary show-room" action="rentHotel" id="hotel{{$hotel->hotel->id}}">Show
-                            Room</button>
-                        </form>
+                    <div class="col-md-7">
+                    <div class="card-body">
+                        <h5 class="card-title mb-0">{{ $hotel->hotel->name }}</h5>
+                        @for ($i = 0; $i < $hotel->hotel->star; $i++)
+                            <i class="fas fa-star"></i>
+                        @endfor
+                        @if (is_null($hotel->hotel->rating))
+                            <br><small class="text-muted my-2">Belum ada penilaian</small>
+                        @else
+                            <h5 class="my-2"><b>{{ $hotel->hotel->rating }}/10 </b>({{ $hotel->hotel->reviewers }} ulasan)</h6>
+                        @endif
+                        <p class="card-text">{{$hotel->detailLengkap}}</p>
+                        <div class="row justify-content-start">
+                            <form method="get" action="/showRoom">
+                                @csrf
+                            <input type="hidden" id="hotelId" name="hotelId" value="{{$hotel->hotel->id}}">
+                            <button type="submit" class="btn btn-primary ml-3">
+                                Lihat Detail
+                            </button>
+                            </form>
+                        </div>
+                    </div>
                     </div>
                 </div>
             </div>
@@ -170,33 +165,26 @@
                     result.forEach(hotel => {
                         $('#hotel-row').append(
                               "<div class='card my-5 card-hotel'>" +
-                              "<div class='card-header'>"+hotel.name+"</div>"+
-                              '<div class="card-body"><div class="row">'+
-                              '<p class="mx-3">'+hotel.detailLengkap+'</p></div>' +
-                              '<div class="row justify-content-center">'+
-                              '<button type="button" class="btn btn-primary show-room" id="hotel'+hotel.id+'">Show Room</button>'+
-                              '</div></div></div></div></div>');
+                              '<div class="row no-gutters">'+
+                              '<div class="col-md-5">'+
+                              '<img src="'+hotel.photo+'" style="height:25vh; object-fit: cover;" class="card-img" alt="No Photo">'+
+                              '</div>'+
+                              '<div class="col-md-7">'+
+                              '<div class="card-body">'+
+                              '<h5 class="card-title">'+hotel.name+'</h5>'+
+                              '<p class="card-text">'+hotel.detailLengkap+'</p>'+
+                              '<div class="row justify-content-start">'+
+                              '<form method="get" action="/showRoom">'+
+                              ' <form method="get" action="/showRoom">@csrf'+
+                              '<input type="hidden" id="hotelId" name="hotelId" value="'+hotel.id+'">'+
+                              '<button type="submit" class="btn btn-primary ml-3">ShowRoom</button>'+
+                              '</form></div></div></div></div></div>'
+                             );
                     })
 
                 }
             })
         });
-        $( '.show-room' ).on('click', function (){
-            var hotelId = $('.showroom').attr("id").replace('hotel',"");
-            $.ajaxSetup({
-                  headers: {
-                      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                  }
-            });
-            $.ajax({
-                type: 'POST',
-                url: '/getRoom',
-                data: { provinsiId: hotelId},
-                success: (result) => {
-                    console.log(result);
-                }
-            })
-        })
     });
 
 </script>

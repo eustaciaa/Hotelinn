@@ -55,7 +55,10 @@ class DatabaseSeeder extends Seeder
 
         $hotel = new App\hotel;
         $hotel->name = "Fraser Residence Menteng";
-        $hotel->rate = "5";
+        $hotel->star = 5;
+        $hotel->rating = 8.5;
+        $hotel->reviewers = 10;
+        $hotel->photo = "/images/hotel/fraser-residence-menteng/home.jpg";
         $hotel->save();
 
         $alamat = new App\alamat;
@@ -89,7 +92,8 @@ class DatabaseSeeder extends Seeder
 
         $hotel = new App\hotel;
         $hotel->name = "Business Tomang";
-        $hotel->rate = "3";
+        $hotel->star = 3;
+        $hotel->photo = '/images/hotel/business-tomang/home.jpg';
         $hotel->save();
 
 
@@ -111,17 +115,20 @@ class DatabaseSeeder extends Seeder
         $room->name = "Studio";
         $room->cost = 175000;
         $room->capacity = 1;
-        $room->available = 7;
+        $room->available = 0;
         $hotel->room()->save($room);
 
         $hotel = new App\hotel;
         $hotel->name = "Jambuluwuk Malioboro";
-        $hotel->rate = "5";
+        $hotel->star = 5;
+        $hotel->rating = 8.7;
+        $hotel->reviewers = 15;
+        $hotel->photo = "/images/hotel/jambuluwuk-malioboro/home.jpg";
         $hotel->save();
 
         $alamat = new App\Alamat;
         $alamat->provinsi_id = 2;
-        $alamat->kota_id = 1;
+        $alamat->kota_id = 2;
         $alamat->detailLengkap = "Jl. Gajah Mada No. 67, 55112, Yogyakarta, Indonesia";
         $hotel->alamat()->save($alamat);
 

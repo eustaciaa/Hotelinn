@@ -16,9 +16,10 @@ class CreateHotel extends Migration
         Schema::create('hotel', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->integer('rate');
+            $table->integer('star');
+            $table->float('rating')->nullable();
+            $table->integer('reviewers')->default(0);
             $table->string('photo')->nullable();
-            $table->string('review')->nullable();
             $table->timestamps();
         });
     }

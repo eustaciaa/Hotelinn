@@ -3,13 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 
 /* Model Imports */
 use App\alamat;
 use App\provinsi;
 use App\room_details;
+use App\hotel;
 
 class MainController extends Controller
 {
@@ -44,6 +44,19 @@ class MainController extends Controller
         return json_encode($alamat, JSON_HEX_TAG);
     }
 
+    /**
+     * Show Room Available
+     */
+
+    public function showRoom(Request $request){
+        $hotelId = $request->input('hotelId');
+
+        $hotel = hotel::find($hotelId);
+
+        $rooms = room_details::where('hotel_id', $hotelId)->get();
+
+        return view('hotel.list')->with(['rooms' => $rooms, 'hotel' => $hotel]);
+    }
 
     public function rentHotel(Request $request)
     {

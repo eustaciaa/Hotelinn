@@ -1,11 +1,17 @@
 // Fonts
-@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400;1,700&family=Raleway:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Nunito');
 
 // Variables
 @import 'variables';
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+@import '~@fortawesome/fontawesome-free/css/all';
+@import '~@fortawesome/fontawesome-free/scss/fontawesome';
+
+.fa-star{
+  color: $yellow;
+}
 
 body, html, main, #app {
     height: 100%;
@@ -20,6 +26,27 @@ body, p{
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
+}
+
+.bg-white {
+  background-color: #fff !important;
+}
+
+.bg-lightgray{
+  background: $lightgray;
+}
+
+.bg-lightblue {
+  background-color: $lightblue;
+}
+
+.bg-purple{
+  background-color: $purple;
+}
+
+.btn{
+  color: $lightblack;
+  font-weight: bold;
 }
 
 h1,h2,h3,h4,h5,h6{
@@ -47,20 +74,136 @@ h1,h2,h3,h4,h5,h6{
       color: #c1d0f7;
   }
 
-
-  #background-carousel {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-  }
-  #content-wrapper {
-    position: absolute;
-    z-index: 1 !important;
-    min-width: 100%;
-    min-height: 100%;
-  }
-
 //   .btn-link:hover{
 //     c;
 //   }
+
+ .form-control{
+   border-radius: 0em;
+   border: 3px solid $blue;
+ }
+  
+//  .btn{
+//   border-radius: 0em;
+//   border: 3px solid $blue;
+//  }
+
+//  .card{
+//    border-radius: 0em;
+//    border: 3px solid rgba(0, 0, 0, 0.125);
+//  }
+
+//  img{
+//    border-radius: 0em;
+//  }
+
+  .load{
+    animation: slide 2s;
+  }
+
+  .slider{
+    background-repeat:  no-repeat;
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 70vh;
+    animation: slide 26s infinite;
+  }
+
+  .content{
+    color: #fff;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+  }
+
+  .principal{
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    letter-spacing: 5px;
+    text-align: center;
+  }
+
+  @keyframes slide {
+    2%{
+      background-image: url('/images/home/lowcontrast/4seasons-bali.png');
+      opacity: 0.5
+    }
+    2%{
+      background-image: url('/images/home/lowcontrast/4seasons-bali.png');
+      opacity: 1
+    }
+    18%{
+      background-image:  url('/images/home/lowcontrast/4seasons-bali.png');
+      opacity: 1;
+    }
+    20%{
+      background-image:  url('/images/home/lowcontrast/4seasons-bali.png');
+      opacity: 0.5;
+    }
+    20.01%{
+      background-image: url('/images/home/lowcontrast/explorerdive-papua.png');
+      opacity: 0.5;
+    }
+    22%{
+      background-image: url('/images/home/lowcontrast/explorerdive-papua.png');
+      opacity: 1;
+    }
+    38%{
+      background-image:  url('/images/home/lowcontrast/explorerdive-papua.png');
+      opacity: 1;
+    }
+    40%{
+      background-image:  url('/images/home/lowcontrast/explorerdive-papua.png');
+      opacity: 0.5;
+    }
+    40.01%{
+      background-image: url('/images/home/lowcontrast/hilton-bandung.png');
+      opacity: 0.5;
+    }
+    42%{
+      background-image: url('/images/home/lowcontrast/hilton-bandung.png');
+      opacity: 1;
+    }
+    57%{
+      background-image: url('/images/home/lowcontrast/hilton-bandung.png');
+      opacity: 1;
+    }
+    60%{
+      background-image:  url('/images/home/lowcontrast/hilton-bandung.png');
+      opacity: 0.5;
+    }
+    60.01%{
+      background-image: url('/images/home/lowcontrast/viceroy-bali.png');
+      opacity: 0.5;
+    }
+    62%{
+      background-image: url('/images/home/lowcontrast/viceroy-bali.png');
+      opacity: 1;
+    }
+    77%{
+      background-image: url('/images/home/lowcontrast/viceroy-bali.png');
+      opacity: 1;
+    }
+    80%{
+      background-image:  url('/images/home/lowcontrast/viceroy-bali.png');
+      opacity: 0.5;
+    }
+    80.01%{
+      background-image:  url('/images/home/lowcontrast/villalonghouse-bali.png');
+      opacity: 0.5;
+    }
+    82%{
+      background-image:  url('/images/home/lowcontrast/villalonghouse-bali.png');
+      opacity: 1;
+    }
+    97%{
+      background-image:  url('/images/home/lowcontrast/villalonghouse-bali.png');
+      opacity: 1;
+    }
+    100%{
+      background-image:  url('/images/home/lowcontrast/villalonghouse-bali.png');
+      opacity: 0.5;
+    }
+  }

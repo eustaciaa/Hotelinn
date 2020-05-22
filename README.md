@@ -19,9 +19,14 @@ jangan lupa buat migrate refresh data dan ditaro di database\seeds\DatabaseSeede
 php artisan migrate:fresh --seed
 ```
 
+kalo belom install font awesome, install dulu yakk
+npm install --save @fortawesome/fontawesome-free
+
 # Update List
-- sudah ada buat check hotel berdasarkan provinsi
-- sudah ada buat check untuk liat room
-- sudah bisa rent room
+- sudah ada home yang menggunakan ajax
 - sudah bisa check history
 - penambahan history di header
+
+# TODO
+- admin dashboard dan admin login
+- admin auth
