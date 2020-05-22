@@ -19,6 +19,9 @@ jangan lupa buat migrate refresh data dan ditaro di database\seeds\DatabaseSeede
 php artisan migrate:fresh --seed
 ```
 
+kalo belom install font awesome, install dulu yakk
+npm install --save @fortawesome/fontawesome-free
+
 # Update List
 - sudah ada home yang menggunakan ajax
 - sudah bisa check history
