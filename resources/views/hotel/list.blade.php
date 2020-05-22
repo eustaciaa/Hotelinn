@@ -29,7 +29,7 @@
                         <div class="card-body">
                         <h5 class="card-title">{{$room->name}}</h5>
                         <h6 class="card-text price"><strong>Rp{{number_format($room->cost,2,",",".")}} / malam</strong></h6>
-                        <div class="row">
+                        <div class="row mt-3">
                             <div class="col-6">
                                 <p><i class="mr-2 fas fa-bed"></i>  {{$room->capacity}}</p>
                             </div>
@@ -43,25 +43,97 @@
                                     <p><i class="mr-2 fas fa-smoking-ban"></i>  Bebas asap rokok</p>
                                 </div>
                             @endif
-                            @if(!is_null($room->scenery))
-                                <div class="col-6">
-                                    <p><i class="mr-2 fas fa-mountain"></i>  {{$room->scenery}}</p>
+                            <div class="col-6">
+                                <p><i class="mr-2 fas fa-mountain"></i>  {{$room->scenery}}</p>
+                            </div>
+                        </div>
+                        <a href="#moreFacilities" data-toggle="modal">
+                            <small class="text-muted"><i class="fas fa-ellipsis-h mr-2"></i>Fasilitas lainnya</small>
+                        </a>
+
+                        <!-- moreFacilities Modal -->
+                        <div class="modal fade" id="moreFacilities" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLongTitle">Fasilitas lainnya</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
                                 </div>
+                                <div class="modal-body">
+                                    <div class="container-fluid">
+                                        <div class="row">
+                                            @if(!is_null($hotel->shower))
+                                                <div class="col-6">
+                                                    <h5>Kamar Mandi dan Perlengkapan Mandi</h5>
+                                                    <p>{{$hotel->shower}}</p>
+                                                </div>
+                                            @endif
+                                            @if(!is_null($hotel->food))
+                                                <div class="col-6">
+                                                    <h5>Makanan dan Minuman</h5>
+                                                    <p>{{$hotel->food}}</p>
+                                                </div>
+                                            @endif
+                                            @if(!is_null($hotel->entertainment))
+                                                <div class="col-6">
+                                                    <h5>Hiburan</h5>
+                                                    <p>{{$hotel->entertainment}}</p>
+                                                </div>
+                                            @endif
+                                            @if(!is_null($hotel->convenience))
+                                                <div class="col-6">
+                                                    <h5>Kenyamanan</h5>
+                                                    <p>{{$hotel->convenience}}</p>
+                                                </div>
+                                            @endif
+                                            @if(!is_null($hotel->furniture))
+                                                <div class="col-6">
+                                                    <h5>Tata Ruang dan Furnitur</h5>
+                                                    <p>{{$hotel->furniture}}</p>
+                                                </div>
+                                            @endif
+                                            @if(!is_null($hotel->service))
+                                                <div class="col-6">
+                                                    <h5>Layanan</h5>
+                                                    <p>{{$hotel->service}}</p>
+                                                </div>
+                                            @endif
+                                            @if(!is_null($hotel->laundry))
+                                                <div class="col-6">
+                                                    <h5>Pakaian dan Binatu</h5>
+                                                    <p>{{$hotel->laundry}}</p>
+                                                </div>
+                                            @endif
+                                            @if(!is_null($hotel->secuity_safety))
+                                                <div class="col-6">
+                                                    <h5>Keamanan dan Keselamatan</h5>
+                                                    <p>{{$hotel->secuity_safety}}</p>
+                                                </div>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                            @if ($room->available > 0)
+                            <form method="get" action="/rent">
+                                @csrf
+                                <input type="hidden" id="hotelId" name="hotelId" value="{{$room->hotel_id}}">
+                                <input type="hidden" id="roomId" name="roomId" value="{{$room->id}}">
+                                <button type="submit" class="btn btn-primary mt-3">Check Room</button>
+                            </form>
+                            @else
+                                <button type="submit" class="btn btn-secondary" disabled>Check Room</button>
                             @endif
-                        </div>
-                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                        @if ($room->available > 0)
-                        <form method="get" action="/rent">
-                            @csrf
-                            <input type="hidden" id="hotelId" name="hotelId" value="{{$room->hotel_id}}">
-                            <input type="hidden" id="roomId" name="roomId" value="{{$room->id}}">
-                            <button type="submit" class="btn btn-primary">Check Room</button>
-                        </form>
-                        @else
-                        <div class="col-1">
-                            <button type="submit" class="btn btn-secondary" disabled>Check Room</button>
-                        </div>
-                        @endif
+                        
                         </div>
                     </div>
                 @if ($loop->iteration%2 == 0)
@@ -73,25 +145,6 @@
                     @endfor
                 @endif
             @endforeach
-            <!-- @foreach ($rooms as $room)
-            <div class="card my-5">
-                <div class="card-header justify-content-center">{{$room->name}}</div>
-                <div class="card-body">
-                    <div class="row mx-1">
-                        <div class="col-9">
-                            <p>
-                                {{$room->capacity}} Stars
-                                <br>
-                                {{$room->cost}}
-                                <br>
-                            </p>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            @endforeach -->
-
         </div>
     </div>
 </div>
