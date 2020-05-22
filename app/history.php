@@ -3,25 +3,25 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\User;
+use App\user;
 
-class History extends Model
+class history extends Model
 {
 
     protected $table = 'history';
 
     public function user()
     {
-        return $this->belongsTo('User');
+        return $this->belongsTo('user');
     }
 
     public function hotel()
     {
-        return $this->belongsTo('App\Hotel');
+        return $this->belongsTo('App\hotel');
     }
 
     public function room()
     {
-        return $this->belongsTo('App\Room_details');
+        return $this->belongsTo('App\room_details');
     }
 }
