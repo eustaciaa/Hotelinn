@@ -29,7 +29,26 @@
                         <div class="card-body">
                         <h5 class="card-title">{{$room->name}}</h5>
                         <h6 class="card-text price"><strong>Rp{{number_format($room->cost,2,",",".")}} / malam</strong></h6>
-                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                        <div class="row">
+                            <div class="col-6">
+                                <p><i class="mr-2 fas fa-bed"></i>  {{$room->capacity}}</p>
+                            </div>
+                            @if($room->freeWifi == true)
+                                <div class="col-6">
+                                    <p><i class="mr-2 fas fa-wifi"></i>  Wifi gratis</p>
+                                </div>
+                            @endif
+                            @if($room->noSmoking == true)
+                                <div class="col-6">
+                                    <p><i class="mr-2 fas fa-smoking-ban"></i>  Bebas asap rokok</p>
+                                </div>
+                            @endif
+                            @if(!is_null($room->scenery))
+                                <div class="col-6">
+                                    <p><i class="mr-2 fas fa-mountain"></i>  {{$room->scenery}}</p>
+                                </div>
+                            @endif
+                        </div>
                         <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
                         @if ($room->available > 0)
                         <form method="get" action="/rent">
