@@ -23,15 +23,9 @@
 
     <!-- Icon -->
     <link rel="icon" href="{{ asset('images/hotelinn/logo_circle.png') }}">
+
 </head>
 <body>
-<script>
-$('.dropdown-toggle').on("click", function(e) {
-    e.stopPropagation();
-    e.preventDefault();
-    $(this).next('.dropdown-menu').toggle();
-});
-</script>
 
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white sticky-top shadow-sm">
@@ -71,12 +65,12 @@ $('.dropdown-toggle').on("click", function(e) {
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                 
 
-                                <a class="dropdown-item dropdown-toggle" type="button" data-toggle="dropdown">
-                                        {{ __('Ubah Profil') }}
+                                <a class="dropdown-toggle dropdown-item" type="button" data-toggle="dropdown">
+                                        {{ __('Pengaturan') }}</a>
                                     <ul class="dropdown-menu">
-                                        <a class="dropdown-item" onclick="event.preventDefault();document.getElementById('profile-form').submit();">{{ __('Second level') }}</a>
-                                    </ul>
-                                </a>    
+                                        <li><a class="dropdown-item" onclick="event.preventDefault();document.getElementById('profile-form').submit();">{{ __('Informasi Akun') }}</a></li>
+
+                                    </ul>    
                                     <form id="profile-form" action="/profile" method="POST" style="display: none;">
                                         @csrf
                                     </form>
@@ -117,5 +111,14 @@ $('.dropdown-toggle').on("click", function(e) {
             @yield('content')
         </main>
     </div>
+<script>
+$(document).ready(function(){
+  $('.dropdown-submenu .dropdown-item').on("click", function(e){
+    $(this).next('ul').toggle();
+    e.stopPropagation();
+    e.preventDefault();
+  });
+});
+</script>
 </body>
 </html>

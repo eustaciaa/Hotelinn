@@ -163,23 +163,27 @@
                     result = JSON.parse(result);
                     $( '.card-hotel').remove();
                     result.forEach(hotel => {
-                        $('#hotel-row').append(
-                              "<div class='card my-5 card-hotel'>" +
+                        var div = "<div class='card my-5 card-hotel' style='height=25vh;'>" +
                               '<div class="row no-gutters">'+
                               '<div class="col-md-5">'+
-                              '<img src="'+hotel.photo+'" style="height:25vh; object-fit: cover;" class="card-img" alt="No Photo">'+
+                              '<img src="'+hotel.photo+'" style="height:100%; object-fit: cover;" class="card-img" alt="No Photo">'+
                               '</div>'+
                               '<div class="col-md-7">'+
                               '<div class="card-body">'+
-                              '<h5 class="card-title">'+hotel.name+'</h5>'+
-                              '<p class="card-text">'+hotel.detailLengkap+'</p>'+
+                              '<h5 class="card-title mb-0">'+hotel.name+'</h5>';
+                              for(var i = 0; i < hotel.star; i++){
+                                div += ' <i class="fas fa-star"></i>';
+                              }
+                              if(hotel.rating == null) div+= '<br><small class="text-muted my-2">Belum ada penilaian</small>';
+                              else div+= '<h5 class="my-2"><b>'+hotel.rating+'/10 </b>('+hotel.reviewers+'ulasan)</h6>'
+                              div +='<p class="card-text">'+hotel.detailLengkap+'</p>'+
                               '<div class="row justify-content-start">'+
                               '<form method="get" action="/showRoom">'+
                               ' <form method="get" action="/showRoom">@csrf'+
                               '<input type="hidden" id="hotelId" name="hotelId" value="'+hotel.id+'">'+
                               '<button type="submit" class="btn btn-primary ml-3">ShowRoom</button>'+
                               '</form></div></div></div></div></div>'
-                             );
+                        $('#hotel-row').append(div);
                     })
 
                 }
