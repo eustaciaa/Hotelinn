@@ -65,10 +65,10 @@
     <div class='row justify-content-center' >
         <div class='col-md-9' id='hotel-row'>
             @foreach($hotels as $hotel)
-            <div class="card my-5 card-hotel">
+            <div class="card my-5 card-hotel" style="height=25vh;">
                 <div class="row no-gutters">
                     <div class="col-md-5">
-                    <img src="{{$hotel->hotel->photo}}" style="height:25vh; object-fit: cover;" class="card-img" alt="{{$hotel->hotel->photo}}">
+                    <img src="{{$hotel->hotel->photo}}" style="height:100%; object-fit: cover;" class="card-img" alt="{{$hotel->hotel->photo}}">
                     </div>
                     <div class="col-md-7">
                     <div class="card-body">

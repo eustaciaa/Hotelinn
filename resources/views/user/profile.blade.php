@@ -39,7 +39,15 @@
                                     <label for="gender" class="col-md-4 col-form-label text-md-right"><i>{{ __('Jenis Kelamin') }}</i></label>
 
                                     <div class="col-md-6">
-                                        <input id="gender" type="text" class="form-control" name="gender" value="{{ Auth::user()->gender }}" required disabled>
+                                        <select class="form-control" id="gender" name="gender">
+                                        @if (Auth::user()->gender=='M')
+                                            <option value="M" selected>Pria</option>
+                                            <option value="F">Wanita</option>
+                                        @elseif (Auth::user()->gender=='F')
+                                            <option value="M">Pria</option>
+                                            <option value="F" selected>Wanita</option>
+                                        @endif
+                                    </select>
                                     </div>
                                 </div>
 
@@ -47,7 +55,7 @@
                                     <label for="birtdate" class="col-md-4 col-form-label text-md-right">{{ __('Tanggal Lahir') }}</label>
 
                                     <div class="col-md-6">
-                                        <input id="date" type="text" class="form-control" name="birthdate" value="{{ Auth::user()->birthdate }}" required>
+                                        <input id="date" type="date" class="form-control" name="birthdate" value="{{ Auth::user()->birthdate }}" required>
                                     </div>
                                 </div>
 

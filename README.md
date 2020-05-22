@@ -20,7 +20,9 @@ php artisan migrate:fresh --seed
 ```
 
 kalo belom install font awesome, install dulu yakk
+```
 npm install --save @fortawesome/fontawesome-free
+```
 
 # Update List
 - sudah ada home yang menggunakan ajax

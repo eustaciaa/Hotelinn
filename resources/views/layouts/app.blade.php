@@ -25,6 +25,14 @@
     <link rel="icon" href="{{ asset('images/hotelinn/logo_circle.png') }}">
 </head>
 <body>
+<script>
+$('.dropdown-toggle').on("click", function(e) {
+    e.stopPropagation();
+    e.preventDefault();
+    $(this).next('.dropdown-menu').toggle();
+});
+</script>
+
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white sticky-top shadow-sm">
             <div class="container">
@@ -63,14 +71,16 @@
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                 
 
-                                <a class="dropdown-item"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('profile-form').submit();">
+                                <a class="dropdown-item dropdown-toggle" type="button" data-toggle="dropdown">
                                         {{ __('Ubah Profil') }}
-                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <a class="dropdown-item" onclick="event.preventDefault();document.getElementById('profile-form').submit();">{{ __('Second level') }}</a>
+                                    </ul>
+                                </a>    
                                     <form id="profile-form" action="/profile" method="POST" style="display: none;">
                                         @csrf
                                     </form>
+
 
                                     <div class="dropdown-divider"></div>
 

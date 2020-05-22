@@ -32,11 +32,13 @@ class UserController extends Controller
 
         $f_name = $request->input('fName');
         $l_name = $request->input('lName');
+        $gender = $request->input('gender');
         $birthdate = $request->input('birthdate');
 
         $updateProfile = User::where('id', Auth::user()->id)->update([
             'fName' => $f_name,
             'lName' => $l_name,
+            'gender' => $gender,
             'birthdate' => $birthdate
         ]);
 
