@@ -15,13 +15,13 @@ class RentController extends Controller
         $this->middleware('auth');
     }
 
-    public function rentRoom (Request $request)
+    public function rent (Request $request)
     {
         $id = $request->input('hotelId');
         $roomId = $request->input('roomId');
         $hotel = hotel::where('id',$id)->first();
         $room = $hotel->room->where('id',$roomId)->first();
-        
+
         return view('hotel.rent')->with( ['hotel' => $hotel,'room'=> $room]);
     }
 

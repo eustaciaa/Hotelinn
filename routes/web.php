@@ -19,11 +19,20 @@ Auth::routes();
 
 Route::get('/','MainController@index');
 
+
 Route::get('/getHotel','MainController@getHotel');
 
 Route::get('/rentHotel','MainController@rentHotel');
 
-Route::get('/rentRoom','RentController@rentRoom');
+Route::get('/rent','RentController@rent');
+
+Route::prefix('admin')->group(function(){
+    Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
+
+    Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
+
+    Route::get('/','AdminController@index')->name('admin.dashboard');
+});
 
 Route::post('/updateProfile','UserController@updateProfile');
 
@@ -35,6 +44,8 @@ Route::post('/history','UserController@history');
 
 
 Route::post('/getKota','AJAXController@getKota');
+
+Route::get('/showRoom','MainController@showRoom');
 
 
 

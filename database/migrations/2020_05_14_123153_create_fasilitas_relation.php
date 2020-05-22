@@ -14,7 +14,7 @@ class CreateFasilitasRelation extends Migration
     public function up()
     {
         Schema::create('fasilitas_relation', function (Blueprint $table) {
-            $table->foreignId('room_details_id')->constrained('room_details');
+            $table->foreignId('hotel_id')->constrained('hotel');
             $table->foreignId('fasilitas_id')->constrained();
             $table->timestamps();
         });

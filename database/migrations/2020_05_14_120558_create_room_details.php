@@ -18,8 +18,19 @@ class CreateRoomDetails extends Migration
             $table->foreignId('hotel_id')->constrained('hotel')->onDelete('cascade');
             $table->string('name')->unique();
             $table->integer('available');
-            $table->integer('capacity');
+            $table->string('capacity');
             $table->integer('cost');
+            $table->boolean('freeWifi')->default(false);
+            $table->boolean('noSmoking')->default(false);
+            $table->boolean('shower')->default(false);
+            $table->string('scenery')->nullable();
+            $table->string('entertainment')->nullable();
+            $table->string('comfort')->nullable();
+            $table->string('convenience')->nullable();
+            $table->string('furniture')->nullable();
+            $table->string('service')->nullable();
+            $table->string('security_safety')->nullable();
+            $table->string('photo');
             $table->timestamps();
         });
     }
