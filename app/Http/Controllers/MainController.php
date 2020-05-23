@@ -52,7 +52,7 @@ class MainController extends Controller
     public function showRoom(Request $request){
         $hotelId = $request->input('hotelId');
 
-        $hotel = hotel::find($hotelId);
+        $hotel = alamat::where('hotel_id', $hotelId)->first();
 
         $rooms = room_details::where('hotel_id', $hotelId)->get();
 

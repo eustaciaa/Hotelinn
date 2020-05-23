@@ -5,17 +5,18 @@
     <div class="row justify-content-center">
         <div class="col-md-9">
             <div class="card my-5">
-                <img class="card-img-top" src="{{$hotel->photo}}" alt="{{$hotel->photo}}">
+                <img class="card-img-top" src="{{$hotel->hotel->photo}}" alt="{{$hotel->hotel->photo}}">
                 <div class="card-body">
-                    <h3 class="card-title mb-0">{{ $hotel->name }}</h3>
-                    @for ($i = 0; $i < $hotel->star; $i++)
+                    <h3 class="card-title mb-0">{{ $hotel->hotel->name }}</h3>
+                    @for ($i = 0; $i < $hotel->hotel->star; $i++)
                         <i class="fas fa-star"></i>
                     @endfor
-                    @if (is_null($hotel->rating))
+                    @if (is_null($hotel->hotel->rating))
                         <br><small class="text-muted my-2">Belum ada penilaian</small>
                     @else
-                        <h5 class="my-2"><b>{{ $hotel->rating }}/10 </b>({{ $hotel->reviewers }} ulasan)</h6>
+                        <h5 class="my-2"><b>{{ $hotel->hotel->rating }}/10 </b>({{ $hotel->hotel->reviewers }} ulasan)</h6>
                     @endif
+                    <span class="badge badge-light txt-lightblack text-uppercase"><i class="fas fa-map-marker-alt mr-1"></i>{{ $hotel->kota->namaKota }}, {{ $hotel->provinsi->namaProvinsi }}</span>
                     <p class="card-text">{{$hotel->detailLengkap}}</p>
                 </div>
             </div>
@@ -31,28 +32,28 @@
                         <h6 class="card-text price"><strong>Rp{{number_format($room->cost,2,",",".")}} / malam</strong></h6>
                         <div class="row mt-3">
                             <div class="col-6">
-                                <p><i class="mr-2 fas fa-bed"></i>  {{$room->capacity}}</p>
+                                <p><i class="mr-2 icon fas fa-bed"></i>  {{$room->capacity}}</p>
                             </div>
                             @if($room->freeWifi == true)
                                 <div class="col-6">
-                                    <p><i class="mr-2 fas fa-wifi"></i>  Wifi gratis</p>
+                                    <p><i class="mr-2 icon fas fa-wifi"></i>  Wifi gratis</p>
                                 </div>
                             @endif
                             @if($room->noSmoking == true)
                                 <div class="col-6">
-                                    <p><i class="mr-2 fas fa-smoking-ban"></i>  Bebas asap rokok</p>
+                                    <p><i class="mr-2 icon fas fa-smoking-ban"></i>  Bebas asap rokok</p>
                                 </div>
                             @endif
                             <div class="col-6">
-                                <p><i class="mr-2 fas fa-mountain"></i>  {{$room->scenery}}</p>
+                                <p><i class="mr-2 icon fas fa-mountain"></i>  {{$room->scenery}}</p>
                             </div>
                         </div>
-                        <a href="#moreFacilities" data-toggle="modal">
+                        <a href="#{{str_replace(' ', '', $room->name)}}" data-toggle="modal">
                             <small class="text-muted"><i class="fas fa-ellipsis-h mr-2"></i>Fasilitas lainnya</small>
                         </a>
 
                         <!-- moreFacilities Modal -->
-                        <div class="modal fade" id="moreFacilities" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal fade" id="{{str_replace(' ', '', $room->name)}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered" role="document">
                                 <div class="modal-content">
                                 <div class="modal-header">
@@ -64,60 +65,59 @@
                                 <div class="modal-body">
                                     <div class="container-fluid">
                                         <div class="row">
-                                            @if(!is_null($hotel->shower))
-                                                <div class="col-6">
-                                                    <h5>Kamar Mandi dan Perlengkapan Mandi</h5>
-                                                    <p>{{$hotel->shower}}</p>
+                                            @if(!is_null($room->shower))
+                                                <div class="col-6 my-2">
+                                                    <h5><i class="icon fas fa-shower mr-2"></i>Kamar Mandi dan Perlengkapan Mandi</h5>
+                                                    <p>{{$room->shower}}</p>
                                                 </div>
                                             @endif
-                                            @if(!is_null($hotel->food))
-                                                <div class="col-6">
-                                                    <h5>Makanan dan Minuman</h5>
-                                                    <p>{{$hotel->food}}</p>
+                                            @if(!is_null($room->food))
+                                                <div class="col-6 my-2">
+                                                    <h5><i class="icon fas fa-utensils mr-2"></i>Makanan dan Minuman</h5>
+                                                    <p>{{$room->food}}</p>
                                                 </div>
                                             @endif
-                                            @if(!is_null($hotel->entertainment))
-                                                <div class="col-6">
-                                                    <h5>Hiburan</h5>
-                                                    <p>{{$hotel->entertainment}}</p>
+                                            @if(!is_null($room->entertainment))
+                                                <div class="col-6 my-2">
+                                                    <h5><i class="icon fas fa-tv mr-2"></i>Hiburan</h5>
+                                                    <p>{{$room->entertainment}}</p>
                                                 </div>
                                             @endif
-                                            @if(!is_null($hotel->convenience))
-                                                <div class="col-6">
-                                                    <h5>Kenyamanan</h5>
-                                                    <p>{{$hotel->convenience}}</p>
+                                            @if(!is_null($room->convenience))
+                                                <div class="col-6 my-2">
+                                                    <h5><i class="icon fas fa-fan mr-2"></i>Kenyamanan</h5>
+                                                    <p>{{$room->convenience}}</p>
                                                 </div>
                                             @endif
-                                            @if(!is_null($hotel->furniture))
-                                                <div class="col-6">
-                                                    <h5>Tata Ruang dan Furnitur</h5>
-                                                    <p>{{$hotel->furniture}}</p>
+                                            @if(!is_null($room->furniture))
+                                                <div class="col-6 my-2">
+                                                    <h5><i class="icon fas fa-couch mr-2"></i>Tata Ruang dan Furnitur</h5>
+                                                    <p>{{$room->furniture}}</p>
                                                 </div>
                                             @endif
-                                            @if(!is_null($hotel->service))
-                                                <div class="col-6">
-                                                    <h5>Layanan</h5>
-                                                    <p>{{$hotel->service}}</p>
+                                            @if(!is_null($room->service))
+                                                <div class="col-6 my-2">
+                                                    <h5><i class="icon fas fa-concierge-bell mr-2"></i>Layanan</h5>
+                                                    <p>{{$room->service}}</p>
                                                 </div>
                                             @endif
-                                            @if(!is_null($hotel->laundry))
-                                                <div class="col-6">
-                                                    <h5>Pakaian dan Binatu</h5>
-                                                    <p>{{$hotel->laundry}}</p>
+                                            @if(!is_null($room->laundry))
+                                                <div class="col-6 my-2">
+                                                    <h5><i class="icon fas fa-tshirt mr-2"></i>Pakaian dan Binatu</h5>
+                                                    <p>{{$room->laundry}}</p>
                                                 </div>
                                             @endif
-                                            @if(!is_null($hotel->secuity_safety))
-                                                <div class="col-6">
-                                                    <h5>Keamanan dan Keselamatan</h5>
-                                                    <p>{{$hotel->secuity_safety}}</p>
+                                            @if(!is_null($room->secuity_safety))
+                                                <div class="col-6 my-2">
+                                                    <h5><i class="icon fas fa-shield-alt mr-2"></i>Keamanan dan Keselamatan</h5>
+                                                    <p>{{$room->secuity_safety}}</p>
                                                 </div>
                                             @endif
                                         </div>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
                                 </div>
                                 </div>
                             </div>
