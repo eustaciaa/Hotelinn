@@ -40,9 +40,34 @@ class MainController extends Controller
     {
         $kotaId = $request->input('kotaId');
         $provinsiId = $request->input('provinsiId');
+        $checkIn = $request->input('checkIn');
+        $checkOut = $request->input('checkOut');
         $query = ['provinsi_id'=> $provinsiId, 'kota_id' => $kotaId];
-        $alamat = alamat::where($query)->join('hotel','alamat.hotel_id','=','hotel.id')->get();
+        $alamat = alamat::where($query)
+                        ->whereNOTIn('hotel_id',function($query){
+                            $query->select('hotel_id')->from('history')
+                                                    ->whereBetween('checkIn', [$checkIn, $checkOut])
+                                                    ->whereBetween('checkOut', [$checkIn, $checkOut]);
+                            })
+                        ->join('hotel','alamat.hotel_id','=','hotel.id')
+                        ->get();
         return json_encode($alamat, JSON_HEX_TAG);
+    }
+
+    /**
+     * Show The Hotel List Filtered With Desired CheckIn and CheckOut
+     */
+    public function getAvailableHotel(Request $request)
+    {
+        $checkIn = $request->input('checkIn');
+        $checkOut = $request->input('checkOut');
+        $hotels = alamat::whereNOTIn('hotel_id',function($query){
+                            $query->select('hotel_id')->from('history')
+                                                      ->whereBetween('checkIn', [$checkIn, $checkOut])
+                                                      ->whereBetween('checkOut', [$checkIn, $checkOut]);
+                        })
+                        ->get();
+        dd($hotels);
     }
 
     /**

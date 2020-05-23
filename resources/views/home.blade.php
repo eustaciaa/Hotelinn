@@ -36,6 +36,16 @@
         <div class="row justify-content-center" id="searchRow">
             <div class="col-md-8 my-5">
                 <form>
+                    <div class="row justify-content-center mb-5">
+                        <div class="col">
+                            <label for="checkIn" class="col-form-label text-md-right"><i>{{ __('Check In') }}</i></label>
+                            <input id="checkOut" type="date" class="form-control" name="checkIn">
+                        </div>
+                        <div class="col">
+                            <label for="checkIn" class="col-form-label text-md-right"><i>{{ __('Check Out') }}</i></label>
+                            <input id="checkOut" type="date" class="form-control" name="checkOut">
+                        </div>
+                    </div>
                     <div class="row justify-content-center">
                         <div class="col">
                             <select class="form-control" name="provinsiId" id="provinsi">
@@ -50,7 +60,7 @@
                                 <option value="null"> Pilih kota </option>
                             </select>
                         </div>
-                        <div class="col d-flex justify-content-end">
+                        <div class="col-2 d-flex justify-content-end">
                             <button type="button" class="btn btn-primary" id="search">
                                 Cari
                             </button>
@@ -81,7 +91,7 @@
                         @else
                             <h5 class="my-2"><b>{{ $hotel->hotel->rating }}/10 </b>({{ $hotel->hotel->reviewers }} ulasan)</h6>
                         @endif
-                        <span class="badge badge-light txt-lightblack text-uppercase"><i class="fas fa-map-marker-alt mr-1"></i>{{ $hotel->kota->namaKota }}, {{ $hotel->provinsi->namaProvinsi }}</span>
+                        <span class="badge badge-light txt-lightblack text-uppercase transparent"><i class="fas fa-map-marker-alt mr-1"></i>{{ $hotel->kota->namaKota }}, {{ $hotel->provinsi->namaProvinsi }}</span>
                         <p class="card-text">{{$hotel->detailLengkap}}</p>
                         <div class="row justify-content-start">
                             <form method="get" action="/showRoom">
