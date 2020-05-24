@@ -67,23 +67,30 @@ class MainController extends Controller
         $hotelId = $request->input('hotelId');
         $checkIn = $request->input('checkIn');
         $checkOut = $request->input('checkOut');
+        
+        $hotel = alamat::where('hotel_id', $hotelId)->first();
 
-        $count = DB::table('history')->select('room_id', DB::raw('count(room_id) as booked_rooms'))
+        $count = DB::table('history')->select('room_id', DB::raw('sum(roomTotal) as booked_rooms'))
                     ->where(['hotel_id' => $hotelId, 'finished' => false])
                     ->whereIn('room_id', function($query) use ($checkIn, $checkOut){
                         $query->select('hotel_id')->from('history')
                                 ->whereBetween('checkIn', [$checkIn, $checkOut])
-                                ->whereBetween('checkOut', [$checkIn, $checkOut]);
+                                ->orwhereBetween('checkOut', [$checkIn, $checkOut]);
                         })
                     ->groupBy('room_id');
 
-        $rooms = room_details::where('hotel_id', $hotelId)
+        $rooms = room_details::where('hotel_id', $hotelId)->get();
+
+        $bookedRooms = room_details::where('hotel_id', $hotelId)
                              ->joinSub($count, 'count', function ($join) {
                                     $join->on('id', '=', 'count.room_id');
                                })
                              ->get();
 
-        return json_encode($rooms, JSON_HEX_TAG);
+        dd($rooms, $bookedRooms);
+
+        return view('hotel.list')->with(['rooms' => $rooms, 'bookedRooms' => $bookedRooms, 'hotel' => $hotel]);
+        // return json_encode($rooms, JSON_HEX_TAG);
     }
 
     /**
