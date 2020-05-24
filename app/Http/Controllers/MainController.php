@@ -99,12 +99,9 @@ class MainController extends Controller
     public function getRoomWithCount(Request $request)
     {
         $hotelId = $request->input('hotelId');
-        // $checkIn = $request->input('checkIn');
-        // $checkOut = $request->input('checkOut');
-        $checkIn = "2020-05-30";
-        $checkOut = "2020-05-31";
+        $checkIn = $request->input('checkIn');
+        $checkOut = $request->input('checkOut');
 
-        $query = [['hotel_id',"=",$hotelId],['checkOut','>',$checkIn],['checkOut','<',]];
         $count = history::selectRaw('room_id, count(room_id) as Checked')
                         ->where('hotel_id',$hotelId)
                         ->where('finished','=','false')

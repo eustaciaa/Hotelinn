@@ -185,7 +185,7 @@
             $.ajax({
                 type: 'GET',
                 url: '/getHotel',
-                data: { provinsiId: provinsiId, kotaId: kotaId, checkIn: checkIn, checkOut: checkOut, field: field, order: order},
+                data: { provinsiId: provinsiId, kotaId: kotaId, field: field, order: order},
                 success: (result) => {
                     console.log(result);
                     result = JSON.parse(result);
