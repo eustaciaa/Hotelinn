@@ -17,10 +17,12 @@ class CreateHistory extends Migration
             $table->id();
             $table->foreignId('hotel_id')->constrained('hotel');
             $table->foreignId('room_id')->constrained('room_details');
-            $table->integer('total');
+            $table->integer('roomTotal');
             $table->date('bookdate');
             $table->date('checkIn')->nullable($value = true);
             $table->date('checkOut')->nullable($value = true);
+            $table->boolean('finished')->default(false);
+            $table->boolean('confirmed')->default(false);
             $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });
