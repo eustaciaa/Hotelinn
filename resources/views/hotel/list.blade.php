@@ -166,7 +166,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                             @if ($room->available > 0)
                             <form method="get" action="/rent" id="book{{ $room->id }}">
                                 @csrf
@@ -177,7 +177,7 @@
                             @else
                                 <button type="submit" id="book{{ $room->id }}" class="btn btn-secondary" disabled>Check Room</button>
                             @endif
-                        
+
                         </div>
                     </div>
                 @if ($loop->iteration%2 == 0)
@@ -194,9 +194,15 @@
 </div>
 <script>
     $( document ).ready(function(){
-        $( '#search' ).on('click', function (){
+        $('#checkIn').attr('min', new Date().toISOString().split("T")[0]);
+        $('#checkIn').on('change', function(){
+            $('#checkOut').attr('min', $('#checkIn').val());
+        });
+        $( '#searchRoom' ).on('click', function (){
             var checkIn = $('#checkIn').val();
             var checkOut = $('#checkOut').val();
+            if(checkIn == "" || checkOut == "") window.alert("Pilih Tanggal Check In dan Check Out");
+            else{
             var hotelId = $('#hotelId').val();
             $.ajaxSetup({
                   headers: {
@@ -209,21 +215,22 @@
                 data: { hotelId: hotelId, checkIn: checkIn, checkOut: checkOut},
                 success: (result) => {
                     console.log(result);
-                    result = JSON.parse(result);
-                    result.forEach(room => {
-                        console.log(room.available);
-                        console.log(room.booked_rooms);
-                        console.log(room.available - room.booked_rooms);
-                        if(room.available - room.booked_rooms == 0){
-                            $('#book'+room.id).replaceWith(
-                                '<button type="submit" class="btn btn-secondary mt-3 text-muted" disabled>Pesan</button>'+
-                                '<br><small class="card-text text-red">Ruangan penuh dipesan</small>'
-                            );
-                        }
-                    })
+                    // result = JSON.parse(result);
+                    // result.forEach(room => {
+                    //     console.log(room.available);
+                    //     console.log(room.booked_rooms);
+                    //     console.log(room.available - room.booked_rooms);
+                    //     if(room.available - room.booked_rooms == 0){
+                    //         $('#book'+room.id).replaceWith(
+                    //             '<button type="submit" class="btn btn-secondary mt-3 text-muted" disabled>Pesan</button>'+
+                    //             '<br><small class="card-text text-red">Ruangan penuh dipesan</small>'
+                    //         );
+                    //     }
+                    // })
 
                 }
             })
+            }
         });
     });
 </script>

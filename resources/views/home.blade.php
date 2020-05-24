@@ -52,7 +52,18 @@
                         </div>
                         <div class="col">
                             <select class="form-control" name="kotaId" id="kota">
-                                <option value="null"> Pilih kota </option>
+                                <option value="all" selected> Pilih kota </option>
+                            </select>
+                        </div>
+                        <div class="col-4">
+                            <select class="form-control" name="orderBy" id="orderBy">
+                                <option value="none" selected> Urutkan Berdasarkan </option>
+                                <optgroup label="Rating">
+                                    <option value="Rating Asc">Terendah - Tertinggi</option>
+                                    <option value="Rating Desc">Tertinggi - Terendah</option>
+                                <optgroup label="Bintang">
+                                    <option value="Star Asc">Terendah - Tertinggi</option>
+                                    <option value="Star Desc">Tertinggi - Terendah</option>
                             </select>
                         </div>
                         <div class="col-2 d-flex justify-content-end">
@@ -144,7 +155,7 @@
                 var result = JSON.parse(result);
                 console.log(result);
                 $( "#kota option" ).remove();
-                $( '#kota').append( '<option value="null"> Pilih... </option>')
+                $( '#kota').append( '<option value="all" selected> Pilih kota </option>')
                 result.forEach(element => {
 
                     $( "#kota" ).append('<option value=' + element.id + '>' + element.namaKota + '</option>');
@@ -156,6 +167,14 @@
         $( '#search' ).on('click', function (){
             var provinsiId = $('#provinsi').val();
             var kotaId = $("#kota").val();
+            var orderBy = $("#orderBy").val();
+            var order = orderBy.split(" ");
+            var field = order[0];
+            var order = order[1];
+            if(order == undefined){
+                order = "none";
+            }
+            console.log(field, order);
             var checkIn = $('#checkIn').val();
             var checkOut = $('#checkOut').val();
             $.ajaxSetup({
@@ -166,7 +185,7 @@
             $.ajax({
                 type: 'GET',
                 url: '/getHotel',
-                data: { provinsiId: provinsiId, kotaId: kotaId, checkIn: checkIn, checkOut: checkOut},
+                data: { provinsiId: provinsiId, kotaId: kotaId, field: field, order: order},
                 success: (result) => {
                     console.log(result);
                     result = JSON.parse(result);

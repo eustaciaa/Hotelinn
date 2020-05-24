@@ -12,7 +12,12 @@ use Illuminate\Support\Facades\Hash;
 
 
 class UserController extends Controller
-{   
+{
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
     public function history(Request $request)
     {
@@ -22,10 +27,10 @@ class UserController extends Controller
     }
 
     public function profile (Request $request)
-    {   
-            
+    {
+
         return view('user.profile');
-    
+
     }
 
     public function updateProfile(Request $request){
@@ -41,7 +46,7 @@ class UserController extends Controller
         ]);
 
         return redirect(view('home.home'));
-        
+
     }
 
 }
