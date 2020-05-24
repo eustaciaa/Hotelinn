@@ -33,7 +33,9 @@
                     </div>
                 </div>
                 <div class="row justify-content-center">
-                    <form>
+                    <form method="get" action="/getRoom">
+                        @csrf
+0313af505bde0e33d8381fb93a81632a5e
                         <input type="hidden" name="hotelId" id="hotelId" value="{{ $hotel->hotel->id }}">
                         <div class="row justify-content-center mb-5">
                             <div class="col">
@@ -45,7 +47,7 @@
                                 <input id="checkOut" type="date" class="form-control" name="checkOut">
                             </div>
                             <div class="col-2 d-flex align-items-end justify-content-end">
-                                <button type="button" class="btn btn-primary" id="search">
+                                <button type="submit" class="btn btn-primary" id="search">
                                     Cari
                                 </button>
                             </div>
@@ -54,7 +56,7 @@
                 </div>
                 <div class="row justify-content-center">
                 <span class="badge badge-light txt-lightblack transparent">
-                    <i>Mohon pilih tanggal check-in dan check-out terlebih dahulu.</i>
+                    <i>Mohon pilih tanggal check-in dan check-out terlebih dahulu untuk melakukan pemesanan ruangan.</i>
                 </span>
                 </div>
             </div>
@@ -64,7 +66,18 @@
 <div class="container my-5">
     <div class="row justify-content-center">
         <div class="col-md-9">
-            <h4>Penawaran Kamar</h4><br>
+            <h4>Penawaran Kamar</h4>
+            @isset($userInput)
+                <h5>
+                    <span class="badge badge-light txt-lightblack text-uppercase transparent">
+                        Check-in: {{ $userInput['checkn'] }}
+                    </span>
+                    <span class="badge badge-light txt-lightblack text-uppercase transparent">
+                        Check-out: {{ $userInput['checkOt'] }}
+                    </span>
+                </h4>
+            @endisset
+            <br>
             @foreach ($rooms as $room)
                 @if ($loop->first || ($loop->iteration-1)%2 == 0)
                     <div class="card-deck mb-4">
@@ -166,18 +179,43 @@
                                 </div>
                             </div>
                         </div>
-
-                            @if ($room->available > 0)
-                            <form method="get" action="/rent" id="book{{ $room->id }}">
+                        @isset($bookedRooms)
+                            @foreach($bookedRooms as $booked)
+                                @if($booked->room_id == $room->id)
+  @if ($booked->available - $booked->booked_rooms > 0)
+                                    <form method="get" action="/rent" id="book{{ $room->id }}" class="book">
+                                        @csrf
+                                        <input type="hidden" id="hotelId" name="hotelId" value="{{$room->hotel_id}}">
+                                        <input type="hidden" id="roomId" name="roomId" value="{{$room->id}}">
+                                        <button type="submit" class="btn btn-primary mt-3">Pesan</button>
+                                    </form>
+                                    @else
+                                        <button type="submit" id="book{{ $room->id }}" class="btn btn-secondary mt-3" disabled>Pesan</button>
+                                        <br><small class="card-text text-red">Ruangan penuh dipesan</small>
+                                    @endif
+                                @else
+                                    <form method="get" action="/rent" id="book{{ $room->id }}" class="book">
+                                        @csrf
+                                        <input type="hidden" id="hotelId" name="hotelId" value="{{$room->hotel_id}}">
+                                        <input type="hidden" id="roomId" name="roomId" value="{{$room->id}}">
+                                        <button type="submit" class="btn btn-primary mt-3">Pesan</button>
+                                    </form>
+                                @endif
+                            @endforeach
+                        @endisset
+                        @empty($bookedRooms)
+                            <!-- <button type="submit" id="book{{ $room->id }}" class="btn btn-secondary mt-3" disabled>Pesan</button>
+                            <br>
+                            <small class="card-text text-red">
+                                <i>Mohon pilih tanggal check-in dan check-out terlebih dahulu untuk melakukan pemesanan ruangan.</i>
+                            </small> -->
+                            <form method="get" action="/rent" id="book{{ $room->id }}" class="book">
                                 @csrf
                                 <input type="hidden" id="hotelId" name="hotelId" value="{{$room->hotel_id}}">
                                 <input type="hidden" id="roomId" name="roomId" value="{{$room->id}}">
                                 <button type="submit" class="btn btn-primary mt-3">Pesan</button>
                             </form>
-                            @else
-                                <button type="submit" id="book{{ $room->id }}" class="btn btn-secondary" disabled>Check Room</button>
-                            @endif
-
+                        @endempty
                         </div>
                     </div>
                 @if ($loop->iteration%2 == 0)
@@ -192,7 +230,7 @@
         </div>
     </div>
 </div>
-<script>
+<!-- <script>
     $( document ).ready(function(){
         $('#checkIn').attr('min', new Date().toISOString().split("T")[0]);
         $('#checkIn').on('change', function(){
@@ -215,25 +253,41 @@
                 data: { hotelId: hotelId, checkIn: checkIn, checkOut: checkOut},
                 success: (result) => {
                     console.log(result);
-                    result = JSON.parse(result);
-                    console.log(result);
-                    result.room.forEach(room => {
-                        console.log(room.id);
+                                  result.forEach(room => {
+                        if(result == []){
+                            $('.book').replaceWith(
+                                '<form method="get" action="/rent" id="book'+room.id+'"">'+
+                                    '@csrf'+
+                                    '<input type="hidden" id="hotelId" name="hotelId" value="'+room.hotel_id+'">'+
+                                    '<input type="hidden" id="roomId" name="roomId" value="'+room.id+'">'+
+                                    '<button type="submit" class="btn btn-primary mt-3">Pesan</button>'+
+                                '</form>'
+                            );
+                        }
                         console.log(room.available);
-                        console.log(result.counter.forEach(counter => {counter.room_id}))
-                        // console.log(room.booked_rooms);
-                        // console.log(room.available - room.booked_rooms);
-                        // if(room.available - room.booked_rooms == 0){
-                        //     $('#book'+room.id).replaceWith(
-                        //         '<button type="submit" class="btn btn-secondary mt-3 text-muted" disabled>Pesan</button>'+
-                        //         '<br><small class="card-text text-red">Ruangan penuh dipesan</small>'
-                        //     );
-                        // }
+                        console.log(room.booked_rooms);
+                        console.log(room.available - room.booked_rooms);
+                        if(room.available - room.booked_rooms == 0){
+                            $('#book'+room.id).replaceWith(
+                                '<button type="submit" class="btn btn-secondary mt-3 text-muted" id="book'+room.id+'" disabled>Pesan</button>'+
+                                '<br><small class="card-text text-red">Ruangan penuh dipesan</small>'
+                            );
+                        }else{
+                            $('#book'+room.id).replaceWith(
+                                '<form method="get" action="/rent" id="book'+room.id+'"">'+
+                                    '@csrf'+
+                                    '<input type="hidden" id="hotelId" name="hotelId" value="'+room.hotel_id+'">'+
+                                    '<input type="hidden" id="roomId" name="roomId" value="'+room.id+'">'+
+                                    '<button type="submit" class="btn btn-primary mt-3">Pesan</button>'+
+                                '</form>'
+                            );
+                        }
                     })
+
+0313af505bde0e33d8381fb93a81632a5e
                 }
             })
             }
         });
     });
-</script>
-@endsection
+</script> -->
