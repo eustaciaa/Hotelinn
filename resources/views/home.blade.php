@@ -34,16 +34,11 @@
 <div class="bg-lightblue">
     <div class="container">
         <div class="row justify-content-center" id="searchRow">
-            <div class="col-md-8 my-5">
+            <div class="col-md-6 my-5">
                 <form>
-                    <div class="row justify-content-center mb-5">
-                        <div class="col">
-                            <label for="checkIn" class="col-form-label text-md-right"><i>{{ __('Check In') }}</i></label>
-                            <input id="checkIn" type="date" class="form-control" name="checkIn">
-                        </div>
-                        <div class="col">
-                            <label for="checkOut" class="col-form-label text-md-right"><i>{{ __('Check Out') }}</i></label>
-                            <input id="checkOut" type="date" class="form-control" name="checkOut">
+                    <div class="row justify-content-center mb-2">
+                        <div class="col text-center">
+                            <h4>Mau nginep di mana?</h4>
                         </div>
                     </div>
                     <div class="row justify-content-center">

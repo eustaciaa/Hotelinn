@@ -47,5 +47,6 @@ Route::post('/getKota','AJAXController@getKota');
 
 Route::get('/showRoom','MainController@showRoom');
 
+Route::get('/getRoom', 'MainController@getRoomWithCount');
 
 

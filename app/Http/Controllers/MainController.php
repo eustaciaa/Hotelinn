@@ -41,14 +41,17 @@ class MainController extends Controller
     {
         $kotaId = $request->input('kotaId');
         $provinsiId = $request->input('provinsiId');
-        $checkIn = $request->input('checkIn');
-        $checkOut = $request->input('checkOut');
-        $alamat = alamat::whereNotIn('hotel_id', function($query) use ($checkIn, $checkOut){
-                            $query->select('hotel_id')->from('history')
-                                                        ->whereBetween('checkIn', [$checkIn, $checkOut])
-                                                        ->whereBetween('checkOut', [$checkIn, $checkOut]);
-                            })
-                        ->where(['alamat.provinsi_id' => $provinsiId, 'alamat.kota_id' => $kotaId])
+        // $alamat = alamat::whereNotIn('hotel_id', function($query) use ($checkIn, $checkOut){
+        //                     $query->select('hotel_id')->from('history')
+        //                                                 ->whereBetween('checkIn', [$checkIn, $checkOut])
+        //                                                 ->whereBetween('checkOut', [$checkIn, $checkOut]);
+        //                     })
+        //                 ->where(['alamat.provinsi_id' => $provinsiId, 'alamat.kota_id' => $kotaId])
+        //                 ->join('hotel', 'alamat.hotel_id', '=', 'hotel.id')
+        //                 ->join('provinsi', 'alamat.provinsi_id', '=', 'provinsi.id')
+        //                 ->join('kota', 'alamat.kota_id', '=', 'kota.id')
+        //                 ->get();
+        $alamat = alamat::where(['alamat.provinsi_id' => $provinsiId, 'alamat.kota_id' => $kotaId])
                         ->join('hotel', 'alamat.hotel_id', '=', 'hotel.id')
                         ->join('provinsi', 'alamat.provinsi_id', '=', 'provinsi.id')
                         ->join('kota', 'alamat.kota_id', '=', 'kota.id')

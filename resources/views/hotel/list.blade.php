@@ -28,6 +28,7 @@
         <div class="row justify-content-center" id="searchRow">
             <div class="col-md-8 my-5">
                 <form>
+                    <input type="hidden" name="hotelId" id="hotelId" value="{{ $hotel->hotel->id }}">
                     <div class="row justify-content-center mb-5">
                         <div class="col">
                             <label for="checkIn" class="col-form-label text-md-right"><i>{{ __('Check In') }}</i></label>
@@ -56,7 +57,7 @@
                 @if ($loop->first || ($loop->iteration-1)%2 == 0)
                     <div class="card-deck mb-4">
                 @endif
-                    <div class="card">
+                    <div class="card room-content">
                         <img class="card-img-top" src="{{$room->photo}}" alt="Card image cap">
                         <div class="card-body">
                         <h5 class="card-title">{{$room->name}}</h5>
@@ -80,7 +81,7 @@
                             </div>
                         </div>
                         <a href="#{{str_replace(' ', '', $room->name)}}" data-toggle="modal">
-                            <small class="text-muted"><i class="fas fa-ellipsis-h mr-2"></i>Fasilitas lainnya</small>
+                            <small class="text-muted"><i class="fas fa-ellipsis-h mr-2"></i>Fasilitas lainnya</small><br>
                         </a>
 
                         <!-- moreFacilities Modal -->
@@ -155,11 +156,11 @@
                         </div>
                         
                             @if ($room->available > 0)
-                            <form method="get" action="/rent">
+                            <form method="get" action="/rent" id="book{{ $room->id }}">
                                 @csrf
                                 <input type="hidden" id="hotelId" name="hotelId" value="{{$room->hotel_id}}">
                                 <input type="hidden" id="roomId" name="roomId" value="{{$room->id}}">
-                                <button type="submit" class="btn btn-primary mt-3">Check Room</button>
+                                <button type="submit" class="btn btn-primary mt-3">Pesan</button>
                             </form>
                             @else
                                 <button type="submit" class="btn btn-secondary" disabled>Check Room</button>
@@ -179,4 +180,39 @@
         </div>
     </div>
 </div>
+<script>
+    $( document ).ready(function(){
+        $( '#search' ).on('click', function (){
+            var checkIn = $('#checkIn').val();
+            var checkOut = $('#checkOut').val();
+            var hotelId = $('#hotelId').val();
+            $.ajaxSetup({
+                  headers: {
+                      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                  }
+            });
+            $.ajax({
+                type: 'GET',
+                url: '/getRoom',
+                data: { hotelId: hotelId, checkIn: checkIn, checkOut: checkOut},
+                success: (result) => {
+                    console.log(result);
+                    result = JSON.parse(result);
+                    result.forEach(room => {
+                        console.log(room.available);
+                        console.log(room.booked_rooms);
+                        console.log(room.available - room.booked_rooms);
+                        if(room.available - room.booked_rooms == 0){
+                            $('#book'+room.id).replaceWith(
+                                '<button type="submit" class="btn btn-secondary mt-3 text-muted" disabled>Pesan</button>'+
+                                '<br><small class="card-text text-red">Ruangan penuh dipesan</small>'
+                            );
+                        }
+                    })
+
+                }
+            })
+        });
+    });
+</script>
 @endsection
