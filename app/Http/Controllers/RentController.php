@@ -36,11 +36,11 @@ class RentController extends Controller
         $checkOut = $request->input('checkOut');
         $hotel = hotel::where('id',$id)->first();
         $room = $hotel->room->where('id',$roomId)->first();
-        $total = $room->cost * $jumlah;
+        $roomTotal = $jumlah;
 
         $history = new history;
         $history->user_id = Auth::user()->id;
-        $history->total = $total;
+        $history->roomTotal = $roomTotal;
         $history->checkIn = $checkIn;
         $history->checkOut = $checkOut;
         $history->hotel_id = $hotel->id;

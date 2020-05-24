@@ -69,7 +69,7 @@ class MainController extends Controller
         $checkOut = $request->input('checkOut');
 
         $count = DB::table('history')->select('room_id', DB::raw('count(room_id) as booked_rooms'))
-                    ->where('hotel_id', $hotelId)
+                    ->where(['hotel_id' => $hotelId, 'finished' => false])
                     ->whereIn('room_id', function($query) use ($checkIn, $checkOut){
                         $query->select('hotel_id')->from('history')
                                 ->whereBetween('checkIn', [$checkIn, $checkOut])

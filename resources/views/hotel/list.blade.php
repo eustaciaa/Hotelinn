@@ -27,24 +27,36 @@
     <div class="container">
         <div class="row justify-content-center" id="searchRow">
             <div class="col-md-8 my-5">
-                <form>
-                    <input type="hidden" name="hotelId" id="hotelId" value="{{ $hotel->hotel->id }}">
-                    <div class="row justify-content-center mb-5">
-                        <div class="col">
-                            <label for="checkIn" class="col-form-label text-md-right"><i>{{ __('Check In') }}</i></label>
-                            <input id="checkIn" type="date" class="form-control" name="checkIn">
-                        </div>
-                        <div class="col">
-                            <label for="checkOut" class="col-form-label text-md-right"><i>{{ __('Check Out') }}</i></label>
-                            <input id="checkOut" type="date" class="form-control" name="checkOut">
-                        </div>
-                        <div class="col-2 d-flex align-items-end justify-content-end">
-                            <button type="button" class="btn btn-primary" id="search">
-                                Cari
-                            </button>
-                        </div>
+                <div class="row justify-content-center mb-2">
+                    <div class="col text-center">
+                        <h4>Mau nginep kapan?</h4>
                     </div>
-                </form>
+                </div>
+                <div class="row justify-content-center">
+                    <form>
+                        <input type="hidden" name="hotelId" id="hotelId" value="{{ $hotel->hotel->id }}">
+                        <div class="row justify-content-center mb-5">
+                            <div class="col">
+                                <label for="checkIn" class="col-form-label text-md-right"><i>{{ __('Check In') }}</i></label>
+                                <input id="checkIn" type="date" class="form-control" name="checkIn">
+                            </div>
+                            <div class="col">
+                                <label for="checkOut" class="col-form-label text-md-right"><i>{{ __('Check Out') }}</i></label>
+                                <input id="checkOut" type="date" class="form-control" name="checkOut">
+                            </div>
+                            <div class="col-2 d-flex align-items-end justify-content-end">
+                                <button type="button" class="btn btn-primary" id="search">
+                                    Cari
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="row justify-content-center">
+                <span class="badge badge-light txt-lightblack transparent">
+                    <i>Mohon pilih tanggal check-in dan check-out terlebih dahulu.</i>
+                </span>
+                </div>
             </div>
         </div>
     </div>
@@ -163,7 +175,7 @@
                                 <button type="submit" class="btn btn-primary mt-3">Pesan</button>
                             </form>
                             @else
-                                <button type="submit" class="btn btn-secondary" disabled>Check Room</button>
+                                <button type="submit" id="book{{ $room->id }}" class="btn btn-secondary" disabled>Check Room</button>
                             @endif
                         
                         </div>
