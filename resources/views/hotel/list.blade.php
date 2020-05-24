@@ -33,7 +33,7 @@
                     </div>
                 </div>
                 <div class="row justify-content-center">
-                    <form action="/getRoom" method="get">
+                    <form>
                         <input type="hidden" name="hotelId" id="hotelId" value="{{ $hotel->hotel->id }}">
                         <div class="row justify-content-center mb-5">
                             <div class="col">
@@ -215,18 +215,21 @@
                 data: { hotelId: hotelId, checkIn: checkIn, checkOut: checkOut},
                 success: (result) => {
                     console.log(result);
-                    // result = JSON.parse(result);
-                    // result.forEach(room => {
-                    //     console.log(room.available);
-                    //     console.log(room.booked_rooms);
-                    //     console.log(room.available - room.booked_rooms);
-                    //     if(room.available - room.booked_rooms == 0){
-                    //         $('#book'+room.id).replaceWith(
-                    //             '<button type="submit" class="btn btn-secondary mt-3 text-muted" disabled>Pesan</button>'+
-                    //             '<br><small class="card-text text-red">Ruangan penuh dipesan</small>'
-                    //         );
-                    //     }
-                    // })
+                    result = JSON.parse(result);
+                    console.log(result);
+                    result.room.forEach(room => {
+                        console.log(room.id);
+                        console.log(room.available);
+                        console.log(result.counter.forEach(counter => {counter.room_id}))
+                        // console.log(room.booked_rooms);
+                        // console.log(room.available - room.booked_rooms);
+                        // if(room.available - room.booked_rooms == 0){
+                        //     $('#book'+room.id).replaceWith(
+                        //         '<button type="submit" class="btn btn-secondary mt-3 text-muted" disabled>Pesan</button>'+
+                        //         '<br><small class="card-text text-red">Ruangan penuh dipesan</small>'
+                        //     );
+                        // }
+                    })
                 }
             })
             }
