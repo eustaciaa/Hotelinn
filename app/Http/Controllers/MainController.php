@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
+
 /* Model Imports */
 use App\alamat;
 use App\provinsi;
@@ -13,14 +14,14 @@ use App\hotel;
 
 class MainController extends Controller
 {
-     /**
+    /**
      * Create a new controller instance.
      *
      * @return void
      */
     public function __construct()
     {
-
+        // $this->middleware('checkAdmin');
     }
 
     /**
@@ -40,8 +41,38 @@ class MainController extends Controller
     {
         $kotaId = $request->input('kotaId');
         $provinsiId = $request->input('provinsiId');
-        $query = ['provinsi_id'=> $provinsiId, 'kota_id' => $kotaId];
-        $alamat = alamat::where($query)->join('hotel','alamat.hotel_id','=','hotel.id')->get();
+        $field = $request->input('field');
+        $order = $request->input('order');
+        if ($field != "none" && $order != "none") {
+            if ($kotaId == 'all' && $provinsiId == 'all') {
+                $alamat = alamat::join('hotel', 'alamat.hotel_id', '=', 'hotel.id')->orderBy($field, $order)->get();
+            } elseif ($kotaId == 'all') {
+                $query = ['provinsi_id' => $provinsiId];
+                $alamat = alamat::where($query)->join('hotel', 'alamat.hotel_id', '=', 'hotel.id')->orderBy($field, $order)->get();
+            } elseif ($provinsiId == 'all') {
+                $query = ['kota_id' => $kotaId];
+                $alamat = alamat::where($query)->join('hotel', 'alamat.hotel_id', '=', 'hotel.id')->orderBy($field, $order)->get();
+            } else {
+                $query = ['provinsi_id' => $provinsiId, 'kota_id' => $kotaId];
+                $alamat = alamat::where($query)->join('hotel', 'alamat.hotel_id', '=', 'hotel.id')->orderBy($field, $order)->get();
+            }
+        } else {
+            if ($kotaId == 'all' && $provinsiId == 'all') {
+                $alamat = alamat::join('hotel', 'alamat.hotel_id', '=', 'hotel.id')->get();
+            } elseif ($kotaId == 'all') {
+                $query = ['provinsi_id' => $provinsiId];
+                $alamat = alamat::where($query)->join('hotel', 'alamat.hotel_id', '=', 'hotel.id')->get();
+            } elseif ($provinsiId == 'all') {
+                $query = ['kota_id' => $kotaId];
+                $alamat = alamat::where($query)->join('hotel', 'alamat.hotel_id', '=', 'hotel.id')->get();
+            } else {
+                $query = ['provinsi_id' => $provinsiId, 'kota_id' => $kotaId];
+                $alamat = alamat::where($query)->join('hotel', 'alamat.hotel_id', '=', 'hotel.id')->get();
+            }
+        }
+
+
+
         return json_encode($alamat, JSON_HEX_TAG);
     }
 
@@ -49,7 +80,8 @@ class MainController extends Controller
      * Show Room Available
      */
 
-    public function showRoom(Request $request){
+    public function showRoom(Request $request)
+    {
         $hotelId = $request->input('hotelId');
 
         $hotel = hotel::find($hotelId);
@@ -61,17 +93,14 @@ class MainController extends Controller
 
     public function rentHotel(Request $request)
     {
-        if($request->input('order'))
-        {
+        if ($request->input('order')) {
             $order = $request->input('order');
-        }
-        else{
+        } else {
             $order = 'asc';
         }
         $id = $request->input('hotelId');
-        $rooms = room_details::where('hotel_id',$id)->orderBy('cost',$order)->get();
+        $rooms = room_details::where('hotel_id', $id)->orderBy('cost', $order)->get();
 
-        return view('hotel.room')->with(['roomdetails' => $rooms,'hotelId' => $id]);
+        return view('hotel.room')->with(['roomdetails' => $rooms, 'hotelId' => $id]);
     }
-
 }
