@@ -34,8 +34,13 @@
 <div class="bg-lightblue">
     <div class="container">
         <div class="row justify-content-center" id="searchRow">
-            <div class="col-md-8 my-5">
+            <div class="col-md-6 my-5">
                 <form>
+                    <div class="row justify-content-center mb-2">
+                        <div class="col text-center">
+                            <h4>Mau nginep di mana?</h4>
+                        </div>
+                    </div>
                     <div class="row justify-content-center">
                         <div class="col">
                             <select class="form-control" name="provinsiId" id="provinsi">
@@ -61,7 +66,7 @@
                                     <option value="Star Desc">Tertinggi - Terendah</option>
                             </select>
                         </div>
-                        <div class="col d-flex justify-content-end">
+                        <div class="col-2 d-flex justify-content-end">
                             <button type="button" class="btn btn-primary" id="search">
                                 Cari
                             </button>
@@ -88,10 +93,11 @@
                             <i class="fas fa-star"></i>
                         @endfor
                         @if (is_null($hotel->hotel->rating))
-                            <br><small class="text-muted my-2">Belum ada penilaian</small>
+                            <br><small class="text-muted my-2">Belum ada penilaian</small><br>
                         @else
                             <h5 class="my-2"><b>{{ $hotel->hotel->rating }}/10 </b>({{ $hotel->hotel->reviewers }} ulasan)</h6>
                         @endif
+                        <span class="badge badge-light txt-lightblack text-uppercase transparent"><i class="fas fa-map-marker-alt mr-1"></i>{{ $hotel->kota->namaKota }}, {{ $hotel->provinsi->namaProvinsi }}</span>
                         <p class="card-text">{{$hotel->detailLengkap}}</p>
                         <div class="row justify-content-start">
                             <form method="get" action="/showRoom">
@@ -169,6 +175,8 @@
                 order = "none";
             }
             console.log(field, order);
+            var checkIn = $('#checkIn').val();
+            var checkOut = $('#checkOut').val();
             $.ajaxSetup({
                   headers: {
                       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -177,8 +185,9 @@
             $.ajax({
                 type: 'GET',
                 url: '/getHotel',
-                data: { provinsiId: provinsiId, kotaId: kotaId, field: field, order: order},
+                data: { provinsiId: provinsiId, kotaId: kotaId, checkIn: checkIn, checkOut: checkOut, field: field, order: order},
                 success: (result) => {
+                    console.log(result);
                     result = JSON.parse(result);
                     $( '.card-hotel').remove();
                     result.forEach(hotel => {
@@ -193,14 +202,15 @@
                               for(var i = 0; i < hotel.star; i++){
                                 div += ' <i class="fas fa-star"></i>';
                               }
-                              if(hotel.rating == null) div+= '<br><small class="text-muted my-2">Belum ada penilaian</small>';
-                              else div+= '<h5 class="my-2"><b>'+hotel.rating+'/10 </b>('+hotel.reviewers+'ulasan)</h6>'
-                              div +='<p class="card-text">'+hotel.detailLengkap+'</p>'+
+                              if(hotel.rating == null) div+= '<br><small class="text-muted my-2">Belum ada penilaian</small><br>';
+                              else div+= '<h5 class="my-2"><b>'+hotel.rating+'/10 </b>('+hotel.reviewers+' ulasan)</h6>'
+                              div += '<span class="badge badge-light txt-lightblack text-uppercase transparent"><i class="fas fa-map-marker-alt mr-1"></i>'+hotel.namaKota+', '+hotel.namaProvinsi+'</span>'+
+                              '<p class="card-text">'+hotel.detailLengkap+'</p>'+
                               '<div class="row justify-content-start">'+
                               '<form method="get" action="/showRoom">'+
                               ' <form method="get" action="/showRoom">@csrf'+
                               '<input type="hidden" id="hotelId" name="hotelId" value="'+hotel.id+'">'+
-                              '<button type="submit" class="btn btn-primary ml-3">ShowRoom</button>'+
+                              '<button type="submit" class="btn btn-primary ml-3">Lihat Detail</button>'+
                               '</form></div></div></div></div></div>'
                         $('#hotel-row').append(div);
                     })
