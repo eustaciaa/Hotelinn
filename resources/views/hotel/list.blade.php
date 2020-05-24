@@ -65,7 +65,18 @@
 <div class="container my-5">
     <div class="row justify-content-center">
         <div class="col-md-9">
-            <h4>Penawaran Kamar</h4><br>
+            <h4>Penawaran Kamar</h4>
+            @isset($userInput)
+                <h5>
+                    <span class="badge badge-light txt-lightblack text-uppercase transparent">
+                        Check-in: {{ $userInput['checkIn'] }}
+                    </span> 
+                    <span class="badge badge-light txt-lightblack text-uppercase transparent">
+                        Check-out: {{ $userInput['checkOut'] }}
+                    </span> 
+                </h4>
+            @endisset
+            <br>
             @foreach ($rooms as $room)
                 @if ($loop->first || ($loop->iteration-1)%2 == 0)
                     <div class="card-deck mb-4">
@@ -167,20 +178,31 @@
                                 </div>
                             </div>
                         </div>
-                        @isset($bookedRooms->booked_rooms)
-                            @if ($bookedRooms->available - $room->booked_rooms > 0)
-                            <form method="get" action="/rent" id="book{{ $room->id }}" class="book">
-                                @csrf
-                                <input type="hidden" id="hotelId" name="hotelId" value="{{$room->hotel_id}}">
-                                <input type="hidden" id="roomId" name="roomId" value="{{$room->id}}">
-                                <button type="submit" class="btn btn-primary mt-3">Pesan</button>
-                            </form>
-                            @else
-                                <button type="submit" id="book{{ $room->id }}" class="btn btn-secondary mt-3" disabled>Pesan</button>
-                                <br><small class="card-text text-red">Ruangan penuh dipesan</small>
-                            @endif
+                        @isset($bookedRooms)
+                            @foreach($bookedRooms as $booked)
+                                @if($booked->room_id == $room->id)
+                                    @if ($booked->available - $booked->booked_rooms > 0)
+                                    <form method="get" action="/rent" id="book{{ $room->id }}" class="book">
+                                        @csrf
+                                        <input type="hidden" id="hotelId" name="hotelId" value="{{$room->hotel_id}}">
+                                        <input type="hidden" id="roomId" name="roomId" value="{{$room->id}}">
+                                        <button type="submit" class="btn btn-primary mt-3">Pesan</button>
+                                    </form>
+                                    @else
+                                        <button type="submit" id="book{{ $room->id }}" class="btn btn-secondary mt-3" disabled>Pesan</button>
+                                        <br><small class="card-text text-red">Ruangan penuh dipesan</small>
+                                    @endif
+                                @else
+                                    <form method="get" action="/rent" id="book{{ $room->id }}" class="book">
+                                        @csrf
+                                        <input type="hidden" id="hotelId" name="hotelId" value="{{$room->hotel_id}}">
+                                        <input type="hidden" id="roomId" name="roomId" value="{{$room->id}}">
+                                        <button type="submit" class="btn btn-primary mt-3">Pesan</button>
+                                    </form>
+                                @endif
+                            @endforeach
                         @endisset
-                        @empty($bookedRooms->booked_rooms)
+                        @empty($bookedRooms)
                             <!-- <button type="submit" id="book{{ $room->id }}" class="btn btn-secondary mt-3" disabled>Pesan</button>
                             <br>
                             <small class="card-text text-red">
@@ -209,9 +231,15 @@
 </div>
 <!-- <script>
     $( document ).ready(function(){
+        $('#checkIn').attr('min', new Date().toISOString().split("T")[0]);
+        $('#checkIn').on('change', function(){
+            $('#checkOut').attr('min', $('#checkIn').val());
+        });
         $( '#search' ).on('click', function (){
             var checkIn = $('#checkIn').val();
             var checkOut = $('#checkOut').val();
+            if(checkIn == "" || checkOut == "") window.alert("Pilih Tanggal Check In dan Check Out");
+            else{
             var hotelId = $('#hotelId').val();
             $.ajaxSetup({
                   headers: {
@@ -258,6 +286,7 @@
 
                 }
             })
+            }
         });
     });
 </script> -->
