@@ -14,7 +14,7 @@ class hotel extends Model
     protected $table = 'hotel';
 
     protected $fillable = [
-        'name', 'rate', 'photo', 'review'
+        'name', 'rating', 'photo', 'reviewers', 'star'
     ];
 
     public function alamat()
@@ -27,4 +27,8 @@ class hotel extends Model
         return $this->hasMany('App\room_details');
     }
 
+    public function fasilitas()
+    {
+        return $this->hasMany('App\Fasilitas');
+    }
 }
