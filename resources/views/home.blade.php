@@ -39,10 +39,10 @@
                     <div class="row justify-content-center mb-5">
                         <div class="col">
                             <label for="checkIn" class="col-form-label text-md-right"><i>{{ __('Check In') }}</i></label>
-                            <input id="checkOut" type="date" class="form-control" name="checkIn">
+                            <input id="checkIn" type="date" class="form-control" name="checkIn">
                         </div>
                         <div class="col">
-                            <label for="checkIn" class="col-form-label text-md-right"><i>{{ __('Check Out') }}</i></label>
+                            <label for="checkOut" class="col-form-label text-md-right"><i>{{ __('Check Out') }}</i></label>
                             <input id="checkOut" type="date" class="form-control" name="checkOut">
                         </div>
                     </div>
@@ -161,6 +161,8 @@
         $( '#search' ).on('click', function (){
             var provinsiId = $('#provinsi').val();
             var kotaId = $("#kota").val();
+            var checkIn = $('#checkIn').val();
+            var checkOut = $('#checkOut').val();
             $.ajaxSetup({
                   headers: {
                       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -169,8 +171,9 @@
             $.ajax({
                 type: 'GET',
                 url: '/getHotel',
-                data: { provinsiId: provinsiId, kotaId: kotaId},
+                data: { provinsiId: provinsiId, kotaId: kotaId, checkIn: checkIn, checkOut: checkOut},
                 success: (result) => {
+                    console.log(result);
                     result = JSON.parse(result);
                     $( '.card-hotel').remove();
                     result.forEach(hotel => {
@@ -185,9 +188,10 @@
                               for(var i = 0; i < hotel.star; i++){
                                 div += ' <i class="fas fa-star"></i>';
                               }
-                              if(hotel.rating == null) div+= '<br><small class="text-muted my-2">Belum ada penilaian</small>';
-                              else div+= '<h5 class="my-2"><b>'+hotel.rating+'/10 </b>('+hotel.reviewers+'ulasan)</h6>'
-                              div +='<p class="card-text">'+hotel.detailLengkap+'</p>'+
+                              if(hotel.rating == null) div+= '<br><small class="text-muted my-2">Belum ada penilaian</small><br>';
+                              else div+= '<h5 class="my-2"><b>'+hotel.rating+'/10 </b>('+hotel.reviewers+' ulasan)</h6>'
+                              div += '<span class="badge badge-light txt-lightblack text-uppercase transparent"><i class="fas fa-map-marker-alt mr-1"></i>'+hotel.namaKota+', '+hotel.namaProvinsi+'</span>'+
+                              '<p class="card-text">'+hotel.detailLengkap+'</p>'+
                               '<div class="row justify-content-start">'+
                               '<form method="get" action="/showRoom">'+
                               ' <form method="get" action="/showRoom">@csrf'+
