@@ -33,7 +33,7 @@
                     </div>
                 </div>
                 <div class="row justify-content-center">
-                    <form>
+                    <form action="/getRoom" method="get">
                         <input type="hidden" name="hotelId" id="hotelId" value="{{ $hotel->hotel->id }}">
                         <div class="row justify-content-center mb-5">
                             <div class="col">
@@ -198,7 +198,7 @@
         $('#checkIn').on('change', function(){
             $('#checkOut').attr('min', $('#checkIn').val());
         });
-        $( '#searchRoom' ).on('click', function (){
+        $( '#search' ).on('click', function (){
             var checkIn = $('#checkIn').val();
             var checkOut = $('#checkOut').val();
             if(checkIn == "" || checkOut == "") window.alert("Pilih Tanggal Check In dan Check Out");
@@ -227,7 +227,6 @@
                     //         );
                     //     }
                     // })
-
                 }
             })
             }

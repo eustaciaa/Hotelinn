@@ -102,10 +102,12 @@ class MainController extends Controller
         $checkIn = $request->input('checkIn');
         $checkOut = $request->input('checkOut');
 
+        $result = ['hotel' => $hotelId,'checkIn'=> $checkIn,'checkOut' => $checkOut];
+
         $count = history::selectRaw('room_id, count(room_id) as Checked')
                         ->where('hotel_id',$hotelId)
                         ->where('finished','=','false')
-                        ->whereRaw("IF((checkIn BETWEEN '2020-05-30' AND '2020-05-31') OR (checkIn BETWEEN '2020-05-30' AND '2020-05-31'), 1, IF(checkOut >= '2020-05-30', 1, 0))")
+                        ->whereRaw("IF((checkIn BETWEEN '".$checkIn."' AND '".$checkOut."') OR (checkIn BETWEEN '".$checkIn."' AND '".$checkOut."'), 1, IF(checkOut >= '".$checkIn."', 1, 0))")
                         ->groupBy('room_id')->get();
 
         // $count = history::selectRaw('room_id, count(room_id) as Checked')
@@ -126,7 +128,11 @@ class MainController extends Controller
         //                      ->get();
 
         return json_encode($count, JSON_HEX_TAG);
+
+        //return json_encode($result, JSON_HEX_TAG);
+
     }
+
 
     /**
      * Show Room Available
