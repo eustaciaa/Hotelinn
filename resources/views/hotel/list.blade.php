@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container my-5">
+<div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-9">
             <div class="card my-5">
@@ -20,6 +20,37 @@
                     <p class="card-text">{{$hotel->detailLengkap}}</p>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+<div class="bg-lightblue">
+    <div class="container">
+        <div class="row justify-content-center" id="searchRow">
+            <div class="col-md-8 my-5">
+                <form>
+                    <div class="row justify-content-center mb-5">
+                        <div class="col">
+                            <label for="checkIn" class="col-form-label text-md-right"><i>{{ __('Check In') }}</i></label>
+                            <input id="checkIn" type="date" class="form-control" name="checkIn">
+                        </div>
+                        <div class="col">
+                            <label for="checkOut" class="col-form-label text-md-right"><i>{{ __('Check Out') }}</i></label>
+                            <input id="checkOut" type="date" class="form-control" name="checkOut">
+                        </div>
+                        <div class="col-2 d-flex align-items-end justify-content-end">
+                            <button type="button" class="btn btn-primary" id="search">
+                                Cari
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-9">
             <h4>Penawaran Kamar</h4><br>
             @foreach ($rooms as $room)
                 @if ($loop->first || ($loop->iteration-1)%2 == 0)

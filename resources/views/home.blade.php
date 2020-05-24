@@ -196,7 +196,7 @@
                               '<form method="get" action="/showRoom">'+
                               ' <form method="get" action="/showRoom">@csrf'+
                               '<input type="hidden" id="hotelId" name="hotelId" value="'+hotel.id+'">'+
-                              '<button type="submit" class="btn btn-primary ml-3">ShowRoom</button>'+
+                              '<button type="submit" class="btn btn-primary ml-3">Lihat Detail</button>'+
                               '</form></div></div></div></div></div>'
                         $('#hotel-row').append(div);
                     })

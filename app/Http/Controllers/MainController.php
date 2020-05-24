@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use DB;
 
 /* Model Imports */
 use App\alamat;
@@ -56,19 +57,30 @@ class MainController extends Controller
     }
 
     /**
-     * Show The Hotel List Filtered With Desired CheckIn and CheckOut
+     * Get Room With Count of Booked Rooms
      */
-    public function getAvailableHotel(Request $request)
-    {
+    public function getRoomWithCount(Request $request)
+    {   
+        $hotelId = $request->input('hotelId');
         $checkIn = $request->input('checkIn');
         $checkOut = $request->input('checkOut');
-        $hotels = alamat::whereNOTIn('hotel_id',function($query){
-                            $query->select('hotel_id')->from('history')
-                                                      ->whereBetween('checkIn', [$checkIn, $checkOut])
-                                                      ->whereBetween('checkOut', [$checkIn, $checkOut]);
+
+        $count = DB::table('history')->select('room_id', DB::raw('count(room_id) as booked_rooms'))
+                    ->where('hotel_id', $hotelId)
+                    ->whereIn('room_id', function($query) use ($checkIn, $checkOut){
+                        $query->select('hotel_id')->from('history')
+                                ->whereBetween('checkIn', [$checkIn, $checkOut])
+                                ->whereBetween('checkOut', [$checkIn, $checkOut]);
                         })
-                        ->get();
-        dd($hotels);
+                    ->groupBy('room_id');
+
+        $rooms = room_details::where('hotel_id', $hotelId)
+                             ->joinSub($count, 'count', function ($join) {
+                                    $join->on('id', '=', 'count.room_id');
+                               })
+                             ->get();
+
+        return json_encode($rooms, JSON_HEX_TAG);
     }
 
     /**
