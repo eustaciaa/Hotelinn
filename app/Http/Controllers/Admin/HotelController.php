@@ -43,7 +43,7 @@ class HotelController extends Controller
             'star' => 'required',
             'rating' => 'nullable',
             'reviewers' => 'nullable',
-            'photo' => 'required|image|max:1000',
+            'photo' => 'image|max:1000',
             'namaProvinsi' => 'required',
             'namaKota' => 'required',
             'detailLengkap' => 'required|max:255'
@@ -123,34 +123,101 @@ class HotelController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\hotel  $hotel
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Hotel $hotel)
     {
-        //
+        return view('admin.edit-hotel', compact('hotel'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\hotel  $hotel
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Hotel $hotel)
     {
-        //
+        $request->validate([
+            'name' => 'required|max:255',
+            'star' => 'required',
+            'rating' => 'nullable',
+            'reviewers' => 'nullable',
+            'photo' => 'image|max:1000'
+        ]);
+
+        Hotel::where('id', $hotel->id)
+        ->update([
+            'name' => $request->name,
+            'star' => $request->star,
+            'rating' => $request->rating,
+            'reviewers' => $request->reviewers
+        ]);
+        
+        if($request->hasFile('photo')) {
+            $file = $request->file('photo');
+            $extension = $file->getClientOriginalExtension(); //image extension
+            $filename = '/images/hotel/' . time() . '.' . $extension;
+            $file->move('images/hotel/', $filename);
+            $hotel->photo = $filename;
+        } else {
+            return $request;
+            $hotel->photo = '';
+        }
+        $hotel->save();
+
+        return redirect('/admin/hotels')->with('status', 'Hotel berhasil diubah !');
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\hotel  $hotel
+     * @return \Illuminate\Http\Response
+     */
+
+    public function editAlamat(Hotel $hotel)
+    {
+        return view('admin.edit-alamat', compact('hotel'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\hotel  $hotel
+     * @return \Illuminate\Http\Response
+     */
+    public function updateAlamat(Request $request, Hotel $hotel)
+    {
+        $request->validate([
+            'namaProvinsi' => 'required',
+            'namaKota' => 'required',
+            'detailLengkap' => 'required|max:255'
+        ]);
+        
+        Alamat::where('hotel_id', $hotel->id)
+        ->update([
+            'detailLengkap' => $request->detailLengkap,
+            'provinsi_id' => $request->namaProvinsi,
+            'kota_id' => $request->namaKota
+        ]);
+
+        return redirect('/admin/hotels')->with('status', 'Alamat Hotel berhasil diubah !');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\hotel  $hotel
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Hotel $hotel)
     {
-        //
+        $alamat = alamat::where('hotel_id', $hotel->id)->delete();
+        Hotel::destroy($hotel->id);
+        return redirect('/admin/hotels')->with('status', 'Hotel berhasil dihapus !'); 
     }
 }
