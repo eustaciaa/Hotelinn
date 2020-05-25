@@ -187,6 +187,8 @@
                                                 @csrf
                                                 <input type="hidden" id="hotelId" name="hotelId" value="{{$room->hotel_id}}">
                                                 <input type="hidden" id="roomId" name="roomId" value="{{$room->id}}">
+                                                <input type="hidden" id="checkIn" name="checkIn" value="{{$userInput->checkIn}}">
+                                                <input type="hidden" id="checkOut" name="checkOut" value="{{$userInput->checkOut}}">
                                                 <button type="submit" class="btn btn-primary mt-3">Pesan</button>
                                             </form>
                                         @else
@@ -198,6 +200,8 @@
                                             @csrf
                                             <input type="hidden" id="hotelId" name="hotelId" value="{{$room->hotel_id}}">
                                             <input type="hidden" id="roomId" name="roomId" value="{{$room->id}}">
+                                            <input type="hidden" id="checkIn" name="checkIn" value="{{$userInput->checkIn}}">
+                                            <input type="hidden" id="checkOut" name="checkOut" value="{{$userInput->checkOut}}">
                                             <button type="submit" class="btn btn-primary mt-3">Pesan</button>
                                         </form>
                                     @endif
@@ -208,6 +212,8 @@
                                     @csrf
                                     <input type="hidden" id="hotelId" name="hotelId" value="{{$room->hotel_id}}">
                                     <input type="hidden" id="roomId" name="roomId" value="{{$room->id}}">
+                                    <input type="hidden" id="checkIn" name="checkIn" value="{{$userInput->checkIn}}">
+                                    <input type="hidden" id="checkOut" name="checkOut" value="{{$userInput->checkOut}}">
                                     <button type="submit" class="btn btn-primary mt-3">Pesan</button>
                                 </form>
                             @endif
