@@ -178,40 +178,47 @@
                                 </div>
                             </div>
                         </div>
-                        @isset($bookedRooms)
-                            @foreach($bookedRooms as $booked)
-                                @if($booked->room_id == $room->id)
-                                    @if ($booked->available - $booked->booked_rooms > 0)
-                                    <form method="get" action="/rent" id="book{{ $room->id }}" class="book">
-                                        @csrf
-                                        <input type="hidden" id="hotelId" name="hotelId" value="{{$room->hotel_id}}">
-                                        <input type="hidden" id="roomId" name="roomId" value="{{$room->id}}">
-                                        <button type="submit" class="btn btn-primary mt-3">Pesan</button>
-                                    </form>
+                        @isset($userInput)
+                            @isset($bookedRooms)
+                                @foreach($bookedRooms as $booked)
+                                    @if($booked->room_id == $room->id)
+                                        @if ($room->available - $booked->booked_rooms > 0)
+                                            <form method="get" action="/rent" id="book{{ $room->id }}" class="book">
+                                                @csrf
+                                                <input type="hidden" id="hotelId" name="hotelId" value="{{$room->hotel_id}}">
+                                                <input type="hidden" id="roomId" name="roomId" value="{{$room->id}}">
+                                                <button type="submit" class="btn btn-primary mt-3">Pesan</button>
+                                            </form>
+                                        @else
+                                            <button type="submit" id="book{{ $room->id }}" class="btn btn-secondary mt-3" disabled>Pesan</button>
+                                            <br><small class="card-text text-red">Ruangan penuh dipesan</small>
+                                        @endif
                                     @else
-                                        <button type="submit" id="book{{ $room->id }}" class="btn btn-secondary mt-3" disabled>Pesan</button>
-                                        <br><small class="card-text text-red">Ruangan penuh dipesan</small>
+                                        <form method="get" action="/rent" id="book{{ $room->id }}" class="book">
+                                            @csrf
+                                            <input type="hidden" id="hotelId" name="hotelId" value="{{$room->hotel_id}}">
+                                            <input type="hidden" id="roomId" name="roomId" value="{{$room->id}}">
+                                            <button type="submit" class="btn btn-primary mt-3">Pesan</button>
+                                        </form>
                                     @endif
-                                @endif
-                            @endforeach
+                                @endforeach
+                            @endisset
+                            @if($bookedRooms == "[]")
+                                <form method="get" action="/rent" id="book{{ $room->id }}" class="book">
+                                    @csrf
+                                    <input type="hidden" id="hotelId" name="hotelId" value="{{$room->hotel_id}}">
+                                    <input type="hidden" id="roomId" name="roomId" value="{{$room->id}}">
+                                    <button type="submit" class="btn btn-primary mt-3">Pesan</button>
+                                </form>
+                            @endif
                         @endisset
-                        @if(!isset($userInput))
+                        @empty($userInput)
                             <button type="submit" id="book{{ $room->id }}" class="btn btn-secondary mt-3" disabled>Pesan</button>
                             <br>
                             <small class="card-text text-red">
                                 <i>Mohon pilih tanggal check-in dan check-out terlebih dahulu untuk melakukan pemesanan ruangan.</i>
                             </small>
-                        @elseif(!isset($bookedRooms[]))
-                            <form method="get" action="/rent" id="book{{ $room->id }}" class="book">
-                                @csrf
-                                <input type="hidden" id="hotelId" name="hotelId" value="{{$room->hotel_id}}">
-                                <input type="hidden" id="roomId" name="roomId" value="{{$room->id}}">
-                                <button type="submit" class="btn btn-primary mt-3">Pesan</button>
-                            </form>
-                        @endif
-                        <!-- @empty($bookedRooms)
-                            
-                        @endempty -->
+                        @endempty
                         </div>
                     </div>
                 @if ($loop->iteration%2 == 0)

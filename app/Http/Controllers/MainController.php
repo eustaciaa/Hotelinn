@@ -113,7 +113,7 @@ class MainController extends Controller
                         ->where('finished','=','false')
                         ->whereRaw("IF((checkIn BETWEEN '".$checkIn."' AND '".$checkOut."') OR (checkIn BETWEEN '".$checkIn."' AND '".$checkOut."'), 1, IF(checkOut >= '".$checkIn."', 1, 0))")
                         ->groupBy('room_id')->get();
-
+        dd($count);
         // $count = history::selectRaw('room_id, count(room_id) as Checked')
         //                 ->where('hotel_id',$hotelId)
         //                 ->when(function ($query) use ($checkIn, $checkOut) {
