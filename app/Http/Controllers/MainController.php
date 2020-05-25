@@ -47,49 +47,58 @@ class MainController extends Controller
         $order = $request->input('order');
         if ($field != "none" && $order != "none") {
             if ($kotaId == 'all' && $provinsiId == 'all') {
-                $alamat = alamat::join('hotel', 'alamat.hotel_id', '=', 'hotel.id')->orderBy($field, $order)->get();
+                $alamat = alamat::join('hotel', 'alamat.hotel_id', '=', 'hotel.id')
+                                ->join('provinsi', 'alamat.provinsi_id', '=', 'provinsi.id')
+                                ->join('kota', 'alamat.kota_id', '=', 'kota.id')
+                                ->orderBy($field, $order)->get();
             } elseif ($kotaId == 'all') {
-                $query = ['provinsi_id' => $provinsiId];
-                $alamat = alamat::where($query)->join('hotel', 'alamat.hotel_id', '=', 'hotel.id')->orderBy($field, $order)->get();
+                $query = ['alamat.provinsi_id' => $provinsiId];
+                $alamat = alamat::where($query)
+                                ->join('hotel', 'alamat.hotel_id', '=', 'hotel.id')
+                                ->join('provinsi', 'alamat.provinsi_id', '=', 'provinsi.id')
+                                ->join('kota', 'alamat.kota_id', '=', 'kota.id')
+                                ->orderBy($field, $order)->get();
             } elseif ($provinsiId == 'all') {
-                $query = ['kota_id' => $kotaId];
-                $alamat = alamat::where($query)->join('hotel', 'alamat.hotel_id', '=', 'hotel.id')->orderBy($field, $order)->get();
+                $query = ['alamat.kota_id' => $kotaId];
+                $alamat = alamat::where($query)
+                                ->join('hotel', 'alamat.hotel_id', '=', 'hotel.id')
+                                ->join('provinsi', 'alamat.provinsi_id', '=', 'provinsi.id')
+                                ->join('kota', 'alamat.kota_id', '=', 'kota.id')
+                                ->orderBy($field, $order)->get();
             } else {
-                $query = ['provinsi_id' => $provinsiId, 'kota_id' => $kotaId];
-                $alamat = alamat::where($query)->join('hotel', 'alamat.hotel_id', '=', 'hotel.id')->orderBy($field, $order)->get();
+                $query = ['alamat.provinsi_id' => $provinsiId, 'alamat.kota_id' => $kotaId];
+                $alamat = alamat::where($query)
+                                ->join('hotel', 'alamat.hotel_id', '=', 'hotel.id')
+                                ->join('provinsi', 'alamat.provinsi_id', '=', 'provinsi.id')
+                                ->join('kota', 'alamat.kota_id', '=', 'kota.id')
+                                ->orderBy($field, $order)->get();
             }
         } else {
             if ($kotaId == 'all' && $provinsiId == 'all') {
-                $alamat = alamat::join('hotel', 'alamat.hotel_id', '=', 'hotel.id')->get();
+                $alamat = alamat::join('hotel', 'alamat.hotel_id', '=', 'hotel.id')
+                                ->join('provinsi', 'alamat.provinsi_id', '=', 'provinsi.id')
+                                ->join('kota', 'alamat.kota_id', '=', 'kota.id')->get();
             } elseif ($kotaId == 'all') {
-                $query = ['provinsi_id' => $provinsiId];
-                $alamat = alamat::where($query)->join('hotel', 'alamat.hotel_id', '=', 'hotel.id')->get();
+                $query = ['alamat.provinsi_id' => $provinsiId];
+                $alamat = alamat::where($query)
+                                ->join('hotel', 'alamat.hotel_id', '=', 'hotel.id')
+                                ->join('provinsi', 'alamat.provinsi_id', '=', 'provinsi.id')
+                                ->join('kota', 'alamat.kota_id', '=', 'kota.id')->get();
             } elseif ($provinsiId == 'all') {
-                $query = ['kota_id' => $kotaId];
-                $alamat = alamat::where($query)->join('hotel', 'alamat.hotel_id', '=', 'hotel.id')->get();
+                $query = ['alamat.kota_id' => $kotaId];
+                $alamat = alamat::where($query)
+                                ->join('hotel', 'alamat.hotel_id', '=', 'hotel.id')
+                                ->join('provinsi', 'alamat.provinsi_id', '=', 'provinsi.id')
+                                ->join('kota', 'alamat.kota_id', '=', 'kota.id')->get();
             } else {
-                $query = ['provinsi_id' => $provinsiId, 'kota_id' => $kotaId];
-                $alamat = alamat::where($query)->join('hotel', 'alamat.hotel_id', '=', 'hotel.id')->get();
+                $query = ['alamat.provinsi_id' => $provinsiId, 'alamat.kota_id' => $kotaId];
+                $alamat = alamat::where($query)
+                                ->join('hotel', 'alamat.hotel_id', '=', 'hotel.id')
+                                ->join('provinsi', 'alamat.provinsi_id', '=', 'provinsi.id')
+                                ->join('kota', 'alamat.kota_id', '=', 'kota.id')->get();
             }
         }
-
-
-
-        // $alamat = alamat::whereNotIn('hotel_id', function($query) use ($checkIn, $checkOut){
-        //                     $query->select('hotel_id')->from('history')
-        //                                                 ->whereBetween('checkIn', [$checkIn, $checkOut])
-        //                                                 ->whereBetween('checkOut', [$checkIn, $checkOut]);
-        //                     })
-        //                 ->where(['alamat.provinsi_id' => $provinsiId, 'alamat.kota_id' => $kotaId])
-        //                 ->join('hotel', 'alamat.hotel_id', '=', 'hotel.id')
-        //                 ->join('provinsi', 'alamat.provinsi_id', '=', 'provinsi.id')
-        //                 ->join('kota', 'alamat.kota_id', '=', 'kota.id')
-        //                 ->get();
-        // $alamat = alamat::where(['alamat.provinsi_id' => $provinsiId, 'alamat.kota_id' => $kotaId])
-        //                 ->join('hotel', 'alamat.hotel_id', '=', 'hotel.id')
-        //                 ->join('provinsi', 'alamat.provinsi_id', '=', 'provinsi.id')
-        //                 ->join('kota', 'alamat.kota_id', '=', 'kota.id')
-        //                 ->get();
+        
         return json_encode($alamat, JSON_HEX_TAG);
     }
 

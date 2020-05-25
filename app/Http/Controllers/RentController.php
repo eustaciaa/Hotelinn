@@ -19,21 +19,33 @@ class RentController extends Controller
     {
         $id = $request->input('hotelId');
         $roomId = $request->input('roomId');
+        $checkIn = $request->input('checkIn');
+        $checkOut = $request->input('checkOut');
+        $remainedRooms = $request->input('remainedRooms');
+        
         $hotel = hotel::where('id',$id)->first();
         $room = $hotel->room->where('id',$roomId)->first();
+        $formNeeds = ['checkIn' => $checkIn, 'checkOut' => $checkOut, 'remainedRooms' => $remainedRooms];
 
-        return view('hotel.rent')->with( ['hotel' => $hotel,'room'=> $room]);
+        return view('hotel.rent')->with( ['hotel' => $hotel,'room'=> $room, 'formNeeds' => $formNeeds]);
     }
 
     public function rentFinal (Request $request)
-    {
+    {   
+        $remainedRooms = $request->input('remainedRooms');
+        $jumlah = $request->input('jmlh');
+
+        if($jumlah > $remainedRooms){
+            return redirect('/')->with('fail', 'Oops! Ruangan hotel gagal dipesan. Jumlah ruangan yang ingin dipesan melebihi jumlah ruangan yang tersedia.');
+        }
+
         $fName = $request->input('fName');
         $lName = $request->input('lName');
         $checkIn = $request->input('checkIn');
-        $jumlah = $request->input('jmlh');
         $id = $request->input('hotelId');
         $roomId = $request->input('roomId');
         $checkOut = $request->input('checkOut');
+
         $hotel = hotel::where('id',$id)->first();
         $room = $hotel->room->where('id',$roomId)->first();
         $roomTotal = $jumlah;

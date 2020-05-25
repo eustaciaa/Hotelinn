@@ -55,7 +55,7 @@
                 </div>
                 <div class="row justify-content-center">
                 <span class="badge badge-light txt-lightblack transparent">
-                    <i>Mohon pilih tanggal check-in dan check-out terlebih dahulu untuk melakukan pemesanan ruangan.</i>
+                    <i class="fas fa-exclamation-triangle mr-1"></i>Mohon pilih tanggal check-in dan check-out terlebih dahulu untuk melakukan pemesanan ruangan.
                 </span>
                 </div>
             </div>
@@ -67,14 +67,20 @@
         <div class="col-md-9">
             <h4>Penawaran Kamar</h4>
             @isset($userInput)
-                <h6>Check In :</h6>
-                    <h5><span class="badge badge-primary txt-lightblack text-uppercase transparent">
+            <div class="row d-flex justify-content-start pt-2">
+                <div class="col-md-2">
+                    <h6>Check In :</h6>
+                    <h4><span class="badge badge-primary txt-lightblack text-uppercase transparent">
                         {{ date_format(date_create($userInput['checkIn']), "j F Y") }}
-                    </span></h5>
-                <h6>Check Out : </h6>
-                    <h5><span class="badge badge-primary txt-lightblack text-uppercase transparent">
+                    </span></h4>
+                </div>
+                <div class="col-md-2">
+                    <h6>Check Out : </h6>
+                    <h4><span class="badge badge-primary txt-lightblack text-uppercase transparent">
                         {{ date_format(date_create($userInput['checkOut']), "j F Y") }}
-                    </span></h5>
+                    </span></h4>
+                </div>
+            </div>
             @endisset
             <br>
             @foreach ($rooms as $room)
@@ -189,12 +195,14 @@
                                                 <input type="hidden" id="roomId" name="roomId" value="{{$room->id}}">
                                                 <input type="hidden" id="checkIn" name="checkIn" value="{{$userInput['checkIn']}}">
                                                 <input type="hidden" id="checkOut" name="checkOut" value="{{$userInput['checkOut']}}">
+                                                <input type="hidden" id="remainedRooms" name="remainedRooms" value="{{$room->available - $booked->booked_rooms}}"> 
                                                 <button type="submit" class="btn btn-primary mt-3">Pesan</button>
+                                                <br><small class="card-text text-success text-07"><b> Tersedia {{ $room->available - $booked->booked_rooms }} ruangan</b></small>
                                             </form>
                                             @break
                                         @else
                                             <button type="submit" id="book{{ $room->id }}" class="btn btn-secondary mt-3" disabled>Pesan</button>
-                                            <br><small class="card-text text-red">Ruangan penuh dipesan</small>
+                                            <br><small class="card-text text-danger text-07">Ruangan penuh dipesan</small>
                                             @break
                                         @endif
                                     @elseif($loop->last)
@@ -204,7 +212,9 @@
                                             <input type="hidden" id="roomId" name="roomId" value="{{$room->id}}">
                                             <input type="hidden" id="checkIn" name="checkIn" value="{{$userInput['checkIn']}}">
                                             <input type="hidden" id="checkOut" name="checkOut" value="{{$userInput['checkOut']}}">
+                                            <input type="hidden" id="remainedRooms" name="remainedRooms" value="{{$room->available}}">                                            
                                             <button type="submit" class="btn btn-primary mt-3">Pesan</button>
+                                            <br><small class="card-text text-success text-07"><b> Tersedia {{ $room->available }} ruangan</b></small>
                                         </form>
                                     @endif
                                 @endforeach
@@ -216,14 +226,16 @@
                                     <input type="hidden" id="roomId" name="roomId" value="{{$room->id}}">
                                     <input type="hidden" id="checkIn" name="checkIn" value="{{$userInput['checkIn']}}">
                                     <input type="hidden" id="checkOut" name="checkOut" value="{{$userInput['checkOut']}}">
+                                    <input type="hidden" id="remainedRooms" name="remainedRooms" value="{{$room->available}}"> 
                                     <button type="submit" class="btn btn-primary mt-3">Pesan</button>
+                                    <br><small class="card-text text-success text-07"><b> Tersedia {{ $room->available }} ruangan</b></small>
                                 </form>
                             @endif
                         @endisset
                         @empty($userInput)
                             <button type="submit" id="book{{ $room->id }}" class="btn btn-secondary mt-3" disabled>Pesan</button>
                             <br>
-                            <small class="card-text text-red">
+                            <small class="card-text text-danger text-07">
                                 <i>Mohon pilih tanggal check-in dan check-out terlebih dahulu untuk melakukan pemesanan ruangan.</i>
                             </small>
                         @endempty

@@ -2,27 +2,37 @@
 
 @section('content')
 @if (session('success'))
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="alert alert-success my-5">
-                {{ session('success') }}
-                Klik <a href="/history"
-                        onclick="event.preventDefault();
-                                document.getElementById('history-form').submit();">di sini</a>
-                untuk menuju ke Riwayat Pemesanan Anda.
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="alert alert-success my-5">
+                    {{ session('success') }}
+                    Klik <a href="/history"
+                            onclick="event.preventDefault();
+                                    document.getElementById('history-form').submit();">di sini</a>
+                    untuk menuju ke Riwayat Pemesanan Anda.
+                </div>
+                <form id="history-form" action="/history" method="POST" style="display: none;">
+                    @csrf
+                </form>
             </div>
-            <form id="history-form" action="/history" method="POST" style="display: none;">
-                @csrf
-            </form>
         </div>
     </div>
-</div>
+@elseif(session('fail'))
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="alert alert-danger my-5">
+                    {{ session('fail') }}
+                </div>
+            </div>
+        </div>
+    </div>
 @endif
 <div class="slider fade">
     <div class="load"></div>
     <div class="content">
-        @if (session('success'))
+        @if (session('success') || session('fail'))
         <div class="principal" style="top: 60%;">
         @else
         <div class="principal" style="top: 40%;">
