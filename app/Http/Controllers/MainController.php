@@ -111,16 +111,16 @@ class MainController extends Controller
         $count = history::selectRaw('room_id, sum(roomTotal) as booked_rooms')
                         ->where('hotel_id',$hotelId)
                         ->where('finished','=','false')
-                        ->whereRaw("IF((checkIn BETWEEN '".$checkIn."' AND '".$checkOut."') OR (checkIn BETWEEN '".$checkIn."' AND '".$checkOut."'), 1, IF((checkOut >= '".$checkIn."') AND (checkIn <='".$checkOut."', 1, 0))")
+                        ->whereRaw("IF((checkIn BETWEEN '".$checkIn."' AND '".$checkOut."') OR (checkIn BETWEEN '".$checkIn."' AND '".$checkOut."'), 1, IF((checkOut >= '".$checkIn."') AND (checkIn <='".$checkOut."'), 1, 0))")
                         ->groupBy('room_id')->get();
 
-        if(!$count->first()){
-            $count = "";
-        }
 
         $hotel = alamat::where('hotel_id', $hotelId)->first();
 
         $rooms = room_details::where('hotel_id', $hotelId)->get();
+
+
+
 
         // $count = history::selectRaw('room_id, count(room_id) as Checked')
         //                 ->where('hotel_id',$hotelId)
@@ -140,6 +140,8 @@ class MainController extends Controller
         //                      ->get();
 
         // return json_encode($count, JSON_HEX_TAG);
+
+
 
         return view('hotel.list')->with(['rooms' => $rooms, 'hotel' => $hotel, 'bookedRooms' => $count, 'userInput' => $result]);
         //return json_encode($result, JSON_HEX_TAG);
