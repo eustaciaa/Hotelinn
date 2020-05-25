@@ -187,21 +187,23 @@
                                                 @csrf
                                                 <input type="hidden" id="hotelId" name="hotelId" value="{{$room->hotel_id}}">
                                                 <input type="hidden" id="roomId" name="roomId" value="{{$room->id}}">
-                                                <input type="hidden" id="checkIn" name="checkIn" value="{{$userInput->checkIn}}">
-                                                <input type="hidden" id="checkOut" name="checkOut" value="{{$userInput->checkOut}}">
+                                                <input type="hidden" id="checkIn" name="checkIn" value="{{$userInput['checkIn']}}">
+                                                <input type="hidden" id="checkOut" name="checkOut" value="{{$userInput['checkOut']}}">
                                                 <button type="submit" class="btn btn-primary mt-3">Pesan</button>
                                             </form>
+                                            @break
                                         @else
                                             <button type="submit" id="book{{ $room->id }}" class="btn btn-secondary mt-3" disabled>Pesan</button>
                                             <br><small class="card-text text-red">Ruangan penuh dipesan</small>
+                                            @break
                                         @endif
-                                    @else
+                                    @elseif($loop->last)
                                         <form method="get" action="/rent" id="book{{ $room->id }}" class="book">
                                             @csrf
                                             <input type="hidden" id="hotelId" name="hotelId" value="{{$room->hotel_id}}">
                                             <input type="hidden" id="roomId" name="roomId" value="{{$room->id}}">
-                                            <input type="hidden" id="checkIn" name="checkIn" value="{{$userInput->checkIn}}">
-                                            <input type="hidden" id="checkOut" name="checkOut" value="{{$userInput->checkOut}}">
+                                            <input type="hidden" id="checkIn" name="checkIn" value="{{$userInput['checkIn']}}">
+                                            <input type="hidden" id="checkOut" name="checkOut" value="{{$userInput['checkOut']}}">
                                             <button type="submit" class="btn btn-primary mt-3">Pesan</button>
                                         </form>
                                     @endif
@@ -212,8 +214,8 @@
                                     @csrf
                                     <input type="hidden" id="hotelId" name="hotelId" value="{{$room->hotel_id}}">
                                     <input type="hidden" id="roomId" name="roomId" value="{{$room->id}}">
-                                    <input type="hidden" id="checkIn" name="checkIn" value="{{$userInput->checkIn}}">
-                                    <input type="hidden" id="checkOut" name="checkOut" value="{{$userInput->checkOut}}">
+                                    <input type="hidden" id="checkIn" name="checkIn" value="{{$userInput['checkIn']}}">
+                                    <input type="hidden" id="checkOut" name="checkOut" value="{{$userInput['checkOut']}}">
                                     <button type="submit" class="btn btn-primary mt-3">Pesan</button>
                                 </form>
                             @endif
