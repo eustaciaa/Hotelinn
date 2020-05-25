@@ -185,6 +185,9 @@
                                         @if ($room->available - $booked->booked_rooms > 0)
                                             <form method="get" action="/rent" id="book{{ $room->id }}" class="book">
                                                 @csrf
+                                                <input type="hidden" id="avaiableFormRent" name="roomAvail" value="{{$room->available - $booked->booked_rooms}}">
+                                                <input type="hidden" id="checkInFix" name="checkIn" value="{{$userInput['checkIn']}}">
+                                                <input type="hidden" id="checkOutFix" name="checkOut" value="{{$userInput['checkOut']}}">
                                                 <input type="hidden" id="hotelId" name="hotelId" value="{{$room->hotel_id}}">
                                                 <input type="hidden" id="roomId" name="roomId" value="{{$room->id}}">
                                                 <input type="hidden" id="checkIn" name="checkIn" value="{{$userInput['checkIn']}}">
@@ -200,6 +203,9 @@
                                     @elseif($loop->last)
                                         <form method="get" action="/rent" id="book{{ $room->id }}" class="book">
                                             @csrf
+                                            <input type="hidden" id="avaiableFormRent" name="roomAvail" value="{{$room->available}}">
+                                            <input type="hidden" id="checkInFix" name="checkIn" value="{{$userInput['checkIn']}}">
+                                            <input type="hidden" id="checkOutFix" name="checkOut" value="{{$userInput['checkOut']}}">
                                             <input type="hidden" id="hotelId" name="hotelId" value="{{$room->hotel_id}}">
                                             <input type="hidden" id="roomId" name="roomId" value="{{$room->id}}">
                                             <input type="hidden" id="checkIn" name="checkIn" value="{{$userInput['checkIn']}}">
@@ -212,6 +218,9 @@
                             @if($bookedRooms == "[]")
                                 <form method="get" action="/rent" id="book{{ $room->id }}" class="book">
                                     @csrf
+                                    <input type="hidden" id="avaiableFormRent" name="roomAvail" value="{{$room->available}}">
+                                    <input type="hidden" id="checkInFix" name="checkIn" value="{{ $userInput['checkIn']}}">
+                                    <input type="hidden" id="checkOutFix" name="checkOut" value="{{ $userInput['checkOut']}}">
                                     <input type="hidden" id="hotelId" name="hotelId" value="{{$room->hotel_id}}">
                                     <input type="hidden" id="roomId" name="roomId" value="{{$room->id}}">
                                     <input type="hidden" id="checkIn" name="checkIn" value="{{$userInput['checkIn']}}">
