@@ -28,6 +28,7 @@ npm install --save @fortawesome/fontawesome-free
 - sudah ada home yang menggunakan ajax
 - sudah bisa check history
 - penambahan history di header
+- udah ada update profile, profile picture, dan password
 
 # TODO
 - admin dashboard dan admin login
