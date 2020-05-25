@@ -67,14 +67,14 @@
         <div class="col-md-9">
             <h4>Penawaran Kamar</h4>
             @isset($userInput)
-                <h5>
-                    <span class="badge badge-light txt-lightblack text-uppercase transparent">
-                        Check-in: {{ $userInput['checkIn'] }}
-                    </span> 
-                    <span class="badge badge-light txt-lightblack text-uppercase transparent">
-                        Check-out: {{ $userInput['checkOut'] }}
-                    </span> 
-                </h4>
+                <h6>Check In :</h6>
+                    <h5><span class="badge badge-primary txt-lightblack text-uppercase transparent">
+                        {{ date_format(date_create($userInput['checkIn']), "j F Y") }}
+                    </span></h5>
+                <h6>Check Out : </h6>
+                    <h5><span class="badge badge-primary txt-lightblack text-uppercase transparent">
+                        {{ date_format(date_create($userInput['checkOut']), "j F Y") }}
+                    </span></h5> 
             @endisset
             <br>
             @foreach ($rooms as $room)
@@ -192,29 +192,26 @@
                                         <button type="submit" id="book{{ $room->id }}" class="btn btn-secondary mt-3" disabled>Pesan</button>
                                         <br><small class="card-text text-red">Ruangan penuh dipesan</small>
                                     @endif
-                                @else
-                                    <form method="get" action="/rent" id="book{{ $room->id }}" class="book">
-                                        @csrf
-                                        <input type="hidden" id="hotelId" name="hotelId" value="{{$room->hotel_id}}">
-                                        <input type="hidden" id="roomId" name="roomId" value="{{$room->id}}">
-                                        <button type="submit" class="btn btn-primary mt-3">Pesan</button>
-                                    </form>
                                 @endif
                             @endforeach
                         @endisset
-                        @empty($bookedRooms)
-                            <!-- <button type="submit" id="book{{ $room->id }}" class="btn btn-secondary mt-3" disabled>Pesan</button>
+                        @if(!isset($userInput))
+                            <button type="submit" id="book{{ $room->id }}" class="btn btn-secondary mt-3" disabled>Pesan</button>
                             <br>
                             <small class="card-text text-red">
                                 <i>Mohon pilih tanggal check-in dan check-out terlebih dahulu untuk melakukan pemesanan ruangan.</i>
-                            </small> -->
+                            </small>
+                        @elseif(!isset($bookedRooms[]))
                             <form method="get" action="/rent" id="book{{ $room->id }}" class="book">
                                 @csrf
                                 <input type="hidden" id="hotelId" name="hotelId" value="{{$room->hotel_id}}">
                                 <input type="hidden" id="roomId" name="roomId" value="{{$room->id}}">
                                 <button type="submit" class="btn btn-primary mt-3">Pesan</button>
                             </form>
-                        @endempty
+                        @endif
+                        <!-- @empty($bookedRooms)
+                            
+                        @endempty -->
                         </div>
                     </div>
                 @if ($loop->iteration%2 == 0)

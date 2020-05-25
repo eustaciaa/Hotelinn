@@ -104,7 +104,7 @@ class MainController extends Controller
         
         $hotel = alamat::where('hotel_id', $hotelId)->first();
 
-        $result = ['checkIn'=> $checkIn,'checkOut' => $checkOut];
+        $result = ['checkIn'=> $checkIn,'checkOut' => $checkOut, 'code' => 1];
 
         $rooms = room_details::where('hotel_id', $hotelId)->get();
 
