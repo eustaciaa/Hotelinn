@@ -25,11 +25,10 @@ npm install --save @fortawesome/fontawesome-free
 ```
 
 # Update List
-- sudah ada home yang menggunakan ajax
-- sudah bisa check history
-- penambahan history di header
-- udah ada update profile, profile picture, dan password
+- rent sudah form validation
+- lihat room sudah bisa validation
 
 # TODO
-- admin dashboard dan admin login
-- admin auth
+- search by name, kota, provinsi
+- sorting
+- admin panel

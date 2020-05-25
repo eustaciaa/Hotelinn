@@ -16,7 +16,14 @@
 
                                     <div class="col-md-6">
                                         <input id="fName" type="text" class="form-control" name="fName" value="{{ Auth::user()->fName }}" required autofocus>
+                                        @error('fName')
+                                            <span class="invalid-feedback" role="alert">
+                                                <b>{{ $message }}</b>
+                                            </span>
+                                        @enderror
                                     </div>
+
+
                                 </div>
 
                                 <div class="form-group row">
@@ -24,6 +31,11 @@
 
                                     <div class="col-md-6">
                                         <input id="lName" type="text" class="form-control" name="lName" value="{{ Auth::user()->lName }}" required autofocus>
+                                        @error('lName')
+                                            <span class="invalid-feedback" role="alert">
+                                                <b>{{ $message }}</b>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
 
@@ -31,7 +43,12 @@
                                     <label for="checkIn" class="col-md-4 col-form-label text-md-right"><i>{{ __('Check In') }}</i></label>
 
                                     <div class="col-md-6">
-                                        <input type="text" class="form-control" value="{{ date_format(date_create($formNeeds['checkIn']), 'j F Y') }}" disabled>
+                                        <input id="checkIn" type="date" class="form-control" name="checkIn" min="1-1-2020" value="{{$userInput['checkIn']}}" disabled>
+                                        @error('checkIn')
+                                            <span class="invalid-feedback" role="alert">
+                                                <b>{{ $message }}</b>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
 
@@ -39,7 +56,12 @@
                                     <label for="checkOut" class="col-md-4 col-form-label text-md-right"><i>{{ __('Check Out') }}</i></label>
 
                                     <div class="col-md-6">
-                                        <input type="text" class="form-control" value="{{ date_format(date_create($formNeeds['checkOut']), 'j F Y') }}" disabled>
+                                        <input id="checkOut" type="date" class="form-control" name="checkOut" value="{{$userInput['checkOut']}}" disabled>
+                                        @error('checkOut')
+                                            <span class="invalid-feedback" role="alert">
+                                                <b>{{ $message }}</b>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
 
@@ -47,20 +69,23 @@
                                     <label for="jumlah" class="col-md-4 col-form-label text-md-right">{{ __('Jumlah') }}</label>
 
                                     <div class="col-md-6">
-                                        <input id="jmlh" type="number" class="form-control" name="jmlh" value="{{ 1 }}" min="1" max="{{ $formNeeds['remainedRooms'] }}" required>
+                                        <input id="jmlh" type="number" class="form-control" name="jmlh" value="{{ 1 }}" min="1" max="{{$userInput['roomAvail']}}" required>
                                         <span class="badge badge-warning txt-lightblack transparent">
-                                            <i class="fas fa-exclamation-circle mr-1"></i><b>Tersisa {{ $formNeeds['remainedRooms'] }} ruangan</b>
+                                            <i class="fas fa-exclamation-circle mr-1"></i><b>Tersisa {{ $userInput['roomAvail'] }} ruangan</b>
                                         </span>
-                                        <br><small class="text-muted text-07"><b>Anda hanya dapat memesan paling banyak {{ $formNeeds['remainedRooms'] }} ruangan.</b></small>
+                                        <br><small class="text-muted text-07"><b>Anda hanya dapat memesan paling banyak {{ $userInput['roomAvail'] }} ruangan.</b></small>
+                                        @error('jmlh')
+                                            <span class="invalid-feedback" role="alert">
+                                                <b>{{ $message }}</b>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
-                                    <input type="hidden" value="{{ $formNeeds['checkIn'] }}" name="checkIn">
-                                    <input type="hidden" value="{{ $formNeeds['checkOut'] }}" name="checkOut">
+                                    <input type="hidden" name="maxRoom" value="{{ $userInput['roomAvail'] }}">
                                     <input type="hidden" name="hotelId" value="{{ $hotel->id }}">
                                     <input type="hidden" name="roomId" value="{{ $room->id }}">
-                                    <input type="hidden" name="remainedRooms" value="{{ $formNeeds['remainedRooms'] }}">
                                     <button id="submit" class="btn btn-primary offset-md-4 " type="submit">Rent</button>
                                 </div>
                         </form>
@@ -69,7 +94,11 @@
         </div>
     </div>
 </div>
-<!-- <script>
+<script>
     $('#checkIn').attr('min', new Date().toISOString().split("T")[0]);
-</script> -->
+    $('#checkOut').attr('min',  $('#checkIn').attr('min'));
+    $('#checkIn').on('change', () => {
+        $('#checkOut').attr('min',  $('#checkIn').val());
+    })
+</script>
 @endsection

@@ -123,7 +123,6 @@ class MainController extends Controller
                         ->whereRaw("IF((checkIn BETWEEN '".$checkIn."' AND '".$checkOut."') OR (checkIn BETWEEN '".$checkIn."' AND '".$checkOut."'), 1, IF((checkOut >= '".$checkIn."') AND (checkIn <='".$checkOut."'), 1, 0))")
                         ->groupBy('room_id')->get();
 
-        // dd($count);
 
         $hotel = alamat::where('hotel_id', $hotelId)->first();
 

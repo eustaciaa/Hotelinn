@@ -24,9 +24,11 @@
 
     <!-- Icon -->
     <link rel="icon" href="{{ asset('images/hotelinn/logo_circle.png') }}">
+
 </head>
 
 <body>
+
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white sticky-top shadow-sm">
             <div class="container">
@@ -53,11 +55,11 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('login') }}">{{ __('Masuk') }}</a>
                         </li>
-                        @if (Route::has('register'))
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('register') }}">{{ __('Daftar') }}</a>
-                        </li>
-                        @endif
+                            @if (Route::has('register'))
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('register') }}">{{ __('Daftar') }}</a>
+                            </li>
+                            @endif
                         @elseif(Auth::guard('web')->check())
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
@@ -68,18 +70,23 @@
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
 
 
-                                <a class="dropdown-item" onclick="event.preventDefault();
-                                                     document.getElementById('profile-form').submit();">
-                                    {{ __('Ubah Profil') }}
-                                </a>
+                                <a class="dropdown-toggle dropdown-item" type="button" data-toggle="dropdown">
+                                    {{ __('Pengaturan') }}</a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item"
+                                            onclick="event.preventDefault();document.getElementById('profile-form').submit();">{{ __('Informasi Akun') }}</a>
+                                    </li>
+
+                                </ul>
                                 <form id="profile-form" action="/profile" method="POST" style="display: none;">
                                     @csrf
                                 </form>
 
+
                                 <div class="dropdown-divider"></div>
 
                                 <a class="dropdown-item" onclick="event.preventDefault();
-                                                     document.getElementById('history-form').submit();">
+                                                 document.getElementById('history-form').submit();">
                                     {{ __('Riwayat Pemesanan') }}
                                 </a>
                                 <form id="history-form" action="/history" method="POST" style="display: none;">
@@ -89,7 +96,7 @@
                                 <div class="dropdown-divider"></div>
 
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                                                 document.getElementById('logout-form').submit();">
                                     {{ __('Keluar') }}
                                 </a>
 
@@ -109,10 +116,9 @@
                                                      document.getElementById('logout-form').submit();">
                                 {{ __('Keluar') }}
                             </a>
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                    style="display: none;">
-                                    @csrf
-                                </form>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
                         </li>
                         @endif
                     </ul>
@@ -124,6 +130,15 @@
             @yield('content')
         </main>
     </div>
+    <script>
+        $(document).ready(function(){
+  $('.dropdown-submenu .dropdown-item').on("click", function(e){
+    $(this).next('ul').toggle();
+    e.stopPropagation();
+    e.preventDefault();
+  });
+});
+    </script>
 </body>
 
 </html>
