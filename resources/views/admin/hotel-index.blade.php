@@ -14,9 +14,11 @@
                 @foreach ($hotels as $hotel)
                     <li class="list-group-item d-flex justify-content-between align-items-center">
                         <h5 class="mb-1">{{ $hotel->hotel->name }}</h5>
-                        <p>{{ $hotel->detailLengkap }}</p>
                         <a href="/admin/hotels/{{ $hotel->hotel->id }}" class="badge badge-info">Detail</a>
-                        <a href="#" class="badge badge-info mx-1">Ubah Alamat</a>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <small class="mb-1">{{ $hotel->detailLengkap }}</small>
+                        <a href="/admin/hotels/alamat/{{ $hotel->hotel->id }}/edit" class="badge badge-info">Ubah Alamat</a>
                     </li>
                 @endforeach
             </ul>

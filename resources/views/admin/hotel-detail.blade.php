@@ -19,8 +19,12 @@
                     @else
                         <p class="my-2"><b>{{ $hotel->rating }}/10 </b>({{ $hotel->reviewers }} ulasan)</p>
                     @endif<br>
-                    <button type="submit" class="btn btn-primary my-1">Ubah Hotel</button>
-                    <button type="submit" class="btn btn-danger mx-3">Hapus Hotel</button>
+                    <a href="{{ $hotel->id }}/edit" class="btn btn-primary my-1">Ubah Hotel</a>
+                    <form action="{{ $hotel->id }}" method="post" class="d-inline">
+                        @method('delete')
+                        @csrf
+                        <button type="submit" class="btn btn-danger mx-3">Hapus Hotel</button>
+                    </form>
                     <a href="/admin/hotels" class="btn btn-primary my-3">Kembali</a>
                 </div>
             </div>
