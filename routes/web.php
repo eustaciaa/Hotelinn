@@ -39,6 +39,16 @@ Route::prefix('admin')->group(function(){
 
     Route::get('/hotels/{hotel}','Admin\HotelController@show');
 
+    Route::delete('/hotels/{hotel}','Admin\HotelController@destroy');
+
+    Route::get('/hotels/{hotel}/edit','Admin\HotelController@edit');
+
+    Route::patch('/hotels/{hotel}','Admin\HotelController@update');
+
+    Route::get('/hotels/alamat/{hotel}/edit','Admin\HotelController@editAlamat');
+
+    Route::patch('/hotels/alamat/{hotel}','Admin\HotelController@updateAlamat');    
+
     Route::get('/add-hotel','Admin\HotelController@create');
 
     Route::post('/add-hotel','Admin\HotelController@store')->name('post.add-hotel'); 
