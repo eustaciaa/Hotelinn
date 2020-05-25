@@ -74,7 +74,7 @@
                 <h6>Check Out : </h6>
                     <h5><span class="badge badge-primary txt-lightblack text-uppercase transparent">
                         {{ date_format(date_create($userInput['checkOut']), "j F Y") }}
-                    </span></h5> 
+                    </span></h5>
             @endisset
             <br>
             @foreach ($rooms as $room)
@@ -239,65 +239,14 @@
         </div>
     </div>
 </div>
-<!-- <script>
+<script>
     $( document ).ready(function(){
         $('#checkIn').attr('min', new Date().toISOString().split("T")[0]);
         $('#checkIn').on('change', function(){
-            $('#checkOut').attr('min', $('#checkIn').val());
-        });
-        $( '#search' ).on('click', function (){
-            var checkIn = $('#checkIn').val();
-            var checkOut = $('#checkOut').val();
-            if(checkIn == "" || checkOut == "") window.alert("Pilih Tanggal Check In dan Check Out");
-            else{
-            var hotelId = $('#hotelId').val();
-            $.ajaxSetup({
-                  headers: {
-                      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                  }
-            });
-            $.ajax({
-                type: 'GET',
-                url: '/getRoom',
-                data: { hotelId: hotelId, checkIn: checkIn, checkOut: checkOut},
-                success: (result) => {
-                    console.log(result);
-                    result = JSON.parse(result);
-                    result.forEach(room => {
-                        if(result == []){
-                            $('.book').replaceWith(
-                                '<form method="get" action="/rent" id="book'+room.id+'"">'+
-                                    '@csrf'+
-                                    '<input type="hidden" id="hotelId" name="hotelId" value="'+room.hotel_id+'">'+
-                                    '<input type="hidden" id="roomId" name="roomId" value="'+room.id+'">'+
-                                    '<button type="submit" class="btn btn-primary mt-3">Pesan</button>'+
-                                '</form>'
-                            );
-                        }
-                        console.log(room.available);
-                        console.log(room.booked_rooms);
-                        console.log(room.available - room.booked_rooms);
-                        if(room.available - room.booked_rooms == 0){
-                            $('#book'+room.id).replaceWith(
-                                '<button type="submit" class="btn btn-secondary mt-3 text-muted" id="book'+room.id+'" disabled>Pesan</button>'+
-                                '<br><small class="card-text text-red">Ruangan penuh dipesan</small>'
-                            );
-                        }else{
-                            $('#book'+room.id).replaceWith(
-                                '<form method="get" action="/rent" id="book'+room.id+'"">'+
-                                    '@csrf'+
-                                    '<input type="hidden" id="hotelId" name="hotelId" value="'+room.hotel_id+'">'+
-                                    '<input type="hidden" id="roomId" name="roomId" value="'+room.id+'">'+
-                                    '<button type="submit" class="btn btn-primary mt-3">Pesan</button>'+
-                                '</form>'
-                            );
-                        }
-                    })
+            $('#checkOut').attr('min', $('#checkIn').val()).val($('#checkIn').val());
 
-                }
-            })
-            }
         });
+
     });
-</script> -->
+</script>
 @endsection
