@@ -62,6 +62,7 @@ Route::post('/rentFinal','RentController@rentFinal');
 
 Route::post('/history','UserController@history');
 
+Route::get('/searchBox','AJAXController@search');
 
 Route::post('/getKota','AJAXController@getKota');
 
