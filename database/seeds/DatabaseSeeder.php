@@ -157,7 +157,7 @@ class DatabaseSeeder extends Seeder
         $room->furniture = "Meja";
         $room->security_safety = "Brankas";
         $room->available = 5;
-        $room->photo = '/images/hotel/business-tomang/standard-double-room.jpeg';
+        $room->photo = '/images/hotel/business-tomang/standard-double-room.jpg';
         $hotel->room()->save($room);
 
         $room = new App\room_details;

@@ -57,29 +57,29 @@ h1,h2,h3,h4,h5,h6{
     font-family: 'Raleway', sans-serif;
 }
 
-@media (max-width: 740px) {
-    html,
-    body,
-    header,
-    .bg {
-      height: 1000px;
-    }
-  }
-  @media (min-width: 800px) and (max-width: 850px) {
-    html,
-    body,
-    header,
-    .bg {
-      height: 600px;
-    }
-  }
+// @media (max-width: 740px) {
+//     html,
+//     body,
+//     header,
+//     .bg {
+//       height: 1000px;
+//     }
+//   }
+//   @media (min-width: 800px) and (max-width: 850px) {
+//     html,
+//     body,
+//     header,
+//     .bg {
+//       height: 600px;
+//     }
+//   }
 
   .text-07{
     opacity: 0.7;
   }
 
   #forgot-password{
-      color: #c1d0f7;
+      color: $darkblue;
   }
 
   .price{

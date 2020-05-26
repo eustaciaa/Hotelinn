@@ -204,7 +204,7 @@
                                             </form>
                                             @break
                                         @else
-                                            <button type="submit" id="book{{ $room->id }}" class="btn btn-secondary mt-3" disabled>Pesan</button>
+                                            <button type="submit" id="book{{ $room->id }}" class="btn btn-primary mt-3" disabled>Pesan</button>
                                             <br><small class="card-text text-danger text-07">Ruangan penuh dipesan</small>
                                             @break
                                         @endif
@@ -219,8 +219,13 @@
                                             <input type="hidden" id="checkIn" name="checkIn" value="{{$userInput['checkIn']}}">
                                             <input type="hidden" id="checkOut" name="checkOut" value="{{$userInput['checkOut']}}">
                                             <input type="hidden" id="remainedRooms" name="remainedRooms" value="{{$room->available}}">                                            
-                                            <button type="submit" class="btn btn-primary mt-3">Pesan</button>
-                                            <br><small class="card-text text-success text-07"><b> Tersedia {{ $room->available }} ruangan</b></small>
+                                            @if($room->available > 0)
+                                                <button type="submit" class="btn btn-primary mt-3">Pesan</button>
+                                                <br><small class="card-text text-success text-07"><b> Tersedia {{ $room->available }} ruangan</b></small>
+                                            @else
+                                                <button type="submit" class="btn btn-primary mt-3" disabled>Pesan</button>
+                                                <br><small class="card-text text-success text-07"><b> Ruangan tidak tersedia</b></small>
+                                            @endif
                                         </form>
                                     @endif
                                 @endforeach
@@ -236,13 +241,18 @@
                                     <input type="hidden" id="checkIn" name="checkIn" value="{{$userInput['checkIn']}}">
                                     <input type="hidden" id="checkOut" name="checkOut" value="{{$userInput['checkOut']}}">
                                     <input type="hidden" id="remainedRooms" name="remainedRooms" value="{{$room->available}}"> 
-                                    <button type="submit" class="btn btn-primary mt-3">Pesan</button>
-                                    <br><small class="card-text text-success text-07"><b> Tersedia {{ $room->available }} ruangan</b></small>
+                                    @if($room->available > 0)
+                                        <button type="submit" class="btn btn-primary mt-3">Pesan</button>
+                                        <br><small class="card-text text-success text-07"><b> Tersedia {{ $room->available }} ruangan</b></small>
+                                    @else
+                                        <button type="submit" class="btn btn-primary mt-3" disabled>Pesan</button>
+                                        <br><small class="card-text text-danger text-07"><b> Ruangan tidak tersedia</b></small>
+                                    @endif
                                 </form>
                             @endif
                         @endisset
                         @empty($userInput)
-                            <button type="submit" id="book{{ $room->id }}" class="btn btn-secondary mt-3" disabled>Pesan</button>
+                            <button type="submit" id="book{{ $room->id }}" class="btn btn-primary mt-3" disabled>Pesan</button>
                             <br>
                             <small class="card-text text-danger text-07">
                                 <i>Mohon pilih tanggal check-in dan check-out terlebih dahulu untuk melakukan pemesanan ruangan.</i>
