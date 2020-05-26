@@ -51,7 +51,7 @@ class RentController extends Controller
 
         $rooms = room_details::select('available')->where(['hotel_id' => $dateHotelValidation['hotelId'],'id' => $dateHotelValidation['roomId']])->first();
 
-        if($maxRoom == "null") $availRoom = $rooms->available;
+        if($maxRoom == null) $availRoom = $rooms->available;
         else $availRoom = $rooms->available - $maxRoom['booked_rooms'];
 
         $dataValid = $request->validate([
