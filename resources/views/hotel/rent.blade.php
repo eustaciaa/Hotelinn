@@ -17,7 +17,9 @@
                                     <div class="col-md-6">
                                         <input id="fName" type="text" class="form-control" name="fName" value="{{ Auth::user()->fName }}" required autofocus>
                                         @error('fName')
-                                            <div class="card-text text-red">{{ $message }}</div>
+                                            <span class="invalid-feedback" role="alert">
+                                                <b>{{ $message }}</b>
+                                            </span>
                                         @enderror
                                     </div>
 
@@ -30,7 +32,9 @@
                                     <div class="col-md-6">
                                         <input id="lName" type="text" class="form-control" name="lName" value="{{ Auth::user()->lName }}" required autofocus>
                                         @error('lName')
-                                            <div class="card-text text-red">{{ $message }}</div>
+                                            <span class="invalid-feedback" role="alert">
+                                                <b>{{ $message }}</b>
+                                            </span>
                                         @enderror
                                     </div>
                                 </div>
@@ -39,9 +43,11 @@
                                     <label for="checkIn" class="col-md-4 col-form-label text-md-right"><i>{{ __('Check In') }}</i></label>
 
                                     <div class="col-md-6">
-                                        <input id="checkIn" type="date" class="form-control" name="checkIn" min="1-1-2020" value="{{$userInput['checkIn']}}"required>
+                                        <input id="checkIn" type="date" class="form-control" name="checkIn" min="1-1-2020" value="{{$userInput['checkIn']}}" disabled>
                                         @error('checkIn')
-                                            <div class="card-text text-red">{{ $message }}</div>
+                                            <span class="invalid-feedback" role="alert">
+                                                <b>{{ $message }}</b>
+                                            </span>
                                         @enderror
                                     </div>
                                 </div>
@@ -50,20 +56,28 @@
                                     <label for="checkOut" class="col-md-4 col-form-label text-md-right"><i>{{ __('Check Out') }}</i></label>
 
                                     <div class="col-md-6">
-                                        <input id="checkOut" type="date" class="form-control" name="checkOut" value="{{$userInput['checkOut']}}" required>
+                                        <input id="checkOut" type="date" class="form-control" name="checkOut" value="{{$userInput['checkOut']}}" disabled>
+                                        @error('checkOut')
+                                            <span class="invalid-feedback" role="alert">
+                                                <b>{{ $message }}</b>
+                                            </span>
+                                        @enderror
                                     </div>
-                                    @error('checkOut')
-                                            <div class="card-text text-red">{{ $message }}</div>
-                                    @enderror
                                 </div>
 
                                 <div class="form-group row">
                                     <label for="jumlah" class="col-md-4 col-form-label text-md-right">{{ __('Jumlah') }}</label>
 
                                     <div class="col-md-6">
-                                        <input id="jmlh" type="number" class="form-control" name="jmlh" value="{{ 1 }}" min="1" max={{$userInput['roomAvail']}} required>
+                                        <input id="jmlh" type="number" class="form-control" name="jmlh" value="{{ 1 }}" min="1" max="{{$userInput['roomAvail']}}" required>
+                                        <span class="badge badge-warning txt-lightblack transparent">
+                                            <i class="fas fa-exclamation-circle mr-1"></i><b>Tersisa {{ $userInput['roomAvail'] }} ruangan</b>
+                                        </span>
+                                        <br><small class="text-muted text-07"><b>Anda hanya dapat memesan paling banyak {{ $userInput['roomAvail'] }} ruangan.</b></small>
                                         @error('jmlh')
-                                            <div class="card-text text-red">{{ $message }}</div>
+                                            <span class="invalid-feedback" role="alert">
+                                                <b>{{ $message }}</b>
+                                            </span>
                                         @enderror
                                     </div>
                                 </div>

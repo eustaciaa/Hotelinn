@@ -2,27 +2,37 @@
 
 @section('content')
 @if (session('success'))
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="alert alert-success my-5">
-                {{ session('success') }}
-                Klik <a href="/history"
-                        onclick="event.preventDefault();
-                                document.getElementById('history-form').submit();">di sini</a>
-                untuk menuju ke Riwayat Pemesanan Anda.
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="alert alert-success my-5">
+                    {{ session('success') }}
+                    Klik <a href="/history"
+                            onclick="event.preventDefault();
+                                    document.getElementById('history-form').submit();">di sini</a>
+                    untuk menuju ke Riwayat Pemesanan Anda.
+                </div>
+                <form id="history-form" action="/history" method="POST" style="display: none;">
+                    @csrf
+                </form>
             </div>
-            <form id="history-form" action="/history" method="POST" style="display: none;">
-                @csrf
-            </form>
         </div>
     </div>
-</div>
+@elseif(session('fail'))
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="alert alert-danger my-5">
+                    {{ session('fail') }}
+                </div>
+            </div>
+        </div>
+    </div>
 @endif
 <div class="slider fade">
     <div class="load"></div>
     <div class="content">
-        @if (session('success'))
+        @if (session('success') || session('fail'))
         <div class="principal" style="top: 60%;">
         @else
         <div class="principal" style="top: 40%;">
@@ -41,7 +51,7 @@
                             <h4>Mau nginep di mana?</h4>
                         </div>
                     </div>
-                    <div class="row justify-content-center mb-2">
+                    <div class="row justify-content-center mb-2" >
                         <div class="col text-center">
                             <form action="/searchBox" method="GET" id="searchForm">
                             <input type="text" class="form-control" name="query" id="searchBox" placeholder="Nama hotel, Provinsi, Kota.." autocomplete="off">
@@ -128,7 +138,8 @@
 <script src="{{ asset('js/typeahead.jquery.min.js') }}"></script>
 <script>
     $(document).ready(function () {
-    $.ajaxSetup({
+
+        $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
@@ -148,8 +159,6 @@
         }
     });
     $('#searchBox').typeahead({
-
-        theme: "bootstrap4",
         source: function (query, process) {
             return $.ajax({
                 type: 'GET',
@@ -159,6 +168,7 @@
                     result = JSON.parse(result);
                     console.log(result);
                     process(result);
+                    customwidth();
                 }
             })},
             displayText: function(item) {
@@ -169,7 +179,9 @@
             afterSelect: function(item){
                 ajaxCallSearch(item);
             }
-            ,autoSelect: true
+            ,
+            autoSelect: true,
+            scrollHeight: 2
         });
     $("#provinsi").change(function () {
         var provinsi = $('#provinsi').val()
@@ -252,7 +264,18 @@
             }
         })
     });
+
+        $(window).resize(function(e) {
+            customwidth();
+        });
 });
+function customwidth()
+        {
+            var formwidth = $('#searchForm').width();
+            $('.typeahead').width(formwidth);
+            console.log($('#searchForm').width());
+        }
+
 
 function ajaxCallSearch (item) {
     var provinsiId = "all";
@@ -303,7 +326,9 @@ function ajaxCallSearch (item) {
                 })
 
             }
-        })
+        });
+
+
 }
 </script>
 @endsection

@@ -76,23 +76,6 @@ class MainController extends Controller
             }
         }
 
-
-
-        // $alamat = alamat::whereNotIn('hotel_id', function($query) use ($checkIn, $checkOut){
-        //                     $query->select('hotel_id')->from('history')
-        //                                                 ->whereBetween('checkIn', [$checkIn, $checkOut])
-        //                                                 ->whereBetween('checkOut', [$checkIn, $checkOut]);
-        //                     })
-        //                 ->where(['alamat.provinsi_id' => $provinsiId, 'alamat.kota_id' => $kotaId])
-        //                 ->join('hotel', 'alamat.hotel_id', '=', 'hotel.id')
-        //                 ->join('provinsi', 'alamat.provinsi_id', '=', 'provinsi.id')
-        //                 ->join('kota', 'alamat.kota_id', '=', 'kota.id')
-        //                 ->get();
-        // $alamat = alamat::where(['alamat.provinsi_id' => $provinsiId, 'alamat.kota_id' => $kotaId])
-        //                 ->join('hotel', 'alamat.hotel_id', '=', 'hotel.id')
-        //                 ->join('provinsi', 'alamat.provinsi_id', '=', 'provinsi.id')
-        //                 ->join('kota', 'alamat.kota_id', '=', 'kota.id')
-        //                 ->get();
         return json_encode($alamat, JSON_HEX_TAG);
     }
 
