@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
         $user->save();
 
         $user = new App\Admin;
-        $user->name = "admin";
+        $user->fName = "admin";
         $user->username = "admin";
         $user->email = "admin@test.com";
         $user->password = Hash::make("admin");
