@@ -15,10 +15,10 @@
                                     <label for="fName" class="col-md-4 col-form-label text-md-right">{{ __('Nama Depan') }}</label>
 
                                     <div class="col-md-6">
-                                        <input id="fName" type="text" class="form-control" name="fName" value="{{ Auth::user()->fName }}" required autofocus>
+                                        <input id="fName" type="text" class="form-control @error('fName') is-invalid @enderror" name="fName" value="{{ Auth::user()->fName }}" required autofocus>
                                         @error('fName')
                                             <span class="invalid-feedback" role="alert">
-                                                <b>{{ $message }}</b>
+                                                <strong>{{ $message }}</strong>
                                             </span>
                                         @enderror
                                     </div>
@@ -30,10 +30,10 @@
                                     <label for="lName" class="col-md-4 col-form-label text-md-right">{{ __('Nama Belakang') }}</label>
 
                                     <div class="col-md-6">
-                                        <input id="lName" type="text" class="form-control" name="lName" value="{{ Auth::user()->lName }}" required autofocus>
+                                        <input id="lName" type="text" class="form-control @error('lName') is-invalid @enderror" name="lName" value="{{ Auth::user()->lName }}" required autofocus>
                                         @error('lName')
                                             <span class="invalid-feedback" role="alert">
-                                                <b>{{ $message }}</b>
+                                                <strong>{{ $message }}</strong>
                                             </span>
                                         @enderror
                                     </div>
@@ -43,10 +43,10 @@
                                     <label for="checkIn" class="col-md-4 col-form-label text-md-right"><i>{{ __('Check In') }}</i></label>
 
                                     <div class="col-md-6">
-                                        <input id="checkIn" type="date" class="form-control" name="checkIn" min="1-1-2020" value="{{$userInput['checkIn']}}" disabled>
+                                        <input id="checkIn" type="date" class="form-control" name="checkIn" min="1-1-2020" value="{{$userInput['checkIn']}}">
                                         @error('checkIn')
                                             <span class="invalid-feedback" role="alert">
-                                                <b>{{ $message }}</b>
+                                                <strong>{{ $message }}</strong>
                                             </span>
                                         @enderror
                                     </div>
@@ -56,10 +56,10 @@
                                     <label for="checkOut" class="col-md-4 col-form-label text-md-right"><i>{{ __('Check Out') }}</i></label>
 
                                     <div class="col-md-6">
-                                        <input id="checkOut" type="date" class="form-control" name="checkOut" value="{{$userInput['checkOut']}}" disabled>
+                                        <input id="checkOut" type="date" class="form-control" name="checkOut" value="{{$userInput['checkOut']}}">
                                         @error('checkOut')
                                             <span class="invalid-feedback" role="alert">
-                                                <b>{{ $message }}</b>
+                                                <strong>{{ $message }}</strong>
                                             </span>
                                         @enderror
                                     </div>
@@ -69,16 +69,16 @@
                                     <label for="jumlah" class="col-md-4 col-form-label text-md-right">{{ __('Jumlah') }}</label>
 
                                     <div class="col-md-6">
-                                        <input id="jmlh" type="number" class="form-control" name="jmlh" value="{{ 1 }}" min="1" max="{{$userInput['roomAvail']}}" required>
+                                        <input id="jmlh" type="number" class="form-control @error('jmlh') is-invalid @enderror" name="jmlh" value="{{ 1 }}" min="1" max="{{$userInput['roomAvail']}}" required>
+                                        @error('jmlh')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                         <span class="badge badge-warning txt-lightblack transparent">
                                             <i class="fas fa-exclamation-circle mr-1"></i><b>Tersisa {{ $userInput['roomAvail'] }} ruangan</b>
                                         </span>
                                         <br><small class="text-muted text-07"><b>Anda hanya dapat memesan paling banyak {{ $userInput['roomAvail'] }} ruangan.</b></small>
-                                        @error('jmlh')
-                                            <span class="invalid-feedback" role="alert">
-                                                <b>{{ $message }}</b>
-                                            </span>
-                                        @enderror
                                     </div>
                                 </div>
 
