@@ -3,7 +3,7 @@
 @section('content')
 <div class="container mh-100">
     <div class="row d-flex align-items-center mh-100" style="height:85vh;">
-        <div class="col-md-6 text-md-right mh-100 m-0">
+        <div class="col-md-6 text-md-right mh-100 m-0 txt-lightblack">
             <img src="/images/hotelinn/brand1.png" height="50vh"><br><br>
             <h1 style="font-size:300%;">
                 <b>Masuk sekarang untuk dapat memesan hotel yang kamu mau!</b>
@@ -13,7 +13,7 @@
             <div class="row pl-5">
                 <div class="card col-md-9">
                     <div class="card-body">
-                        <h4 class="card-title text-center">{{ __('Masuk') }}</h4><br>
+                        <h4 class="card-title text-center"><b>{{ __('Masuk') }}</b></h4><br>
                         <form method="POST" action="{{ route('login') }}">
                             @csrf
 
