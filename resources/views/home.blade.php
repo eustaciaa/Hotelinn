@@ -6,8 +6,8 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="alert alert-success my-5">
-                    {{ session('success') }}
-                    Klik <a href="/history"
+                    {{ session('success') }} Silahkan cek e-mail Anda atau
+                    klik <a href="/history"
                             onclick="event.preventDefault();
                                     document.getElementById('history-form').submit();">di sini</a>
                     untuk menuju ke Riwayat Pemesanan Anda.
