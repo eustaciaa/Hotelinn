@@ -46,6 +46,15 @@
                         <h6>{{ $room->name }}</h6>
                         </div>
                     </div>
+
+                    <div class="row form-group">
+                        <label class="col-md-4 text-md-right">{{ __('Harga') }}</label>
+
+                        <div class="col-md-6 d-flex align-items-center text-red">
+                        <h6>Rp{{number_format($room->cost,2,",",".")}} / malam</h6>
+                        </div>
+                    </div>
+
                     <form action="/rentFinal" method="POST">
                         @csrf
                     <div class="form-group row">
