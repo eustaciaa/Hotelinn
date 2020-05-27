@@ -14,6 +14,9 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\MessageBag;
 
 use Image;
+use App\alamat;
+use App\provinsi;
+use App\hotel;
 
 
 class UserController extends Controller
