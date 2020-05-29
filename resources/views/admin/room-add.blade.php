@@ -4,9 +4,9 @@
 <div class="container">
     <div class="row">
         <div class="col-md-6 offset-md-3">
-            <form action="{{route('post.add-hotel')}}" method="POST" enctype="multipart/form-data">
+            <form action="{{route('post.add-room')}}" method="POST" enctype="multipart/form-data">
                 @csrf
-                <h4>Tambahkan Hotel</h4>
+                <h4>Tambahkan Kamar Hotel</h4>
                 <div class="form-group">
                     <label for="name">{{ __('Nama Hotel') }}</label>
                     <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" placeholder="Masukkan nama hotel" value="{{ old('name') }}" />
