@@ -52,6 +52,14 @@ Route::prefix('admin')->group(function(){
     Route::get('/add-hotel','Admin\HotelController@create');
 
     Route::post('/add-hotel','Admin\HotelController@store')->name('post.add-hotel');
+
+    Route::get('/getUserCount','AdminController@getUserCount')->name('admin.userCount');
+
+    Route::get('/getHotelCount','AdminController@getHotelCount')->name('admin.hotelCount');
+
+    Route::get('/getOrderCount','AdminController@getOrderCount')->name('admin.orderCount');
+
+    Route::get('/hotelStat','AdminController@index');
 });
 
 Route::post('/updateProfile','UserController@updateProfile');
