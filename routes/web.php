@@ -20,7 +20,7 @@ Auth::routes();
 Route::get('/','MainController@index');
 
 
-Route::get('/getHotel','MainController@getHotel');
+Route::get('/getHotel','AJAXController@getHotel');
 
 Route::get('/rentHotel','MainController@rentHotel');
 

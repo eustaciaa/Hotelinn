@@ -56,7 +56,7 @@ class RentController extends Controller
         $dataValid = $request->validate([
             'fName' => 'required|alpha',
             'lName' => 'required|alpha',
-            'jmlh' => 'required|max:'.$availRoom
+            'jmlh' => 'required|lte:'.$availRoom
         ],
         [
             'fName.required' => 'Nama depan harus diisi.',
@@ -64,7 +64,7 @@ class RentController extends Controller
             'lName.alpha' => 'Nama belakang harus berupa huruf.',
             'lName.required' => 'Nama belakang harus diisi.',
             'jmlh.requried' => 'Jumlah ruangan harus diisi.',
-            'jmlh.max' => 'Jumlah ruangan yang ingin dipesan melebihi jumlah ruangan yang tersedia.'
+            'jmlh.lte' => 'Jumlah ruangan yang ingin dipesan melebihi jumlah ruangan yang tersedia.'
         ]);
 
         $data = array_merge($dateHotelValidation, $dataValid);
