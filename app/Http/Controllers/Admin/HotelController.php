@@ -10,6 +10,10 @@ use App\provinsi;
 
 class HotelController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:admin');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -54,7 +58,7 @@ class HotelController extends Controller
         $hotel->star = $request->star;
         $hotel->rating = $request->rating;
         $hotel->reviewers = $request->reviewers;
-        
+
         if($request->hasFile('photo')) {
             $file = $request->file('photo');
             $extension = $file->getClientOriginalExtension(); //image extension
@@ -73,7 +77,7 @@ class HotelController extends Controller
             case 'DKI Jakarta':
                 $alamat->provinsi_id = 1;
                 break;
-            
+
             case 'D.I Yogyakarta':
                 $alamat->provinsi_id = 2;
                 break;
@@ -86,7 +90,7 @@ class HotelController extends Controller
             case 'Jakarta':
                 $alamat->kota_id = 1;
                 break;
-            
+
             case 'Yogyakarta':
                 $alamat->kota_id = 2;
                 break;
@@ -94,11 +98,11 @@ class HotelController extends Controller
             case 'Tangerang':
                 $alamat->kota_id = 3;
                 break;
-            
+
             case 'Tangerang Selatan':
                 $alamat->kota_id = 4;
                 break;
-            
+
             case 'Serang':
                 $alamat->kota_id = 5;
                 break;
@@ -155,7 +159,7 @@ class HotelController extends Controller
             'rating' => $request->rating,
             'reviewers' => $request->reviewers
         ]);
-        
+
         if($request->hasFile('photo')) {
             $file = $request->file('photo');
             $extension = $file->getClientOriginalExtension(); //image extension
@@ -197,7 +201,7 @@ class HotelController extends Controller
             'namaKota' => 'required',
             'detailLengkap' => 'required|max:255'
         ]);
-        
+
         Alamat::where('hotel_id', $hotel->id)
         ->update([
             'detailLengkap' => $request->detailLengkap,
@@ -218,6 +222,6 @@ class HotelController extends Controller
     {
         $alamat = alamat::where('hotel_id', $hotel->id)->delete();
         Hotel::destroy($hotel->id);
-        return redirect('/admin/hotels')->with('status', 'Hotel berhasil dihapus !'); 
+        return redirect('/admin/hotels')->with('status', 'Hotel berhasil dihapus !');
     }
 }

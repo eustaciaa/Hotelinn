@@ -20,7 +20,7 @@ Auth::routes();
 Route::get('/','MainController@index');
 
 
-Route::get('/getHotel','MainController@getHotel');
+Route::get('/getHotel','AJAXController@getHotel');
 
 Route::get('/rentHotel','MainController@rentHotel');
 
@@ -52,6 +52,20 @@ Route::prefix('admin')->group(function(){
     Route::get('/add-hotel','Admin\HotelController@create');
 
     Route::post('/add-hotel','Admin\HotelController@store')->name('post.add-hotel');
+
+    Route::get('/getUserCount','AdminController@getUserCount')->name('admin.userCount');
+
+    Route::get('/getHotelCount','AdminController@getHotelCount')->name('admin.hotelCount');
+
+    Route::get('/getOrderCount','AdminController@getOrderCount')->name('admin.orderCount');
+
+    Route::get('/hotelStat','AdminController@showHotelStat')->name('admin.hotelStat');
+
+    Route::get('/userStat','AdminController@showUserStat')->name('admin.userStat');
+
+    Route::get('/getUserCountDetails','AdminController@getUserCountDetails')->name('admin.userCountDetail');
+
+    Route::get('/getHotelCountDetails','AdminController@getHotelCountDetails')->name('admin.hotelCountDetail');
 });
 
 Route::post('/updateProfile','UserController@updateProfile');

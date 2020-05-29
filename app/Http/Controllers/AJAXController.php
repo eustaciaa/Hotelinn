@@ -4,9 +4,52 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\kota;
+use App\alamat;
 
 class AJAXController extends Controller
 {
+    /**
+     * Show The Hotel List
+     */
+    public function getHotel(Request $request)
+    {
+        $kotaId = $request->input('kotaId');
+        $provinsiId = $request->input('provinsiId');
+        $hotelId = $request->input('hotelId');
+        $field = $request->input('field');
+        $order = $request->input('order');
+        if ($field != "none" && $order != "none") {
+            if ($kotaId == 'all' && $provinsiId == 'all') {
+                $alamat = alamat::join('hotel', 'alamat.hotel_id', '=', 'hotel.id')->join('kota','alamat.kota_id','=','kota.id')->join('provinsi','alamat.provinsi_id','=','provinsi.id')->orderBy($field, $order)->get();
+            } elseif ($kotaId == 'all') {
+                $query = ['provinsi_id' => $provinsiId];
+                $alamat = alamat::where($query)->join('hotel', 'alamat.hotel_id', '=', 'hotel.id')->join('kota','alamat.kota_id','=','kota.id')->join('provinsi','alamat.provinsi_id','=','provinsi.id')->orderBy($field, $order)->get();
+            } elseif ($provinsiId == 'all') {
+                $query = ['kota_id' => $kotaId];
+                $alamat = alamat::where($query)->join('hotel', 'alamat.hotel_id', '=', 'hotel.id')->join('kota','alamat.kota_id','=','kota.id')->join('provinsi','alamat.provinsi_id','=','provinsi.id')->orderBy($field, $order)->get();
+            } else {
+                $query = ['provinsi_id' => $provinsiId, 'kota_id' => $kotaId];
+                $alamat = alamat::where($query)->join('hotel', 'alamat.hotel_id', '=', 'hotel.id')->join('kota','alamat.kota_id','=','kota.id')->join('provinsi','alamat.provinsi_id','=','provinsi.id')->orderBy($field, $order)->get();
+            }
+        } else {
+            if ($kotaId == 'all' && $provinsiId == 'all' && $hotelId == "all") {
+                $alamat = alamat::join('hotel', 'alamat.hotel_id', '=', 'hotel.id')->join('kota','alamat.kota_id','=','kota.id')->join('provinsi','alamat.provinsi_id','=','provinsi.id')->get();
+            } elseif($kotaId == 'all' && $provinsiId == 'all') {
+                $alamat = alamat::join('hotel', 'alamat.hotel_id', '=', 'hotel.id')->join('kota','alamat.kota_id','=','kota.id')->join('provinsi','alamat.provinsi_id','=','provinsi.id')->where('hotel.id',$hotelId)->get();
+            } elseif ($kotaId == 'all' && $hotelId == 'all') {
+                $alamat = alamat::where('provinsi_id',$provinsiId)->join('hotel', 'alamat.hotel_id', '=', 'hotel.id')->join('provinsi','alamat.provinsi_id','=','provinsi.id')->join('kota','alamat.kota_id','=','kota.id')->groupBy('hotel.id')->get();
+            } elseif ($provinsiId == 'all' && $hotelId == "all") {
+                $query = ['kota_id' => $kotaId];
+                $alamat = alamat::where($query)->join('hotel', 'alamat.hotel_id', '=', 'hotel.id')->join('kota','alamat.kota_id','=','kota.id')->join('provinsi','alamat.provinsi_id','=','provinsi.id')->get();
+            } else {
+                $query = ['provinsi_id' => $provinsiId, 'kota_id' => $kotaId];
+                $alamat = alamat::where($query)->join('hotel', 'alamat.hotel_id', '=', 'hotel.id')->join('kota','alamat.kota_id','=','kota.id')->join('provinsi','alamat.provinsi_id','=','provinsi.id')->get();
+            }
+        }
+
+        return json_encode($alamat, JSON_HEX_TAG);
+    }
+
     public function getKota(Request $request)
     {
         if ($request->input('provinsi') == 'all') {
@@ -36,7 +79,7 @@ class AJAXController extends Controller
         if($kotas->count() > 0)
         {
             foreach($kotas as $kota){
-                $result[] = ["kota" => $kota->namaKota, "kota_id", $kota->id];
+                $result[] = ["kota" => $kota->namaKota, "kota_id"=> $kota->id];
             }
         }
 

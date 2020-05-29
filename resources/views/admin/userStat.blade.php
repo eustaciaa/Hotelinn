@@ -30,14 +30,14 @@
             <li class="nav-item">
                 <a class="nav-link" href="#dropdowm" aria-expanded="false" data-toggle="collapse">
                     <i class="fas fa-layer-group mr-2"></i>
-                    Statistik Detail
+                    Dropdown
                 </a>
                 <ul id="dropdowm" class="collapse nav flex-column px-4">
                     <li class="nav-item">
-                        <a href="{{ route('admin.userStat') }}" class="nav-link">User</a>
+                        <a href="#" class="nav-link">Page</a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('admin.hotelStat') }}" class="nav-link">Hotel</a>
+                        <a href="#" class="nav-link">Page</a>
                     </li>
                     <li class="nav-item">
                         <a href="#" class="nav-link">Page</a>
@@ -63,7 +63,7 @@
     </nav>
     <div class="content-inner p-5">
         <div class="row justify-content-around">
-            <div class="col-3">
+            <div class="col-12">
                 <div class="card">
                     <div class="card-body text-center">
                         <h5 class="card-title">
@@ -71,30 +71,6 @@
                         </h5>
                         <h5 class="card-text">
                             {{ $user }}
-                        </h5>
-                    </div>
-                </div>
-            </div>
-            <div class="col-3">
-                <div class="card">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">
-                            <strong>Jumlah Hotel Yang Terdaftar</strong>
-                        </h5>
-                        <h5 class="card-text">
-                            {{ $hotel }}
-                        </h5>
-                    </div>
-                </div>
-            </div>
-            <div class="col-3">
-                <div class="card">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">
-                            <strong>Jumlah Order Yang Terdaftar</strong>
-                        </h5>
-                        <h5 class="card-text">
-                            {{ $order }}
                         </h5>
                     </div>
                 </div>
@@ -134,32 +110,14 @@
     $(document).ready( async ()=>{
         let ctx = $('#allChart')
         let userCount = await getUserCount();
-        let hotelCount = await getHotelCount();
-        let orderCount = await getOrderCount();
         let month = ['January','February','March','April','May','June','July','August','September','October','November','December'];
         var myChart = new Chart(ctx, {
             type: 'line',
             data: {
                 labels: month,
                 datasets: [{
-                    label: 'Jumlah User Terdaftar',
+                    label: 'Jumlah User Terdaftar Per Bulan',
                     data: userCount,
-                    backgroundColor:
-                        'rgba(255, 99, 132, 0.2)',
-                    borderColor:
-                        'rgba(255, 99, 132, 1)',
-                    fill: false
-                },{
-                    label: 'Jumlah Hotel Terdaftar',
-                    data: hotelCount,
-                    backgroundColor:
-                        'rgba(52, 152, 219,1.0)',
-                    borderColor:
-                        'rgba(52, 152, 219,1.0)',
-                    fill: false
-                },{
-                    label: 'Jumlah Order Terdaftar',
-                    data: orderCount,
                     backgroundColor:
                         'rgba(255, 99, 132, 0.2)',
                     borderColor:
@@ -181,25 +139,7 @@
     })
 
     function getUserCount() {
-        return   axios.get('{{route('admin.userCount')}}')
-        .then( (res) => {
-            var data = res.data;
-            console.log(data)
-            return data;
-            }
-        );
-    }
-    function getHotelCount() {
-        return   axios.get('{{route('admin.hotelCount')}}')
-        .then( (res) => {
-            var data = res.data;
-            console.log(data)
-            return data;
-            }
-        );
-    }
-    function getOrderCount() {
-        return   axios.get('{{route('admin.orderCount')}}')
+        return   axios.get('{{route("admin.userCountDetail")}}')
         .then( (res) => {
             var data = res.data;
             console.log(data)
