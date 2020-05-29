@@ -36,6 +36,12 @@ class AdminController extends Controller
         return view('admin')->with(['user' => $user,'hotel' => $hotel,'order' => $order]);
     }
 
+    public function showUserStat(){
+        $user = User::count();
+
+        return view('admin.userStat')->with(['user' => $user]);
+    }
+
     public function getUserCount(){
 
         // $users = factory(User::class, 100)->create();
@@ -77,6 +83,45 @@ class AdminController extends Controller
         return json_encode($resultFinal);
     }
 
+    public function getUserCountDetails(){
+
+        // $users = factory(User::class, 100)->create();
+
+        $users = User::select('id', 'created_at')
+        ->get()
+        ->groupBy(function($date) {
+            //return Carbon::parse($date->created_at)->format('Y'); // grouping by years
+            return Carbon::parse($date->created_at)->format('m'); // grouping by months
+        });
+
+        $usermcount = [];
+        $result = [];
+
+        foreach ($users as $key => $value) {
+            $usermcount[(int)$key] = count($value);
+        }
+
+        for ($i = 1; $i <= 12; $i++) {
+            if (!empty($usermcount[$i])) {
+                $result[$i] = $usermcount[$i];
+            } else {
+                $result[$i] = 0;
+            }
+        }
+
+        foreach($result as $res){
+            $resultFinal[] = $res;
+        }
+
+        return json_encode($resultFinal);
+    }
+
+    public function showHotelStat(){
+        $hotel = hotel::count();
+
+        return view('admin.hotelStat')->with(['hotel' => $hotel]);
+    }
+
     public function getHotelCount(){
 
         // $users = factory(User::class, 100)->create();
@@ -110,6 +155,42 @@ class AdminController extends Controller
                 } else {
                     $result[$i] = $result[$i-1];
                 }
+            }
+        }
+        foreach($result as $res){
+            $resultFinal[] = $res;
+        }
+
+
+        return json_encode($resultFinal);
+
+    }
+
+    public function getHotelCountDetails(){
+
+        // $users = factory(User::class, 100)->create();
+
+        // $result = hotel::selectRaw("MONTHNAME(created_at AS Month, ifnull(count(*),0)  as count")->groupByRaw('MONTHNAME(created_at)')->orderByRaw('MONTH(created_at)')->get();
+
+        $hotels = hotel::select('id', 'created_at')
+        ->get()
+        ->groupBy(function($date) {
+            //return Carbon::parse($date->created_at)->format('Y'); // grouping by years
+            return Carbon::parse($date->created_at)->format('m'); // grouping by months
+        });
+
+        $hotelmcount = [];
+        $result = [];
+
+        foreach ($hotels as $key => $value) {
+            $hotelmcount[(int)$key] = count($value);
+        }
+
+        for ($i = 1; $i <= 12; $i++) {
+            if (!empty($hotelmcount[$i])) {
+                    $result[$i] = $hotelmcount[$i];
+            } else {
+                    $result[$i] = 0;
             }
         }
         foreach($result as $res){

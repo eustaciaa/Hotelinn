@@ -59,7 +59,13 @@ Route::prefix('admin')->group(function(){
 
     Route::get('/getOrderCount','AdminController@getOrderCount')->name('admin.orderCount');
 
-    Route::get('/hotelStat','AdminController@index');
+    Route::get('/hotelStat','AdminController@showHotelStat')->name('admin.hotelStat');
+
+    Route::get('/userStat','AdminController@showUserStat')->name('admin.userStat');
+
+    Route::get('/getUserCountDetails','AdminController@getUserCountDetails')->name('admin.userCountDetail');
+
+    Route::get('/getHotelCountDetails','AdminController@getHotelCountDetails')->name('admin.hotelCountDetail');
 });
 
 Route::post('/updateProfile','UserController@updateProfile');
