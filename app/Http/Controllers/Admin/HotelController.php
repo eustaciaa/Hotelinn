@@ -41,9 +41,9 @@ class HotelController extends Controller
         $request->validate([
             'name' => 'required|max:255',
             'star' => 'required',
-            'rating' => 'nullable',
+            'rating' => 'nullable|numeric',
             'reviewers' => 'nullable',
-            'photo' => 'image|max:1000',
+            'photo' => 'required|image|max:1000',
             'namaProvinsi' => 'required',
             'namaKota' => 'required',
             'detailLengkap' => 'required|max:255'
@@ -58,11 +58,11 @@ class HotelController extends Controller
         if($request->hasFile('photo')) {
             $file = $request->file('photo');
             $extension = $file->getClientOriginalExtension(); //image extension
-            $filename = '/images/hotel/' . time() . '.' . $extension;
-            $file->move('images/hotel/', $filename);
+            $filename = '/images/hotel/hotels/' . time() . '.' . $extension;
+            $file->move('images/hotel/hotels/', $filename);
             $hotel->photo = $filename;
         } else {
-            return $request;
+            return redirect('/admin/hotels')->with('unstatus', 'Hotel tidak berhasil ditambahkan !');
             $hotel->photo = '';
         }
         $hotel->save();
@@ -143,7 +143,7 @@ class HotelController extends Controller
         $request->validate([
             'name' => 'required|max:255',
             'star' => 'required',
-            'rating' => 'nullable',
+            'rating' => 'nullable|numeric',
             'reviewers' => 'nullable',
             'photo' => 'image|max:1000'
         ]);
@@ -159,11 +159,11 @@ class HotelController extends Controller
         if($request->hasFile('photo')) {
             $file = $request->file('photo');
             $extension = $file->getClientOriginalExtension(); //image extension
-            $filename = '/images/hotel/' . time() . '.' . $extension;
-            $file->move('images/hotel/', $filename);
+            $filename = '/images/hotel/hotels/' . time() . '.' . $extension;
+            $file->move('images/hotel/hotels/', $filename);
             $hotel->photo = $filename;
         } else {
-            return $request;
+            return redirect('/admin/hotels')->with('unstatus', 'Hotel berhasil diubah dengan gambar yang sama !');
             $hotel->photo = '';
         }
         $hotel->save();
