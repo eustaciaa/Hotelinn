@@ -22972,6 +22972,29 @@ readers do not read off random characters that represent icons */
   width: auto;
 }
 
+a {
+  color: #7bc7d6;
+}
+
+nav.side-navbar {
+  background: #fff;
+  min-width: 250px;
+  max-width: 250px;
+  color: #535353;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+  z-index: 9;
+  position: -webkit-sticky;
+  position: sticky;
+}
+
+.content-inner {
+  position: relative;
+  width: calc(100% - 250px);
+  min-height: calc(100vh - 70px);
+  padding-bottom: 60px;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+}
+
 .fa-star {
   color: #ffe865;
 }
@@ -23025,30 +23048,12 @@ h6 {
   font-family: "Raleway", sans-serif;
 }
 
-@media (max-width: 740px) {
-  html,
-  body,
-  header,
-  .bg {
-    height: 1000px;
-  }
-}
-
-@media (min-width: 800px) and (max-width: 850px) {
-  html,
-  body,
-  header,
-  .bg {
-    height: 600px;
-  }
-}
-
 .text-07 {
   opacity: 0.7;
 }
 
 #forgot-password {
-  color: #c1d0f7;
+  color: #7bc7d6;
 }
 
 .price {
@@ -23060,7 +23065,7 @@ h6 {
 }
 
 .icon {
-  color: #85d4e3;
+  color: #7bc7d6;
 }
 
 .txt-lightblack {

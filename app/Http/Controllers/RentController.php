@@ -26,9 +26,10 @@ class RentController extends Controller
         $roomAvail = $request->input('roomAvail');
         $hotel = hotel::where('id',$id)->first();
         $room = $hotel->room->where('id',$roomId)->first();
+        $alamat = $hotel->alamat->first();
         $userInput = ["checkIn" => $checkIn, "checkOut" => $checkOut,"roomAvail" => $roomAvail];
 
-        return view('hotel.rent')->with( ['hotel' => $hotel,'room'=> $room, 'userInput' => $userInput]);
+        return view('hotel.rent')->with( ['hotel' => $hotel,'room'=> $room, 'userInput' => $userInput, 'alamat' => $alamat]);
     }
 
     public function rentFinal (Request $request)
@@ -50,7 +51,7 @@ class RentController extends Controller
 
         $rooms = room_details::select('available')->where(['hotel_id' => $dateHotelValidation['hotelId'],'id' => $dateHotelValidation['roomId']])->first();
 
-        if($maxRoom == "null") $availRoom = $rooms->available;
+        if($maxRoom == null) $availRoom = $rooms->available;
         else $availRoom = $rooms->available - $maxRoom['booked_rooms'];
 
         $dataValid = $request->validate([

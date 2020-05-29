@@ -33,7 +33,7 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white sticky-top shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <a class="navbar-brand pl-3" href="{{ url('/') }}">
                     <!-- {{ config('app.name', 'Laravel') }} -->
                     <img src="{{ asset('images/hotelinn/brand.png') }}" width="100" height="100%" alt="">
                 </a>
