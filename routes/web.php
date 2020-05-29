@@ -33,8 +33,7 @@ Route::prefix('admin')->group(function(){
 
     Route::get('/','AdminController@index')->name('admin.dashboard');
 
-    Route::get('/','AdminController@index')->name('admin.dashboard');
-
+    
     Route::get('/hotels','Admin\HotelController@index');
 
     Route::get('/hotels/{hotel}','Admin\HotelController@show');
@@ -47,11 +46,26 @@ Route::prefix('admin')->group(function(){
 
     Route::get('/hotels/alamat/{hotel}/edit','Admin\HotelController@editAlamat');
 
-    Route::patch('/hotels/alamat/{hotel}','Admin\HotelController@updateAlamat');    
+    Route::patch('/hotels/alamat/{hotel}','Admin\HotelController@updateAlamat');
 
     Route::get('/add-hotel','Admin\HotelController@create');
 
-    Route::post('/add-hotel','Admin\HotelController@store')->name('post.add-hotel'); 
+    Route::post('/add-hotel','Admin\HotelController@store')->name('post.add-hotel');
+
+
+    Route::get('/rooms','Admin\RoomsController@index');
+
+    Route::get('/rooms/{room_detail}','Admin\RoomsController@show');
+
+    Route::delete('/rooms/{room_detail}','Admin\RoomsController@destroy');
+
+    Route::get('rooms/{hotel}/add-room','Admin\RoomsController@create');
+
+    Route::post('rooms/{hotel}','Admin\RoomsController@store');
+
+    Route::get('/rooms/{room_detail}/edit','Admin\RoomsController@edit');
+
+    Route::patch('/rooms/{room_detail}','Admin\RoomsController@update');    
 });
 
 Route::post('/updateProfile','UserController@updateProfile');
