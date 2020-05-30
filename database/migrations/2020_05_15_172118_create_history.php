@@ -24,6 +24,9 @@ class CreateHistory extends Migration
             $table->boolean('finished')->default(false);
             $table->boolean('confirmed')->default(false);
             $table->foreignId('user_id')->constrained();
+            $table->string('nama_depan');
+            $table->string('nama_belakang');
+            $table->string('phone');
             $table->timestamps();
         });
     }
