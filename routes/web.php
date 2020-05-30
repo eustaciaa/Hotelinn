@@ -79,6 +79,7 @@ Route::prefix('admin')->group(function(){
     Route::get('/getUserCountDetails','AdminController@getUserCountDetails')->name('admin.userCountDetail');
 
     Route::get('/getHotelCountDetails','AdminController@getHotelCountDetails')->name('admin.hotelCountDetail');
+
 });
 
 Route::post('/updateProfile','UserController@updateProfile');
@@ -96,5 +97,10 @@ Route::post('/getKota','AJAXController@getKota');
 Route::get('/showRoom','MainController@showRoom');
 
 Route::get('/getRoom', 'MainController@getRoomWithCount');
+
+Route::get('/minMaxRating','AJAXController@getMinMaxRating');
+
+
+Route::get('/minMaxCost','AJAXController@getMinMaxCost');
 
 

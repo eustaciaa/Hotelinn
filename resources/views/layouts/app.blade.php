@@ -21,7 +21,6 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/typeahead.css') }}" rel="stylesheet">
 
     <!-- Icon -->
     <link rel="icon" href="{{ asset('images/hotelinn/logo_circle.png') }}">

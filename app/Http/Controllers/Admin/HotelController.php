@@ -55,11 +55,13 @@ class HotelController extends Controller
         $hotel->rating = $request->rating;
         $hotel->reviewers = $request->reviewers;
 
+        $hotelFilename = strtolower(str_replace(" ","-",$request->name));
+
         if($request->hasFile('photo')) {
             $file = $request->file('photo');
             $extension = $file->getClientOriginalExtension(); //image extension
-            $filename = '/images/hotel/hotels/' . time() . '.' . $extension;
-            $file->move('images/hotel/hotels/', $filename);
+            $filename = '/images/hotel/'. $hotelFilename . '/home' . '.' . $extension;
+            $file->move('images/hotel/'.$hotelFilename.'/', $filename);
             $hotel->photo = $filename;
         } else {
             return redirect('/admin/hotels')->with('unstatus', 'Hotel tidak berhasil ditambahkan !');
@@ -156,11 +158,13 @@ class HotelController extends Controller
             'reviewers' => $request->reviewers
         ]);
 
+        $hotelFilename = strtolower(str_replace(" ","-",$request->name));
+
         if($request->hasFile('photo')) {
             $file = $request->file('photo');
             $extension = $file->getClientOriginalExtension(); //image extension
-            $filename = '/images/hotel/hotels/' . time() . '.' . $extension;
-            $file->move('images/hotel/hotels/', $filename);
+            $filename = '/images/hotel/'. $hotelFilename . '/home' . '.' . $extension;
+            $file->move('images/hotel/'.$hotelFilename.'/', $filename);
             $hotel->photo = $filename;
         } else {
             return redirect('/admin/hotels')->with('unstatus', 'Hotel berhasil diubah dengan gambar yang sama !');
