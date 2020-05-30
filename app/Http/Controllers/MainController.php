@@ -32,8 +32,8 @@ class MainController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
-    {
-        return view('home')->with(['hotels' => alamat::all(), 'provinsis' => provinsi::all()]);
+    {  
+         return view('home')->with(['hotels' => alamat::all(), 'provinsis' => provinsi::all()]);
     }
 
 

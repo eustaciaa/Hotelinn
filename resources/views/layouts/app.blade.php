@@ -70,14 +70,10 @@
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
 
 
-                                <a class="dropdown-toggle dropdown-item" type="button" data-toggle="dropdown">
-                                    {{ __('Pengaturan') }}</a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item"
-                                            onclick="event.preventDefault();document.getElementById('profile-form').submit();">{{ __('Informasi Akun') }}</a>
-                                    </li>
-
-                                </ul>
+                                <a class="dropdown-item" onclick="event.preventDefault();document.getElementById('profile-form').submit();">
+                                {{ __('Informasi Akun') }}
+                                </a>
+                                
                                 <form id="profile-form" action="/profile" method="POST" style="display: none;">
                                     @csrf
                                 </form>

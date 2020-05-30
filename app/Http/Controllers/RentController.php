@@ -50,14 +50,14 @@ class RentController extends Controller
                         ->groupBy('room_id')->first();
 
         $rooms = room_details::select('available')->where(['hotel_id' => $dateHotelValidation['hotelId'],'id' => $dateHotelValidation['roomId']])->first();
-
         if($maxRoom == null) $availRoom = $rooms->available;
         else $availRoom = $rooms->available - $maxRoom['booked_rooms'];
 
         $dataValid = $request->validate([
             'fName' => 'required|alpha',
             'lName' => 'required|alpha',
-            'jmlh' => 'required|lte:'.$availRoom
+            'jmlh' => 'required|lte:'.$availRoom,
+            'phone' => 'required|numeric|digits_between:10,13'
         ],
         [
             'fName.required' => 'Nama depan harus diisi.',
@@ -71,12 +71,16 @@ class RentController extends Controller
         $data = array_merge($dateHotelValidation, $dataValid);
 
         $history = new history;
+        $history->id = mt_rand(10000000,99999999);
         $history->user_id = Auth::user()->id;
         $history->roomTotal =$data['jmlh'];
         $history->checkIn = $request->input('checkIn');
         $history->checkOut = $request->input('checkOut');
         $history->hotel_id = $data['hotelId'];
         $history->room_id = $data['roomId'];
+        $history->nama_depan = $request->input('fName');
+        $history->nama_belakang = $request->input('lName');
+        $history->phone = $request->input('phone');
         $history->bookDate = Carbon::now();
         $history->save();
 

@@ -36,6 +36,18 @@ Route::prefix('admin')->group(function(){
 
     Route::get('/hotels','Admin\HotelController@index');
 
+    Route::get('/orderList','Admin\HotelController@orderList');
+
+    Route::get('/order/{history}','Admin\HotelController@detailOrder');
+
+    Route::get('/confirm/{history}','Admin\HotelController@confirm');
+
+    Route::get('/unconfirm/{history}','Admin\HotelController@unconfirm');
+
+    Route::get('/finish/{history}','Admin\HotelController@finish');
+
+    Route::get('/unfinish/{history}','Admin\HotelController@unfinish');
+
     Route::get('/hotels/{hotel}','Admin\HotelController@show');
 
     Route::delete('/hotels/{hotel}','Admin\HotelController@destroy');
@@ -89,6 +101,12 @@ Route::post('/profile','UserController@profile');
 Route::post('/rentFinal','RentController@rentFinal');
 
 Route::post('/history','UserController@history');
+
+Route::post('/historyRating','UserController@rating');
+
+Route::get('/history','UserController@history');
+
+Route::post('/history/{id}','UserController@history_detail');
 
 Route::get('/searchBox','AJAXController@search');
 

@@ -39,9 +39,9 @@
                     <li class="nav-item">
                         <a href="{{ route('admin.hotelStat') }}" class="nav-link">Hotel</a>
                     </li>
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a href="#" class="nav-link">Page</a>
-                    </li>
+                    </li> -->
                 </ul>
             </li>
             <li class="nav-item px-3 pt-4">
@@ -57,6 +57,15 @@
                 <a class="nav-link" href="/admin/add-hotel">
                     <i class="fas fa-plus-circle mr-2"></i>
                     Tambahkan hotel
+                </a>
+            </li>
+            <li class="nav-item px-3 pt-4">
+                <h6>Order</h6>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/admin/orderList">
+                    <i class="fas fa-th-list mr-2"></i>
+                    Pemesanan
                 </a>
             </li>
         </ul>

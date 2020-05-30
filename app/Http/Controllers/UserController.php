@@ -14,6 +14,9 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\MessageBag;
 
 use Image;
+use App\alamat;
+use App\provinsi;
+use App\hotel;
 
 
 class UserController extends Controller
@@ -28,6 +31,42 @@ class UserController extends Controller
         $history = history::where('user_id',Auth::user()->id)->orderBy('id','asc')->get()->all();
 
         return view('user.history')->with('histories',$history);
+    }
+
+    public function history_detail($id)
+    {   
+        $detail = history::where('id',$id)->get()->all();
+
+        return view('user.history_detail')->with('details',$detail);
+
+    }
+
+    public function rating(Request $request)
+    {   
+        $id = $request->input('historyId');
+        $ratingValue = $request->input('ratingValue') * 2;
+
+        $hotel = history::where('id',$id)->update([
+            'rating' => $ratingValue
+        ]);
+
+
+        $hotelId = history::select('hotel_id')->where('id',$id)->first();
+        
+        $hotel = hotel::select('total_rating','reviewers','rating')->where('id',$hotelId->hotel_id)->first();
+
+        $addRatingTotal = $hotel->total_rating + $ratingValue;
+        $addReview = $hotel->reviewers + 1;
+        $addRating = $addRatingTotal / $addReview;
+
+        $hotel = hotel::where('id',$hotelId->hotel_id)->update([
+            'total_rating' =>  $addRatingTotal,
+            'reviewers' => $addReview,
+            'rating' => $addRating
+        ]);
+
+
+        return redirect()->back()->with('success', '<div class="text-center"><h5><strong>Ulasan Berhasil Ditambahkan! <br> <div class="text-muted">Ayo, perbanyak pengalaman Hotelinn kamu!</div></strong></h5></div>');   
     }
 
     public function profile (Request $request)
