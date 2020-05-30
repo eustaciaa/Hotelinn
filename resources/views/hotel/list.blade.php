@@ -14,7 +14,7 @@
                     @if (is_null($hotel->hotel->rating))
                         <br><small class="text-muted my-2">Belum ada penilaian</small>
                     @else
-                        <h5 class="my-2"><b>{{ $hotel->hotel->rating }}/10 </b>({{ $hotel->hotel->reviewers }} ulasan)</h6>
+                        <h5 class="my-2"><b>{{ $hotel->hotel->rating }}/5 </b>({{ $hotel->hotel->reviewers }} ulasan)</h6>
                     @endif
                     <span class="badge badge-light txt-lightblack text-uppercase transparent"><i class="fas fa-map-marker-alt mr-1"></i>{{ $hotel->kota->namaKota }}, {{ $hotel->provinsi->namaProvinsi }}</span>
                     <p class="card-text">{{$hotel->detailLengkap}}</p>
