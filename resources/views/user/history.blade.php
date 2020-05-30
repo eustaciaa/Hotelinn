@@ -3,7 +3,7 @@
 @section('content')
 <script>
 $(document).ready(function(){
-  $("#rating").click(function(){
+  $(".btn-light").click(function(){
     $("#rate").modal();
   });
 });
@@ -67,7 +67,7 @@ $(document).ready(function(){
                                                     <div class="d-flex align-items-end">
                                                         <form action="/history/{{$history->id}}" method="post">
                                                         @csrf
-                                                        <button type="submit" class="btn btn-primary">
+                                                        <button type="submit" class="btn btn-info">
                                                             Detail Pemesanan
                                                         </button>
                                                         </form>
@@ -77,6 +77,11 @@ $(document).ready(function(){
                                         </div>
                                 </div>
                                 </div>
+                                </div>
+                                @else
+                                <div class="form-group">
+                                    <h5 class="text-muted my-2">Belum Ada Riwayat Pemesanan</h5>
+                                    <h6 class="text-muted my-2">Nginep? Hotelinn aja!</h6>
                                 </div>
                                 @endif
                                 @endforeach
@@ -114,7 +119,7 @@ $(document).ready(function(){
                                                     <div class="d-flex align-items-end">
                                                         <form action="/history/{{$history->id}}" method="post">
                                                         @csrf
-                                                        <button type="submit" class="btn btn-primary">
+                                                        <button type="submit" class="btn btn-info">
                                                             Detail Pemesanan
                                                         </button>
                                                         </form>
@@ -124,6 +129,11 @@ $(document).ready(function(){
                                             </div>
                                         </div>
                                 </div>
+                                </div>
+                                @else
+                                <div class="form-group">
+                                    <h5 class="text-muted my-2">Belum Ada Pemesanan Aktif</h5>
+                                    <h6 class="text-muted my-2">Nginep? Hotelinn aja!</h6>
                                 </div>
                                 @endif
                                 @endforeach
@@ -139,7 +149,7 @@ $(document).ready(function(){
                                         <div class="row mx-1">
                                             <div class="col-9">
                                                 <p class="text-left">
-                                                <img class="card-img" style="width: 300px" src="{{$history->hotel->photo}}" alt="{{$history->hotel->photo}}">
+                                                <img class="card-img" style="width: 300px" src="{{$history->hotel->photo}}" alt="{{$history->hotel->photo}}"/>
                                                     <br><br><strong>
                                                     {{$history->hotel->name}}
                                                     <br>
@@ -162,7 +172,7 @@ $(document).ready(function(){
                                                     <div class="d-flex align-items-end">
                                                         <form action="/history/{{$history->id}}" method="post">
                                                         @csrf
-                                                        <button type="submit" class="btn btn-primary">
+                                                        <button type="submit" class="btn btn-info">
                                                             Detail Pemesanan
                                                         </button>
                                                         </form>
@@ -170,7 +180,7 @@ $(document).ready(function(){
                                                     </div>
                                                     <div class="col-sm">
                                                     <div class="d-flex align-items-end">
-                                                        <button type="button" onclick="myFunction()" id="rating" data="{{ $history->id }}" class="btn btn-primary">Tambahkan Ulasan</button>
+                                                        <button type="button" id="{{ $history->id }}"  class="btn btn-light">Tambahkan Ulasan</button>
                                                     </div>
                                                     </div>
                                                     </div>
@@ -180,12 +190,17 @@ $(document).ready(function(){
                                         </div>
                                 </div>
                                 </div>
+                                @else
+                                <div class="form-group">
+                                    <h5 class="text-muted my-2">Belum Ada Riwayat Pemesanan</h5>
+                                    <h6 class="text-muted my-2">Nginep? Hotelinn aja!</h6>
+                                </div>
+
                                 @endif
                                 @endforeach
-
                             </div>
                         </div>
-
+                                <a href="/" class="btn btn-primary my-3">Kembali</a>
                     </div>
                     </div>
                 </div>
@@ -198,7 +213,7 @@ $(document).ready(function(){
         <div class='modal-dialog modal-lg'>
             <div class='modal-content'>
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </div>
                 <div class='modal-body'>
                 <div class="container">
@@ -261,11 +276,14 @@ $(document).ready(function(){
 </script>
 
 <script>
-function myFunction() {
-  var x = document.getElementById("rating").getAttribute("data");
-//   console.log(x)
-  document.getElementById("historyId").value = x;
-}
+
+$(document).on("click", ".btn-light",function() {
+        var id = $(this).attr("id");
+        // console.log(id);
+
+        document.getElementById("historyId").value = id;
+})
+
 </script>
 
 @endsection

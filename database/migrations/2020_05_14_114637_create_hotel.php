@@ -18,6 +18,7 @@ class CreateHotel extends Migration
             $table->string('name');
             $table->integer('star');
             $table->float('rating')->nullable();
+            $table->integer('total_rating')->nullable();
             $table->integer('reviewers')->default(0);
             $table->string('photo')->nullable();
             $table->timestamps();

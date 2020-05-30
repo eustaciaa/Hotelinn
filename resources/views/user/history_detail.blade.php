@@ -118,6 +118,7 @@
             </div>
 
             @endforeach
+            <a href="/history" class="btn btn-primary my-3">Kembali</a>
 
                 
         </div>

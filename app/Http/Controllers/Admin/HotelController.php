@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\hotel;
 use App\alamat;
 use App\provinsi;
+use App\history;
 
 class HotelController extends Controller
 {
@@ -219,5 +220,51 @@ class HotelController extends Controller
         $alamat = alamat::where('hotel_id', $hotel->id)->delete();
         Hotel::destroy($hotel->id);
         return redirect('/admin/hotels')->with('status', 'Hotel berhasil dihapus !');
+    }
+
+    public function orderList(){
+        return view('admin.orderList')->with(['histories' => history::all()]);
+    }
+    
+    public function detailOrder($history){
+        $order = history::where('id',$history)->get()->all();
+
+        return view('admin.detailOrder')->with('histories',$order);
+    }
+
+    public function confirm($history){
+        $true = 1;
+        $confirm = history::where('id',$history)->update([
+            'confirmed' =>  $true
+        ]);
+
+        return redirect()->back();
+    }
+
+    public function unconfirm($history){
+        $false = 0;
+        $confirm = history::where('id',$history)->update([
+            'confirmed' =>  $false
+        ]);
+
+        return redirect()->back();
+    }
+
+    public function finish($history){
+        $true = 1;
+        $confirm = history::where('id',$history)->update([
+            'finished' =>  $true
+        ]);
+
+        return redirect()->back();
+    }
+
+    public function unfinish($history){
+        $false = 0;
+        $confirm = history::where('id',$history)->update([
+            'finished' =>  $false
+        ]);
+
+        return redirect()->back();
     }
 }

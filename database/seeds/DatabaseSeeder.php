@@ -63,8 +63,6 @@ class DatabaseSeeder extends Seeder
         $hotel = new App\hotel;
         $hotel->name = "Fraser Residence Menteng";
         $hotel->star = 5;
-        $hotel->rating = 8.5;
-        $hotel->reviewers = 10;
         $hotel->photo = "/images/hotel/fraser-residence-menteng/home.jpg";
         $hotel->save();
 
@@ -180,8 +178,6 @@ class DatabaseSeeder extends Seeder
         $hotel = new App\hotel;
         $hotel->name = "Jambuluwuk Malioboro";
         $hotel->star = 5;
-        $hotel->rating = 8.7;
-        $hotel->reviewers = 15;
         $hotel->photo = "/images/hotel/jambuluwuk-malioboro/home.jpg";
         $hotel->save();
 

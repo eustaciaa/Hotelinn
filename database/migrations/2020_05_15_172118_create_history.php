@@ -27,6 +27,7 @@ class CreateHistory extends Migration
             $table->string('nama_depan');
             $table->string('nama_belakang');
             $table->string('phone');
+            $table->integer('rating')->nullable($value = true);
             $table->timestamps();
         });
     }

@@ -44,7 +44,7 @@ class UserController extends Controller
     public function rating(Request $request)
     {   
         $id = $request->input('historyId');
-        $ratingValue = $request->input('ratingValue');
+        $ratingValue = $request->input('ratingValue') * 2;
 
         $hotel = history::where('id',$id)->update([
             'rating' => $ratingValue
