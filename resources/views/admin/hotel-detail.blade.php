@@ -3,10 +3,10 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-6">
-            <h1 class="mt-3">Detail Hotel</h1>
+        <div class="col-10">
+            <h2 class="mt-3">Detail Hotel</h2>
 
-            <div class="card" style="width: 18rem;">
+            <div class="card" style="width: 20rem;">
                 <img src="{{ $hotel->photo }}" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">{{ $hotel->name }}</h5>
@@ -19,15 +19,15 @@
                     @else
                         <p class="my-2"><b>{{ $hotel->rating }}/10 </b>({{ $hotel->reviewers }} ulasan)</p>
                     @endif<br>
-                    <a href="{{ $hotel->id }}/edit" class="btn btn-primary my-1">Ubah Hotel</a>
+                    <a href="{{ $hotel->id }}/edit" class="btn btn-primary mx-3 my-3">Ubah Hotel</a>
                     <form action="{{ $hotel->id }}" method="post" class="d-inline">
                         @method('delete')
                         @csrf
-                        <button type="submit" class="btn btn-danger mx-3">Hapus Hotel</button>
+                        <button type="submit" class="btn btn-danger mx-3 my-3">Hapus Hotel</button>
                     </form>
-                    <a href="/admin/hotels" class="btn btn-primary my-3">Kembali</a>
                 </div>
             </div>
+            <a href="/admin/hotels" class="btn btn-primary mx-3 my-3">Kembali</a>
         </div>
     </div>
 </div>

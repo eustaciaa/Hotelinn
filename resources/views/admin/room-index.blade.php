@@ -4,8 +4,8 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.21/datatables.min.css"/>
 <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.21/datatables.min.js"></script>
 <div class="container">
-    <div class="col-12">
-        <h2 class="mt-3">Daftar Hotel</h2>
+    <div class="col-7">
+        <h2 class="mt-3">Daftar Kamar Hotel</h2>
         @if (session('status'))
             <div class="alert alert-success">
                 {{ session('status') }}
@@ -18,20 +18,24 @@
         <table id="example" class="table table-striped table-bordered">
             <thead>
                 <tr>
+                    <th>#</th>
                     <th>Nama Hotel</th>
-                    <th>Alamat Hotel</th>
+                    <th>Kamar Kosong</th>
+                    <th>Kapasitas</th>
+                    <th>Harga</th>
                     <th>Panel</th>
                 </tr>
             </thead>
             <tbody>
-            @foreach ($hotels as $hotel)
+            @foreach ($room_details as $room)
                 <tr>
-                    <td>{{ $hotel->hotel->name }}</td>
-                    <td>{{ $hotel->detailLengkap }}</td>
+                    <td>{{ $room->id }}</td>
+                    <td>{{ $room->name }}</td>
+                    <td>{{ $room->available }}</td>
+                    <td>{{ $room->capacity }}</td>
+                    <td>{{ $room->cost }}</td>
                     <td>
-                        <a href="/admin/hotels/{{ $hotel->hotel->id }}" class="mx-2 badge badge-info">Detail</a>
-                        <a href="/admin/hotels/alamat/{{ $hotel->hotel->id }}/edit" class="mx-2 badge badge-info">Ubah Alamat</a>
-                        <a href="/admin/rooms/{{ $hotel->hotel->id }}/add-room" class="mx-2 badge badge-info">Tambah Kamar</a>
+                        <a href="/admin/rooms/{{ $room->id }}" class="mx-2 badge badge-info">Cek Kamar</a>
                     </td>
                 </tr>
             @endforeach
