@@ -24,7 +24,7 @@
                 </div>
                 <div class="form-group">
                     <label for="rating">{{ __('Penilaian') }}</label>
-                    <input type="number" name="rating" class="form-control @error('rating') is-invalid @enderror" min="1" max="10" value="{{ $hotel->rating }}" />
+                    <input type="text" name="rating" class="form-control @error('rating') is-invalid @enderror" min="1" max="10" value="{{ $hotel->rating }}" />
                     @error('rating')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror

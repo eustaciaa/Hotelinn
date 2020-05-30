@@ -41,9 +41,9 @@ class HotelController extends Controller
         $request->validate([
             'name' => 'required|max:255',
             'star' => 'required',
-            'rating' => 'nullable',
+            'rating' => 'nullable|numeric',
             'reviewers' => 'nullable',
-            'photo' => 'image|max:1000',
+            'photo' => 'required|image|max:1000',
             'namaProvinsi' => 'required',
             'namaKota' => 'required',
             'detailLengkap' => 'required|max:255'
@@ -54,15 +54,15 @@ class HotelController extends Controller
         $hotel->star = $request->star;
         $hotel->rating = $request->rating;
         $hotel->reviewers = $request->reviewers;
-        
+
         if($request->hasFile('photo')) {
             $file = $request->file('photo');
             $extension = $file->getClientOriginalExtension(); //image extension
-            $filename = '/images/hotel/' . time() . '.' . $extension;
-            $file->move('images/hotel/', $filename);
+            $filename = '/images/hotel/hotels/' . time() . '.' . $extension;
+            $file->move('images/hotel/hotels/', $filename);
             $hotel->photo = $filename;
         } else {
-            return $request;
+            return redirect('/admin/hotels')->with('unstatus', 'Hotel tidak berhasil ditambahkan !');
             $hotel->photo = '';
         }
         $hotel->save();
@@ -73,7 +73,7 @@ class HotelController extends Controller
             case 'DKI Jakarta':
                 $alamat->provinsi_id = 1;
                 break;
-            
+
             case 'D.I Yogyakarta':
                 $alamat->provinsi_id = 2;
                 break;
@@ -86,7 +86,7 @@ class HotelController extends Controller
             case 'Jakarta':
                 $alamat->kota_id = 1;
                 break;
-            
+
             case 'Yogyakarta':
                 $alamat->kota_id = 2;
                 break;
@@ -94,11 +94,11 @@ class HotelController extends Controller
             case 'Tangerang':
                 $alamat->kota_id = 3;
                 break;
-            
+
             case 'Tangerang Selatan':
                 $alamat->kota_id = 4;
                 break;
-            
+
             case 'Serang':
                 $alamat->kota_id = 5;
                 break;
@@ -143,7 +143,7 @@ class HotelController extends Controller
         $request->validate([
             'name' => 'required|max:255',
             'star' => 'required',
-            'rating' => 'nullable',
+            'rating' => 'nullable|numeric',
             'reviewers' => 'nullable',
             'photo' => 'image|max:1000'
         ]);
@@ -155,15 +155,15 @@ class HotelController extends Controller
             'rating' => $request->rating,
             'reviewers' => $request->reviewers
         ]);
-        
+
         if($request->hasFile('photo')) {
             $file = $request->file('photo');
             $extension = $file->getClientOriginalExtension(); //image extension
-            $filename = '/images/hotel/' . time() . '.' . $extension;
-            $file->move('images/hotel/', $filename);
+            $filename = '/images/hotel/hotels/' . time() . '.' . $extension;
+            $file->move('images/hotel/hotels/', $filename);
             $hotel->photo = $filename;
         } else {
-            return $request;
+            return redirect('/admin/hotels')->with('unstatus', 'Hotel berhasil diubah dengan gambar yang sama !');
             $hotel->photo = '';
         }
         $hotel->save();
@@ -197,7 +197,7 @@ class HotelController extends Controller
             'namaKota' => 'required',
             'detailLengkap' => 'required|max:255'
         ]);
-        
+
         Alamat::where('hotel_id', $hotel->id)
         ->update([
             'detailLengkap' => $request->detailLengkap,
@@ -218,6 +218,6 @@ class HotelController extends Controller
     {
         $alamat = alamat::where('hotel_id', $hotel->id)->delete();
         Hotel::destroy($hotel->id);
-        return redirect('/admin/hotels')->with('status', 'Hotel berhasil dihapus !'); 
+        return redirect('/admin/hotels')->with('status', 'Hotel berhasil dihapus !');
     }
 }

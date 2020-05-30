@@ -177,11 +177,11 @@
                 else if (item.hotel) return item.hotel
             },
             afterSelect: function(item){
+                console.log(item);
                 ajaxCallSearch(item);
             }
             ,
-            autoSelect: true,
-            scrollHeight: 2
+            autoSelect: true
         });
     $("#provinsi").change(function () {
         var provinsi = $('#provinsi').val()
