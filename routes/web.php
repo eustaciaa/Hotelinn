@@ -95,6 +95,10 @@ Route::prefix('admin')->group(function(){
 
 Route::post('/updateProfile','UserController@updateProfile');
 
+Route::get('/profile','UserController@profile');
+
+Route::post('/changePass','UserController@changePassword');
+
 Route::post('/profile','UserController@profile');
 
 Route::post('/rentFinal','RentController@rentFinal');

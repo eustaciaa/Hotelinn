@@ -28,9 +28,11 @@ class UserController extends Controller
 
     public function history(Request $request)
     {
-        $history = history::where('user_id',Auth::user()->id)->orderBy('id','asc')->get()->all();
-
-        return view('user.history')->with('histories',$history);
+        $history_wait = history::where(['user_id'=>Auth::user()->id, 'confirmed' => 0, 'finished' => 0])->orderBy('id','asc')->get();
+        $history_confirm = history::where(['user_id'=>Auth::user()->id, 'confirmed' => 1, 'finished' => 0])->orderBy('id','asc')->get();
+        $history_finish = history::where(['user_id'=>Auth::user()->id, 'confirmed' => 1, 'finished' => 1])->orderBy('id','asc')->get();
+        
+        return view('user.history')->with(['histories_wait' => $history_wait, 'histories_confirm' => $history_confirm, 'histories_finish' => $history_finish]);
     }
 
     public function history_detail($id)
@@ -112,9 +114,9 @@ class UserController extends Controller
             'new_confirm_password' => ['required', 'same:new_password'],
         ]);
 
-        User::find(Auth::user()->id)->update(['password'=> Hash::make($request->new_password)]);
+        $change = User::find(Auth::user()->id)->update(['password'=> Hash::make($request->new_password)]);
 
-        return redirect(view('home.home'));
+        return redirect()->back()->with('success', '<div class="text-center"><h5><strong>Kata Sandi berhasil diubah!</strong></h5></div>');   
     }
 
 }

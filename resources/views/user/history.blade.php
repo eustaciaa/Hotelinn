@@ -38,8 +38,8 @@ $(document).ready(function(){
                     <div class="card-body">
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade show active" id="wait_confirm" role="tabpanel" aria-labelledby="wait-tab">
-                                @foreach ($histories as $history)
-                                @if ($history->finished == 0 && $history->confirmed == 0) 
+                            @if($histories_wait->count() > 0)
+                                @foreach ($histories_wait as $history)
                                 <div class="form-group">
                                 <div class="card my-5">
                                     <div class="card-body">
@@ -78,20 +78,21 @@ $(document).ready(function(){
                                 </div>
                                 </div>
                                 </div>
+                                @endforeach
                                 @else
+                                 
                                 <div class="form-group">
                                     <h5 class="text-muted my-2">Belum Ada Riwayat Pemesanan</h5>
                                     <h6 class="text-muted my-2">Nginep? Hotelinn aja!</h6>
                                 </div>
                                 @endif
-                                @endforeach
 
                             </div>
 
 
                             <div class="tab-pane fade" id="active_book" role="tabpanel" aria-labelledby="confirm-tab">
-                            @foreach ($histories as $history)
-                                @if ($history->finished == 0 && $history->confirmed == 1) 
+                            @if($histories_confirm->count() > 0)
+                            @foreach ($histories_confirm as $history)
                                 <div class="form-group">
                                 <div class="card my-5">
                                     <div class="card-body">
@@ -130,19 +131,19 @@ $(document).ready(function(){
                                         </div>
                                 </div>
                                 </div>
+                                @endforeach
                                 @else
                                 <div class="form-group">
                                     <h5 class="text-muted my-2">Belum Ada Pemesanan Aktif</h5>
                                     <h6 class="text-muted my-2">Nginep? Hotelinn aja!</h6>
                                 </div>
                                 @endif
-                                @endforeach
 
                             </div>
                             
                             <div class="tab-pane fade" id="history" role="tabpanel" aria-labelledby="history-tab">
-                            @foreach ($histories as $history)
-                                @if ($history->finished == 1 && $history->confirmed == 1) 
+                            @if($histories_finish->count() > 0)
+                            @foreach ($histories_finish as $history)
                                 <div class="form-group">
                                 <div class="card my-5">
                                     <div class="card-body">
@@ -178,10 +179,18 @@ $(document).ready(function(){
                                                         </form>
                                                     </div>
                                                     </div>
+                                                    @if ($history->rating != NULL)
+                                                    <div class="col-sm">
+                                                    <div class="d-flex align-items-end">
+                                                        <button type="button" class="btn btn-info" disabled>Ulasan Sudah Diberikan</button>
+                                                    </div>
+                                                    </div>
+                                                    @elseif ($history->rating == NULL)
                                                     <div class="col-sm">
                                                     <div class="d-flex align-items-end">
                                                         <button type="button" id="{{ $history->id }}"  class="btn btn-light">Tambahkan Ulasan</button>
                                                     </div>
+                                                    @endif
                                                     </div>
                                                     </div>
                                                 </p>
@@ -190,14 +199,13 @@ $(document).ready(function(){
                                         </div>
                                 </div>
                                 </div>
+                                @endforeach
                                 @else
                                 <div class="form-group">
                                     <h5 class="text-muted my-2">Belum Ada Riwayat Pemesanan</h5>
                                     <h6 class="text-muted my-2">Nginep? Hotelinn aja!</h6>
                                 </div>
-
                                 @endif
-                                @endforeach
                             </div>
                         </div>
                                 <a href="/" class="btn btn-primary my-3">Kembali</a>
