@@ -9,6 +9,11 @@ use App\room_details;
 
 class RoomsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:admin');
+    }
+
     /**
      * Create a new controller instance.
      *
@@ -25,7 +30,8 @@ class RoomsController extends Controller
      */
     public function index()
     {
-        return view('admin.room-index')->with(['room_details' => room_details::all()]);
+
+        return view('admin.room-index')->with(['room_details' => room_details::withTrashed()->get()]);
     }
 
     /**
@@ -199,5 +205,11 @@ class RoomsController extends Controller
     {
         room_details::destroy($room_detail->id);
         return redirect('/admin/rooms')->with('status', 'Kamar hotel berhasil dihapus !');
+    }
+
+    public function restore($id){
+        room_details::onlyTrashed()->find($id)->restore();
+
+        return redirect('/admin/rooms')->with('status', 'Kamar hotel berhasil dipulihkan !');
     }
 }

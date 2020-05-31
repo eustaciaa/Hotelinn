@@ -28,6 +28,7 @@
             </thead>
             <tbody>
             @foreach ($room_details as $room)
+            @if($room->hotel != null)
                 <tr>
                     <td>{{ $room->id }}</td>
                     <td>{{ $room->name }}</td>
@@ -35,9 +36,18 @@
                     <td>{{ $room->capacity }}</td>
                     <td>{{ $room->cost }}</td>
                     <td>
+                        @if($room->deleted_at == null)
                         <a href="/admin/rooms/{{ $room->id }}" class="mx-2 badge badge-info">Cek Kamar</a>
+                        @else
+                        <form action="/admin/room_restore/{{ $room->id }}" method="POST">
+                            @method('PATCH')
+                            @csrf
+                        <button type="submit" class="mx-2 badge badge-success" style="border: none">Pulihkan Kembali</button>
+                        </form>
+                        @endif
                     </td>
                 </tr>
+            @endif
             @endforeach
             </tbody>
         </table>

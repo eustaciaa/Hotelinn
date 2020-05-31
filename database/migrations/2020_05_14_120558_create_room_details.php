@@ -34,6 +34,11 @@ class CreateRoomDetails extends Migration
             $table->string('photo');
             $table->timestamps();
         });
+
+
+        Schema::table('room_details', function (Blueprint $table) {
+            $table->softDeletes();
+        });
     }
 
     /**
