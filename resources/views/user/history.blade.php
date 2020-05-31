@@ -21,7 +21,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
 
-            <div class="card my-5 text-center bg-lightblue">
+            <div class="card my-5 text-center bg-lightblue d-flex align-items-stretch">
                 <div class="card-header bg-dark">
                     <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
                         <li class="nav-item">

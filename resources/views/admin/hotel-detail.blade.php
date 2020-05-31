@@ -1,10 +1,10 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
-@section('content')
-<div class="container">
+@section('item')
+<div class="container  mt-4 mx-4">
     <div class="row">
         <div class="col-10">
-            <h2 class="mt-3">Detail Hotel</h2>
+            <h2 class="mt-3">Detail Hotel</h2><br>
 
             <div class="card" style="width: 20rem;">
                 <img src="{{ $hotel->photo }}" class="card-img-top" alt="...">

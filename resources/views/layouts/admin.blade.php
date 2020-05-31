@@ -2,16 +2,16 @@
 
 @section('content')
 <div class="d-flex align-items-stretch">
-    <nav class="side-navbar">
+    <nav class="side-navbar" style="height:100vh;">
         <!-- Sidebar Header-->
-        <div class="sidebar-header d-flex align-items-center pt-5 pb-3 px-4">
+        <div class="sidebar-header d-flex align-items-center pt-5 pb-3 ml-3 pl-4">
             <div class="title">
                 <h1 class="h4">{{ Auth::user()->fName }}</h1>
                 <p>{{ Auth::user()->email }}</p>
             </div>
         </div>
         <!-- Sidebar Navidation Menus-->
-        <ul class="nav flex-column px-2">
+        <ul class="nav flex-column pl-4">
             <li class="nav-item">
                 <a class="nav-link active" href="/admin">
                     <i class="fas fa-home mr-2"></i>
@@ -56,7 +56,16 @@
             <li class="nav-item">
                 <a class="nav-link" href="/admin/add-hotel">
                     <i class="fas fa-plus-circle mr-2"></i>
-                    Tambahkan hotel
+                    Tambah hotel
+                </a>
+            </li>
+            <li class="nav-item px-3 pt-4">
+                <h6>Ruangan</h6>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/admin/rooms">
+                    <i class="fas fa-th-list mr-2"></i>
+                    Lihat semua ruangan
                 </a>
             </li>
             <li class="nav-item px-3 pt-4">
