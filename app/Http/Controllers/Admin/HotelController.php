@@ -8,9 +8,15 @@ use App\hotel;
 use App\alamat;
 use App\provinsi;
 use App\history;
+use App\room_details;
 
 class HotelController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth:admin');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -225,6 +231,12 @@ class HotelController extends Controller
     {
 
         Hotel::destroy($hotel->id);
+        $rooms = room_details::where('hotel_id',$hotel->id)->get();
+        foreach($rooms as $room)
+        {
+            $room->delete();
+        }
+
 
         return redirect('/admin/hotels')->with('status', 'Hotel berhasil dihapus !');
     }
@@ -278,6 +290,12 @@ class HotelController extends Controller
     public function restore($id)
     {
          hotel::onlyTrashed()->find($id)->restore();
+
+         $rooms = room_details::where('hotel_id',$id)->onlyTrashed()->get();
+        foreach($rooms as $room)
+        {
+            $room->restore();
+        }
          return redirect('/admin/hotels')->with('status', 'Hotel berhasil dipulihkan !');
     }
 

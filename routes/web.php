@@ -98,6 +98,8 @@ Route::prefix('admin')->group(function(){
 
     Route::patch('/hotels_restore/{id}','Admin\HotelController@restore');
 
+    Route::patch('/room_restore/{id}','Admin\RoomsController@restore');
+
 });
 
 Route::post('/updateProfile','UserController@updateProfile');
