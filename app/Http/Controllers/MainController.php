@@ -13,6 +13,7 @@ use App\provinsi;
 use App\room_details;
 use App\hotel;
 use App\history;
+use Illuminate\Database\Eloquent\Builder;
 
 class MainController extends Controller
 {
@@ -32,8 +33,14 @@ class MainController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
-    {  
-         return view('home')->with(['hotels' => alamat::all(), 'provinsis' => provinsi::all()]);
+    {
+
+        $hotel = alamat::whereHas('hotel', function (Builder $query) {
+            $query->has('room','>','0');
+        },">",0)->get();
+
+
+        return view('home')->with(['hotels' => $hotel, 'provinsis' => provinsi::all()]);
     }
 
 

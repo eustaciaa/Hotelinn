@@ -98,6 +98,8 @@ Route::post('/updateProfile','UserController@updateProfile');
 
 Route::post('/profile','UserController@profile');
 
+Route::post('/changePass', 'UserController@changePassword');
+
 Route::post('/rentFinal','RentController@rentFinal');
 
 Route::post('/history','UserController@history');

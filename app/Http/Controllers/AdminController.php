@@ -33,7 +33,7 @@ class AdminController extends Controller
         $hotel = hotel::count();
         $order = history::count();
 
-        return view('admin')->with(['user' => $user,'hotel' => $hotel,'order' => $order]);
+        return view('pane')->with(['user' => $user,'hotel' => $hotel,'order' => $order]);
     }
 
     public function showUserStat(){
@@ -219,15 +219,59 @@ class AdminController extends Controller
         foreach ($history as $key => $value) {
             $historymcount[(int)$key] = count($value);
         }
-
-        for($i = 1; $i <= 12; $i++){
-            if(!empty($historymcount[$i])){
-                $userArr[$i] = $historymcount[$i];
-            }else{
-                $userArr[$i] = 0;
+        for ($i = 1; $i <= 12; $i++) {
+            if (!empty($historymcount[$i])) {
+                if($i == 1) {
+                    $result[$i] = $historymcount[$i];
+                } else {
+                    $result[$i] = $result[$i-1] + $historymcount[$i];
+                }
+            } else {
+                if($i == 1) {
+                    $result[$i] = 0;
+                } else {
+                    $result[$i] = $result[$i-1];
+                }
             }
         }
 
-        return json_encode($result);
+        foreach($result as $res){
+            $resultFinal[] = $res;
+        }
+
+        return json_encode($resultFinal);
+    }
+
+    public function getOrderCountDetails(){
+
+        // $users = factory(User::class, 100)->create();
+
+        $history = history::select('id', 'created_at')
+        ->get()
+        ->groupBy(function($date) {
+            //return Carbon::parse($date->created_at)->format('Y'); // grouping by years
+            return Carbon::parse($date->created_at)->format('m'); // grouping by months
+        });
+
+        $historymcount = [];
+        $result = [];
+
+        foreach ($history as $key => $value) {
+            $historymcount[(int)$key] = count($value);
+        }
+
+        for ($i = 1; $i <= 12; $i++) {
+            if (!empty($historymcount[$i])) {
+                $result[$i] = $historymcount[$i];
+            } else {
+                $result[$i] = 0;
+            }
+        }
+
+        foreach($result as $res){
+            $resultFinal[] = $res;
+        }
+
+        return json_encode($resultFinal);
     }
 }

@@ -71,7 +71,6 @@ class RentController extends Controller
         $data = array_merge($dateHotelValidation, $dataValid);
 
         $history = new history;
-        $history->id = mt_rand(10000000,99999999);
         $history->user_id = Auth::user()->id;
         $history->roomTotal =$data['jmlh'];
         $history->checkIn = $request->input('checkIn');

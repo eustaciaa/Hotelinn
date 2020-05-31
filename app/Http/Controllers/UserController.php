@@ -28,13 +28,13 @@ class UserController extends Controller
 
     public function history(Request $request)
     {
-        $history = history::where('user_id',Auth::user()->id)->orderBy('id','asc')->get()->all();
+        $history = history::where('user_id',Auth::user()->id)->orderBy('id','asc')->get();
 
         return view('user.history')->with('histories',$history);
     }
 
     public function history_detail($id)
-    {   
+    {
         $detail = history::where('id',$id)->get()->all();
 
         return view('user.history_detail')->with('details',$detail);
@@ -42,7 +42,7 @@ class UserController extends Controller
     }
 
     public function rating(Request $request)
-    {   
+    {
         $id = $request->input('historyId');
         $ratingValue = $request->input('ratingValue') * 2;
 
@@ -52,7 +52,7 @@ class UserController extends Controller
 
 
         $hotelId = history::select('hotel_id')->where('id',$id)->first();
-        
+
         $hotel = hotel::select('total_rating','reviewers','rating')->where('id',$hotelId->hotel_id)->first();
 
         $addRatingTotal = $hotel->total_rating + $ratingValue;
@@ -66,7 +66,7 @@ class UserController extends Controller
         ]);
 
 
-        return redirect()->back()->with('success', '<div class="text-center"><h5><strong>Ulasan Berhasil Ditambahkan! <br> <div class="text-muted">Ayo, perbanyak pengalaman Hotelinn kamu!</div></strong></h5></div>');   
+        return redirect()->back()->with('success', '<div class="text-center"><h5><strong>Ulasan Berhasil Ditambahkan! <br> <div class="text-muted">Ayo, perbanyak pengalaman Hotelinn kamu!</div></strong></h5></div>');
     }
 
     public function profile (Request $request)

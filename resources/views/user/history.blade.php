@@ -39,7 +39,7 @@ $(document).ready(function(){
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade show active" id="wait_confirm" role="tabpanel" aria-labelledby="wait-tab">
                                 @foreach ($histories as $history)
-                                @if ($history->finished == 0 && $history->confirmed == 0) 
+                                @if ($history->finished == 0 && $history->confirmed == 0)
                                 <div class="form-group">
                                 <div class="card my-5">
                                     <div class="card-body">
@@ -59,7 +59,7 @@ $(document).ready(function(){
                                                     <br>
                                                     <div class="d-flex align-items-end">
                                                         <h5><span class="badge badge-primary txt-lightblack text-uppercase transparent">
-                                                            {{ date_format(date_create($history->checkIn), "j F Y") }} - 
+                                                            {{ date_format(date_create($history->checkIn), "j F Y") }} -
                                                             {{ date_format(date_create($history->checkOut), "j F Y") }}
                                                         </span></h5>
                                                     </div>
@@ -91,7 +91,7 @@ $(document).ready(function(){
 
                             <div class="tab-pane fade" id="active_book" role="tabpanel" aria-labelledby="confirm-tab">
                             @foreach ($histories as $history)
-                                @if ($history->finished == 0 && $history->confirmed == 1) 
+                                @if ($history->finished == 0 && $history->confirmed == 1)
                                 <div class="form-group">
                                 <div class="card my-5">
                                     <div class="card-body">
@@ -111,7 +111,7 @@ $(document).ready(function(){
                                                     <br>
                                                     <div class="d-flex align-items-end">
                                                         <h5><span class="badge badge-primary txt-lightblack text-uppercase transparent">
-                                                            {{ date_format(date_create($history->checkIn), "j F Y") }} - 
+                                                            {{ date_format(date_create($history->checkIn), "j F Y") }} -
                                                             {{ date_format(date_create($history->checkOut), "j F Y") }}
                                                         </span></h5>
                                                     </div>
@@ -139,10 +139,10 @@ $(document).ready(function(){
                                 @endforeach
 
                             </div>
-                            
+
                             <div class="tab-pane fade" id="history" role="tabpanel" aria-labelledby="history-tab">
                             @foreach ($histories as $history)
-                                @if ($history->finished == 1 && $history->confirmed == 1) 
+                                @if ($history->finished == 1 && $history->confirmed == 1)
                                 <div class="form-group">
                                 <div class="card my-5">
                                     <div class="card-body">
@@ -162,7 +162,7 @@ $(document).ready(function(){
                                                     <br>
                                                     <div class="d-flex align-items-end">
                                                         <h5><span class="badge badge-primary txt-lightblack text-uppercase transparent">
-                                                            {{ date_format(date_create($history->checkIn), "j F Y") }} - 
+                                                            {{ date_format(date_create($history->checkIn), "j F Y") }} -
                                                             {{ date_format(date_create($history->checkOut), "j F Y") }}
                                                         </span></h5>
                                                     </div>
@@ -242,13 +242,13 @@ $(document).ready(function(){
                          </div>
                     </div>
                 </div>
-                       
-                
+
+
                     <button type='submit'name='add' class='btn btn-primary' >Tambah Ulasan</button>
                     <button type='submit' data-dismiss="modal" class='btn btn-warning'>Cancel</button>
                     </div>
                     </form>
-             
+
              </div>
         </div>
 </div>
@@ -287,3 +287,4 @@ $(document).on("click", ".btn-light",function() {
 </script>
 
 @endsection
+
