@@ -25,10 +25,9 @@ npm install --save @fortawesome/fontawesome-free
 ```
 
 # Update List
-- rent sudah form validation
-- lihat room sudah bisa validation
+- filter sudah
+- path untuk filename harusnya sudah
 
 # TODO
-- search by name, kota, provinsi
-- sorting
-- admin panel
+- benerin beberapa UI
+- benerin route biar lebih rapi

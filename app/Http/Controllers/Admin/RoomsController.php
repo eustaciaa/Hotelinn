@@ -63,11 +63,14 @@ class RoomsController extends Controller
         $room_detail->capacity = $request->capacity;
         $room_detail->cost = $request->cost;
 
+        $roomFilePath = strtolower(str_replace(" ","-",$hotel->name));
+        $roomFileName = strtolower(str_replace(" ","-",$request->name));
+
         if($request->hasFile('photo')) {
             $file = $request->file('photo');
             $extension = $file->getClientOriginalExtension(); //image extension
-            $filename = '/images/hotel/rooms/' . time() . '.' . $extension;
-            $file->move('images/hotel/rooms/', $filename);
+            $filename = '/images/hotel/'.$roomFilePath.'/' . $roomFileName . '.' . $extension;
+            $file->move('images/hotel/'.$roomFilePath.'/', $filename);
             $room_detail->photo = $filename;
         } else {
             return redirect('/admin/rooms')->with('unstatus', 'Kamar hotel tidak berhasil ditambahkan !');
@@ -159,11 +162,14 @@ class RoomsController extends Controller
             'food' => $request->food
         ]);
 
+        $roomFilePath = strtolower(str_replace(" ","-",$room_detail->hotel->name));
+        $roomFileName = strtolower(str_replace(" ","-",$request->name));
+
         if($request->hasFile('photo')) {
             $file = $request->file('photo');
             $extension = $file->getClientOriginalExtension(); //image extension
-            $filename = '/images/hotel/rooms/' . time() . '.' . $extension;
-            $file->move('images/hotel/rooms/', $filename);
+            $filename = '/images/hotel/'.$roomFilePath.'/' . $roomFileName . '.' . $extension;
+            $file->move('images/hotel/'.$roomFilePath.'/', $filename);
             $room_detail->photo = $filename;
         } else {
             return redirect('/admin/rooms')->with('unstatus', 'Kamar hotel berhasil diubah dengan gambar yang sama !');
@@ -183,6 +189,6 @@ class RoomsController extends Controller
     public function destroy(room_details $room_detail)
     {
         room_details::destroy($room_detail->id);
-        return redirect('/admin/rooms')->with('status', 'Kamar hotel berhasil dihapus !'); 
+        return redirect('/admin/rooms')->with('status', 'Kamar hotel berhasil dihapus !');
     }
 }
