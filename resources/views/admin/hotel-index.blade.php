@@ -26,12 +26,20 @@
             <tbody>
             @foreach ($hotels as $hotel)
                 <tr>
-                    <td>{{ $hotel->hotel->name }}</td>
-                    <td>{{ $hotel->detailLengkap }}</td>
+                    <td>{{ $hotel->name }}</td>
+                    <td>{{ $hotel->alamat->detailLengkap }} {{ $hotel->deleted_at }}</td>
                     <td>
-                        <a href="/admin/hotels/{{ $hotel->hotel->id }}" class="mx-2 badge badge-info">Detail</a>
-                        <a href="/admin/hotels/alamat/{{ $hotel->hotel->id }}/edit" class="mx-2 badge badge-info">Ubah Alamat</a>
-                        <a href="/admin/rooms/{{ $hotel->hotel->id }}/add-room" class="mx-2 badge badge-info">Tambah Kamar</a>
+                        @if($hotel->deleted_at == null)
+                        <a href="/admin/hotels/{{ $hotel->id }}" class="mx-2 badge badge-info">Detail</a>
+                        <a href="/admin/hotels/alamat/{{ $hotel->id }}/edit" class="mx-2 badge badge-info">Ubah Alamat</a>
+                        <a href="/admin/rooms/{{ $hotel->id }}/add-room" class="mx-2 badge badge-info">Tambah Kamar</a>
+                        @else
+                        <form action="/admin/hotels_restore/{{ $hotel->id }}" method="POST">
+                            @method('PATCH')
+                            @csrf
+                        <button type="submit" class="mx-2 badge badge-success" style="border: none">Pulihkan Kembali</button>
+                        </form>
+                        @endif
                     </td>
                 </tr>
             @endforeach

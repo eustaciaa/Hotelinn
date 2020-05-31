@@ -13,4 +13,9 @@ class room_details extends Model
         return $this->belongsTo('App\hotel');
     }
 
+    public function hotel_trashed()
+    {
+        return $this->belongsTo('App\hotel')->withTrashed();
+    }
+
 }

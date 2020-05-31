@@ -23,6 +23,10 @@ class CreateHotel extends Migration
             $table->string('photo')->nullable();
             $table->timestamps();
         });
+
+        Schema::table('hotel', function (Blueprint $table) {
+            $table->softDeletes();
+        });
     }
 
     /**

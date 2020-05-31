@@ -7,10 +7,10 @@
             <div class="card">
                 <div class="card-body text-center">
                     <h5 class="card-title">
-                        <strong>Jumlah User Yang Terdaftar</strong>
+                        <strong>Jumlah Hotel Yang Terdaftar</strong>
                     </h5>
                     <h5 class="card-text">
-                        {{ $user }}
+                        {{ $order}}
                     </h5>
                 </div>
             </div>
@@ -29,15 +29,15 @@
 <script>
     $(document).ready( async ()=>{
         let ctx = $('#allChart')
-        let userCount = await getUserCount();
+        let orderCount = await getOrderCount();
         let month = ['January','February','March','April','May','June','July','August','September','October','November','December'];
         var myChart = new Chart(ctx, {
             type: 'line',
             data: {
                 labels: month,
                 datasets: [{
-                    label: 'Jumlah User Terdaftar Per Bulan',
-                    data: userCount,
+                    label: 'Jumlah Hotel Terdaftar Per Bulan',
+                    data: orderCount,
                     backgroundColor:
                         'rgba(255, 99, 132, 0.2)',
                     borderColor:
@@ -58,8 +58,8 @@
         });
     })
 
-    function getUserCount() {
-        return   axios.get('{{route("admin.userCountDetail")}}')
+    function getOrderCount() {
+        return   axios.get('{{route('admin.orderCountDetail')}}')
         .then( (res) => {
             var data = res.data;
             console.log(data)

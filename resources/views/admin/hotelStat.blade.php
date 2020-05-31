@@ -20,7 +20,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <canvas id="allChart" width="200" height="110"></canvas>
+                    <canvas id="allChart" width="200" height="80"></canvas>
                 </div>
             </div>
         </div>

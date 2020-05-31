@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container d-flex align-items-stretch">
+<div class="d-flex align-items-stretch">
     <nav class="side-navbar">
         <!-- Sidebar Header-->
         <div class="sidebar-header d-flex align-items-center pt-5 pb-3 px-4">
@@ -39,9 +39,9 @@
                     <li class="nav-item">
                         <a href="{{ route('admin.hotelStat') }}" class="nav-link">Hotel</a>
                     </li>
-                    <!-- <li class="nav-item">
-                        <a href="#" class="nav-link">Page</a>
-                    </li> -->
+                    <li class="nav-item">
+                        <a href="{{ route('admin.orderStat') }}" class="nav-link">Order</a>
+                    </li>
                 </ul>
             </li>
             <li class="nav-item px-3 pt-4">
@@ -71,26 +71,5 @@
         </ul>
     </nav>
     @yield('item')
-        {{-- <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        Welcome ADMIN <strong>{{ Auth::user()->fName }}</strong>!
-    </div>
-    <div class="panel-body">
-        <div class="row">
-            <div class="col-4">
-                <div class="list-group" id="list-tab" role="tablist">
-                    <a class="list-group-item list-group-item-action" href="/admin/add-hotel">Menambahkan Hotel</a>
-                    <a class="list-group-item list-group-item-action" href="/admin/hotels">Menampilkan Hotel</a>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
-</div>
-</div>
-</> --}}
-</div>
-
 @endsection

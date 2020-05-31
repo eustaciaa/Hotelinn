@@ -2,7 +2,7 @@
 
 @section('content')
 <script>
-$(document).ready(function(){
+    $(document).ready(function(){
   $(".btn-light").click(function(){
     $("#rate").modal();
   });
@@ -10,220 +10,248 @@ $(document).ready(function(){
 </script>
 
 @if (\Session::has('success'))
-    <div class="alert alert-success">
-        <ul>
-            {!! \Session::get('success') !!}
-        </ul>
-    </div>
+<div class="alert alert-success">
+    <ul>
+        {!! \Session::get('success') !!}
+    </ul>
+</div>
 @endif
 
-                <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="col-md-8">
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
 
-                    <div class="card my-5 text-center bg-lightblue">
-                    <div class="card-header bg-dark">
+            <div class="card my-5 text-center bg-lightblue">
+                <div class="card-header bg-dark">
                     <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
-                                <li class="nav-item">
-                                    <a href="#wait_confirm" class="nav-link active a-ijo" id="wait-tab" data-toggle="tab" role="tab" aria-controls="wait" aria-selected="true">Menunggu Konfirmasi</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#active_book" class="nav-link a-ijo" id="confirm-tab" data-toggle="tab"  role="tab" aria-controls="active" aria-selected="false">Pemesanan Aktif</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#history"  class="nav-link a-ijo" id="history-tab" data-toggle="tab" role="tab" aria-controls="history" aria-selected="false">Riwayat Pemesanan</a>
-                                </li>
-                            </ul>
-                    </div>
-                    <div class="card-body">
-                        <div class="tab-content" id="myTabContent">
-                            <div class="tab-pane fade show active" id="wait_confirm" role="tabpanel" aria-labelledby="wait-tab">
+                        <li class="nav-item">
+                            <a href="#wait_confirm" class="nav-link active a-ijo" id="wait-tab" data-toggle="tab"
+                                role="tab" aria-controls="wait" aria-selected="true">Menunggu Konfirmasi</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#active_book" class="nav-link a-ijo" id="confirm-tab" data-toggle="tab" role="tab"
+                                aria-controls="active" aria-selected="false">Pemesanan Aktif</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#history" class="nav-link a-ijo" id="history-tab" data-toggle="tab" role="tab"
+                                aria-controls="history" aria-selected="false">Riwayat Pemesanan</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-body">
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="wait_confirm" role="tabpanel"
+                            aria-labelledby="wait-tab">
                             @if($histories_wait->count() > 0)
-                                @foreach ($histories_wait as $history)
-                                <div class="form-group">
+                            @foreach ($histories_wait as $history)
+                            <div class="form-group">
                                 <div class="card my-5">
                                     <div class="card-body">
                                         <div class="row mx-1">
                                             <div class="col-9">
                                                 <p class="text-left">
-                                                <img class="card-img" style="width: 300px" src="{{$history->hotel->photo}}" alt="{{$history->hotel->photo}}">
+                                                    <img class="card-img" style="width: 300px"
+                                                        src="{{$history->hotel->photo}}"
+                                                        alt="{{$history->hotel->photo}}">
                                                     <br><br><strong>
-                                                    {{$history->hotel->name}}
+                                                        {{$history->hotel->name}}
+                                                        <br>
+                                                        {{$history->room->name}}</strong>
                                                     <br>
-                                                    {{$history->room->name}}</strong>
                                                     <br>
+                                                    <span
+                                                        class="badge badge-light txt-lightblack text-uppercase transparent"><i
+                                                            class="fas fa-map-marker-alt mr-1"></i>{{ $history->hotel->alamat->kota->namaKota }},
+                                                        {{ $history->hotel->alamat->provinsi->namaProvinsi }}</span>
                                                     <br>
-                                                    <span class="badge badge-light txt-lightblack text-uppercase transparent"><i class="fas fa-map-marker-alt mr-1"></i>{{ $history -> hotel -> alamat -> kota -> namaKota }}, {{ $history -> hotel -> alamat -> provinsi -> namaProvinsi }}</span>
-                                                    <br>
-                                                    {{$history -> hotel -> alamat -> detailLengkap}}
+                                                    {{$history->hotel->alamat->detailLengkap}}
                                                     <br>
                                                     <div class="d-flex align-items-end">
-                                                        <h5><span class="badge badge-primary txt-lightblack text-uppercase transparent">
-                                                            {{ date_format(date_create($history->checkIn), "j F Y") }} -
-                                                            {{ date_format(date_create($history->checkOut), "j F Y") }}
-                                                        </span></h5>
+                                                        <h5><span
+                                                                class="badge badge-primary txt-lightblack text-uppercase transparent">
+                                                                {{ date_format(date_create($history->checkIn), "j F Y") }}
+                                                                -
+                                                                {{ date_format(date_create($history->checkOut), "j F Y") }}
+                                                            </span></h5>
                                                     </div>
                                                     <br>
                                                     <div class="d-flex align-items-end">
                                                         <form action="/history/{{$history->id}}" method="post">
-                                                        @csrf
-                                                        <button type="submit" class="btn btn-info">
-                                                            Detail Pemesanan
-                                                        </button>
+                                                            @csrf
+                                                            <button type="submit" class="btn btn-info">
+                                                                Detail Pemesanan
+                                                            </button>
                                                         </form>
                                                     </div>
                                                 </p>
                                             </div>
                                         </div>
+                                    </div>
                                 </div>
-                                </div>
-                                </div>
-                                @endforeach
-                                @else
-
-                                <div class="form-group">
-                                    <h5 class="text-muted my-2">Belum Ada Riwayat Pemesanan</h5>
-                                    <h6 class="text-muted my-2">Nginep? Hotelinn aja!</h6>
-                                </div>
-                                @endif
-
                             </div>
+                            @endforeach
+                            @else
+
+                            <div class="form-group">
+                                <h5 class="text-muted my-2">Belum Ada Riwayat Pemesanan</h5>
+                                <h6 class="text-muted my-2">Nginep? Hotelinn aja!</h6>
+                            </div>
+                            @endif
+
+                        </div>
 
 
-                            <div class="tab-pane fade" id="active_book" role="tabpanel" aria-labelledby="confirm-tab">
+                        <div class="tab-pane fade" id="active_book" role="tabpanel" aria-labelledby="confirm-tab">
                             @if($histories_confirm->count() > 0)
                             @foreach ($histories_confirm as $history)
-                                <div class="form-group">
+                            <div class="form-group">
                                 <div class="card my-5">
                                     <div class="card-body">
                                         <div class="row mx-1">
                                             <div class="col-9">
                                                 <p class="text-left">
-                                                <img class="card-img" style="width: 300px" src="{{$history->hotel->photo}}" alt="{{$history->hotel->photo}}">
+                                                    <img class="card-img" style="width: 300px"
+                                                        src="{{$history->hotel->photo}}"
+                                                        alt="{{$history->hotel->photo}}">
                                                     <br><br><strong>
-                                                    {{$history->hotel->name}}
+                                                        {{$history->hotel->name}}
+                                                        <br>
+                                                        {{$history->room->name}}</strong>
                                                     <br>
-                                                    {{$history->room->name}}</strong>
                                                     <br>
+                                                    <span
+                                                        class="badge badge-light txt-lightblack text-uppercase transparent"><i
+                                                            class="fas fa-map-marker-alt mr-1"></i>{{ $history ->hotel->alamat->kota->namaKota }},
+                                                        {{ $history->hotel->alamat->provinsi->namaProvinsi }}</span>
                                                     <br>
-                                                    <span class="badge badge-light txt-lightblack text-uppercase transparent"><i class="fas fa-map-marker-alt mr-1"></i>{{ $history -> hotel -> alamat -> kota -> namaKota }}, {{ $history -> hotel -> alamat -> provinsi -> namaProvinsi }}</span>
-                                                    <br>
-                                                    {{$history -> hotel -> alamat -> detailLengkap}}
+                                                    {{$history->hotel->alamat->detailLengkap}}
                                                     <br>
                                                     <div class="d-flex align-items-end">
-                                                        <h5><span class="badge badge-primary txt-lightblack text-uppercase transparent">
-                                                            {{ date_format(date_create($history->checkIn), "j F Y") }} -
-                                                            {{ date_format(date_create($history->checkOut), "j F Y") }}
-                                                        </span></h5>
+                                                        <h5><span
+                                                                class="badge badge-primary txt-lightblack text-uppercase transparent">
+                                                                {{ date_format(date_create($history->checkIn), "j F Y") }}
+                                                                -
+                                                                {{ date_format(date_create($history->checkOut), "j F Y") }}
+                                                            </span></h5>
                                                     </div>
                                                     <br>
                                                     <div class="d-flex align-items-end">
                                                         <form action="/history/{{$history->id}}" method="post">
-                                                        @csrf
-                                                        <button type="submit" class="btn btn-info">
-                                                            Detail Pemesanan
-                                                        </button>
+                                                            @csrf
+                                                            <button type="submit" class="btn btn-info">
+                                                                Detail Pemesanan
+                                                            </button>
                                                         </form>
                                                     </div>
                                                 </p>
-                                                </div>
                                             </div>
                                         </div>
+                                    </div>
                                 </div>
-                                </div>
-                                @endforeach
-                                @else
-                                <div class="form-group">
-                                    <h5 class="text-muted my-2">Belum Ada Pemesanan Aktif</h5>
-                                    <h6 class="text-muted my-2">Nginep? Hotelinn aja!</h6>
-                                </div>
-                                @endif
-
                             </div>
+                            @endforeach
+                            @else
+                            <div class="form-group">
+                                <h5 class="text-muted my-2">Belum Ada Pemesanan Aktif</h5>
+                                <h6 class="text-muted my-2">Nginep? Hotelinn aja!</h6>
+                            </div>
+                            @endif
 
-                            <div class="tab-pane fade" id="history" role="tabpanel" aria-labelledby="history-tab">
+                        </div>
+
+                        <div class="tab-pane fade" id="history" role="tabpanel" aria-labelledby="history-tab">
                             @if($histories_finish->count() > 0)
                             @foreach ($histories_finish as $history)
-                                <div class="form-group">
+                            <div class="form-group">
                                 <div class="card my-5">
                                     <div class="card-body">
                                         <div class="row mx-1">
                                             <div class="col-9">
                                                 <p class="text-left">
-                                                <img class="card-img" style="width: 300px" src="{{$history->hotel->photo}}" alt="{{$history->hotel->photo}}"/>
+                                                    <img class="card-img" style="width: 300px"
+                                                        src="{{$history->hotel->photo}}"
+                                                        alt="{{$history->hotel->photo}}" />
                                                     <br><br><strong>
-                                                    {{$history->hotel->name}}
+                                                        {{$history->hotel->name}}
+                                                        <br>
+                                                        {{$history->room->name}}</strong>
                                                     <br>
-                                                    {{$history->room->name}}</strong>
                                                     <br>
+                                                    <span
+                                                        class="badge badge-light txt-lightblack text-uppercase transparent"><i
+                                                            class="fas fa-map-marker-alt mr-1"></i>{{ $history->hotel->alamat->kota->namaKota }},
+                                                        {{ $history->hotel->alamat->provinsi->namaProvinsi }}</span>
                                                     <br>
-                                                    <span class="badge badge-light txt-lightblack text-uppercase transparent"><i class="fas fa-map-marker-alt mr-1"></i>{{ $history -> hotel -> alamat -> kota -> namaKota }}, {{ $history -> hotel -> alamat -> provinsi -> namaProvinsi }}</span>
-                                                    <br>
-                                                    {{$history -> hotel -> alamat -> detailLengkap}}
+                                                    {{$history-> hotel -> alamat -> detailLengkap}}
                                                     <br>
                                                     <div class="d-flex align-items-end">
-                                                        <h5><span class="badge badge-primary txt-lightblack text-uppercase transparent">
-                                                            {{ date_format(date_create($history->checkIn), "j F Y") }} -
-                                                            {{ date_format(date_create($history->checkOut), "j F Y") }}
-                                                        </span></h5>
+                                                        <h5><span
+                                                                class="badge badge-primary txt-lightblack text-uppercase transparent">
+                                                                {{ date_format(date_create($history->checkIn), "j F Y") }}
+                                                                -
+                                                                {{ date_format(date_create($history->checkOut), "j F Y") }}
+                                                            </span></h5>
                                                     </div>
                                                     <br>
                                                     <div class="row">
-                                                    <div class="col-sm">
-                                                    <div class="d-flex align-items-end">
-                                                        <form action="/history/{{$history->id}}" method="post">
-                                                        @csrf
-                                                        <button type="submit" class="btn btn-info">
-                                                            Detail Pemesanan
-                                                        </button>
-                                                        </form>
-                                                    </div>
-                                                    </div>
-                                                    @if ($history->rating != NULL)
-                                                    <div class="col-sm">
-                                                    <div class="d-flex align-items-end">
-                                                        <button type="button" class="btn btn-info" disabled>Ulasan Sudah Diberikan</button>
-                                                    </div>
-                                                    </div>
-                                                    @elseif ($history->rating == NULL)
-                                                    <div class="col-sm">
-                                                    <div class="d-flex align-items-end">
-                                                        <button type="button" id="{{ $history->id }}"  class="btn btn-light">Tambahkan Ulasan</button>
-                                                    </div>
-                                                    @endif
-                                                    </div>
+                                                        <div class="col-sm">
+                                                            <div class="d-flex align-items-end">
+                                                                <form action="/history/{{$history->id}}" method="post">
+                                                                    @csrf
+                                                                    <button type="submit" class="btn btn-info">
+                                                                        Detail Pemesanan
+                                                                    </button>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                        @if ($history->rating != NULL)
+                                                        <div class="col-sm">
+                                                            <div class="d-flex align-items-end">
+                                                                <button type="button" class="btn btn-info"
+                                                                    disabled>Ulasan Sudah Diberikan</button>
+                                                            </div>
+                                                        </div>
+                                                        @elseif ($history->rating == NULL)
+                                                        <div class="col-sm">
+                                                            <div class="d-flex align-items-end">
+                                                                <button type="button" id="{{ $history->id }}"
+                                                                    class="btn btn-light">Tambahkan Ulasan</button>
+                                                            </div>
+                                                            @endif
+                                                        </div>
                                                     </div>
                                                 </p>
                                             </div>
                                         </div>
-                                        </div>
+                                    </div>
                                 </div>
-                                </div>
-                                @endforeach
-                                @else
-                                <div class="form-group">
-                                    <h5 class="text-muted my-2">Belum Ada Riwayat Pemesanan</h5>
-                                    <h6 class="text-muted my-2">Nginep? Hotelinn aja!</h6>
-                                </div>
-                                @endif
                             </div>
+                            @endforeach
+                            @else
+                            <div class="form-group">
+                                <h5 class="text-muted my-2">Belum Ada Riwayat Pemesanan</h5>
+                                <h6 class="text-muted my-2">Nginep? Hotelinn aja!</h6>
+                            </div>
+                            @endif
                         </div>
-                                <a href="/" class="btn btn-primary my-3">Kembali</a>
                     </div>
-                    </div>
+                    <a href="/" class="btn btn-primary my-3">Kembali</a>
                 </div>
-
+            </div>
         </div>
+
     </div>
 </div>
+</div>
 
-<div class='modal fade' id='rate'  role='dialog'>
-        <div class='modal-dialog modal-lg'>
-            <div class='modal-content'>
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                </div>
-                <div class='modal-body'>
+<div class='modal fade' id='rate' role='dialog'>
+    <div class='modal-dialog modal-lg'>
+        <div class='modal-content'>
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+            </div>
+            <div class='modal-body'>
                 <div class="container">
                     <div class="justify-content-center">
                         <div class="col-md-14 py-5">
@@ -240,25 +268,25 @@ $(document).ready(function(){
                                         <span class="far fa-star" style="font-size:48px"></span>
                                     </div>
                                     <form action="/historyRating" method="post">
-                                    @csrf
-                                    <div class="row">
-                                        <input type="hidden" id="ratingValue" name="ratingValue">
-                                        <input type="hidden" id="historyId" name="historyId">
-                                    </div>
+                                        @csrf
+                                        <div class="row">
+                                            <input type="hidden" id="ratingValue" name="ratingValue">
+                                            <input type="hidden" id="historyId" name="historyId">
+                                        </div>
                                 </div>
                             </div>
-                         </div>
+                        </div>
                     </div>
                 </div>
 
 
-                    <button type='submit'name='add' class='btn btn-primary' >Tambah Ulasan</button>
-                    <button type='submit' data-dismiss="modal" class='btn btn-warning'>Cancel</button>
-                    </div>
-                    </form>
+                <button type='submit' name='add' class='btn btn-primary'>Tambah Ulasan</button>
+                <button type='submit' data-dismiss="modal" class='btn btn-warning'>Cancel</button>
+            </div>
+            </form>
 
-             </div>
         </div>
+    </div>
 </div>
 
 <script>
@@ -284,8 +312,7 @@ $(document).ready(function(){
 </script>
 
 <script>
-
-$(document).on("click", ".btn-light",function() {
+    $(document).on("click", ".btn-light",function() {
         var id = $(this).attr("id");
         // console.log(id);
 

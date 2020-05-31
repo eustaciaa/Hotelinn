@@ -18,7 +18,9 @@ class HotelController extends Controller
      */
     public function index()
     {
-        return view('admin.hotel-index')->with(['hotels' => alamat::all(), 'provinsis' => provinsi::all()]);
+        // dd(alamat::all());
+        // dd(hotel::all());
+        return view('admin.hotel-index')->with(['hotels' => hotel::withTrashed()->get(), 'provinsis' => provinsi::all()]);
     }
 
     /**
@@ -221,15 +223,16 @@ class HotelController extends Controller
      */
     public function destroy(Hotel $hotel)
     {
-        $alamat = alamat::where('hotel_id', $hotel->id)->delete();
+
         Hotel::destroy($hotel->id);
+
         return redirect('/admin/hotels')->with('status', 'Hotel berhasil dihapus !');
     }
 
     public function orderList(){
         return view('admin.orderList')->with(['histories' => history::all()]);
     }
-    
+
     public function detailOrder($history){
         $order = history::where('id',$history)->get()->all();
 
@@ -271,4 +274,11 @@ class HotelController extends Controller
 
         return redirect()->back();
     }
+
+    public function restore($id)
+    {
+         hotel::onlyTrashed()->find($id)->restore();
+         return redirect('/admin/hotels')->with('status', 'Hotel berhasil dipulihkan !');
+    }
+
 }

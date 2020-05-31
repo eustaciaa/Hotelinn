@@ -17,6 +17,11 @@ class alamat extends Model
         return $this->belongsTo('App\hotel');
     }
 
+    public function hotel_trashed()
+    {
+        return $this->belongsTo('App\hotel')->withTrashed();
+    }
+
     public function kota()
     {
         return $this->belongsTo('App\Kota');

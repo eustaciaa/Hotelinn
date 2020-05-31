@@ -73,7 +73,7 @@
                                 <a class="dropdown-item" onclick="event.preventDefault();document.getElementById('profile-form').submit();">
                                 {{ __('Informasi Akun') }}
                                 </a>
-                                
+
                                 <form id="profile-form" action="/profile" method="POST" style="display: none;">
                                     @csrf
                                 </form>

@@ -42,6 +42,12 @@ class AdminController extends Controller
         return view('admin.userStat')->with(['user' => $user]);
     }
 
+    public function showOrderStat(){
+        $history = History::count();
+
+        return view('admin.orderStat')->with(['order' => $history]);
+    }
+
     public function getUserCount(){
 
         // $users = factory(User::class, 100)->create();
