@@ -19,6 +19,14 @@
   }
 </script>
 
+@if (\Session::has('success'))
+    <div class="alert alert-success">
+        <ul>
+            {!! \Session::get('success') !!}
+        </ul>
+    </div>
+@endif
+
 <div class="container">
     <div class="row justify-content-center">
     
@@ -160,6 +168,7 @@
     </div>
     </div>
     </div>
+                <a href="/" class="btn btn-primary my-3">Kembali</a>
         
     </div>
 </div>
