@@ -133,16 +133,16 @@ class AJAXController extends Controller
         $provinsiId = $request->input('provinsiId');
 
         if($kotaId == 'all' && $provinsiId == 'all') {
-            $alamat = alamat::selectRaw('MAX("cost") as Max, MIN("cost") as Min')->join('hotel', 'alamat.hotel_id', '=', 'hotel.id')->join('kota','alamat.kota_id','=','kota.id')->join('provinsi','alamat.provinsi_id','=','provinsi.id')->join('room_details','alamat.hotel_id','room_details.hotel_id')->get();
+            $alamat = alamat::selectRaw('MAX(cost) as Max, MIN(cost) as Min')->join('hotel', 'alamat.hotel_id', '=', 'hotel.id')->join('kota','alamat.kota_id','=','kota.id')->join('provinsi','alamat.provinsi_id','=','provinsi.id')->join('room_details','alamat.hotel_id','room_details.hotel_id')->get();
         } elseif ($kotaId == 'all') {
             $query = ['kota_id' => $provinsiId];
-            $alamat = alamat::selectRaw('MAX("cost") as Max, MIN("cost") as Min')->where($query)->join('hotel', 'alamat.hotel_id', '=', 'hotel.id')->join('kota','alamat.kota_id','=','kota.id')->join('provinsi','alamat.provinsi_id','=','provinsi.id')->join('room_details','alamat.hotel_id','room_details.hotel_id')->get();
+            $alamat = alamat::selectRaw('MAX(cost) as Max, MIN(cost) as Min')->where($query)->join('hotel', 'alamat.hotel_id', '=', 'hotel.id')->join('kota','alamat.kota_id','=','kota.id')->join('provinsi','alamat.provinsi_id','=','provinsi.id')->join('room_details','alamat.hotel_id','room_details.hotel_id')->get();
         } elseif ($provinsiId == 'all') {
             $query = ['kota_id' => $kotaId];
-            $alamat = alamat::selectRaw('MAX("cost") as Max, MIN("cost") as Min')->where($query)->join('hotel', 'alamat.hotel_id', '=', 'hotel.id')->join('kota','alamat.kota_id','=','kota.id')->join('provinsi','alamat.provinsi_id','=','provinsi.id')->join('room_details','alamat.hotel_id','room_details.hotel_id')->get();
+            $alamat = alamat::selectRaw('MAX(cost) as Max, MIN(cost) as Min')->where($query)->join('hotel', 'alamat.hotel_id', '=', 'hotel.id')->join('kota','alamat.kota_id','=','kota.id')->join('provinsi','alamat.provinsi_id','=','provinsi.id')->join('room_details','alamat.hotel_id','room_details.hotel_id')->get();
         } else {
             $query = ['alamat.provinsi_id' => $provinsiId, 'alamat.kota_id' => $kotaId];
-            $alamat = alamat::selectRaw('MAX("cost") as Max, MIN("cost") as Min')->where($query)->join('hotel', 'alamat.hotel_id', '=', 'hotel.id')->join('kota','alamat.kota_id','=','kota.id')->join('provinsi','alamat.provinsi_id','=','provinsi.id')->join('room_details','alamat.hotel_id','room_details.hotel_id')->get();
+            $alamat = alamat::selectRaw('MAX(cost) as Max, MIN(cost) as Min')->where($query)->join('hotel', 'alamat.hotel_id', '=', 'hotel.id')->join('kota','alamat.kota_id','=','kota.id')->join('provinsi','alamat.provinsi_id','=','provinsi.id')->join('room_details','alamat.hotel_id','room_details.hotel_id')->get();
         }
 
         return json_encode($alamat, JSON_HEX_TAG);
