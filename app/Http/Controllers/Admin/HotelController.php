@@ -12,11 +12,6 @@ use App\room_details;
 
 class HotelController extends Controller
 {
-
-    public function __construct()
-    {
-        $this->middleware('auth:admin');
-    }
     /**
      * Create a new controller instance.
      *
