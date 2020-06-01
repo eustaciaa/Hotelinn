@@ -66,12 +66,6 @@ class DatabaseSeeder extends Seeder
         $hotel->photo = "/images/hotel/fraser-residence-menteng/home.jpg";
         $hotel->save();
 
-        $hotel = new App\hotel;
-        $hotel->name = "Fraser Residence Menteng";
-        $hotel->star = 5;
-        $hotel->photo = "/images/hotel/fraser-residence-menteng/home.jpg";
-        $hotel->save();
-
         $alamat = new App\alamat;
         $alamat->provinsi_id = 1;
         $alamat->kota_id = 1;
