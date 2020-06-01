@@ -73,7 +73,6 @@ class DatabaseSeeder extends Seeder
         $hotel->save();
 
         $alamat = new App\alamat;
-        $alamat->hotel_id = $hotel->id;
         $alamat->provinsi_id = 1;
         $alamat->kota_id = 1;
         $alamat->detailLengkap = "Jl. Menteng Raya No. 60, Menteng Jakarta 10340,Indonesia";
