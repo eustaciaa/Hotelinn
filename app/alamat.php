@@ -14,7 +14,7 @@ class alamat extends Model
 
     public function hotel()
     {
-        return $this->belongsTo('App\hotel');
+        return $this->belongsTo('App\hotel','hotel_id','id');
     }
 
     public function kota()

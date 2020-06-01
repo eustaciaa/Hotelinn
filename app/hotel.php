@@ -23,7 +23,7 @@ class hotel extends Model
 
     public function alamat()
     {
-        return $this->hasOne('App\alamat');
+        return $this->hasOne('App\alamat','hotel_id');
     }
 
     public function room()
