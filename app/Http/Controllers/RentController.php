@@ -42,11 +42,14 @@ class RentController extends Controller
         ]);
 
 
-        $maxRoom = history::selectRaw('sum(roomTotal) as booked_rooms')
+        $maxRoom = history::selectRaw('sum("roomTotal") as booked_rooms')
                         ->where('hotel_id',$dateHotelValidation['hotelId'])
                         ->where('room_id',$dateHotelValidation['roomId'])
                         ->where('finished','=','false')
-                        ->whereRaw("IF((checkIn BETWEEN '".$request->input('checkIn')."' AND '".$request->input('checkOut')."') OR (checkIn BETWEEN '".$request->input('checkIn')."' AND '".$request->input('checkOut')."'), 1, IF((checkOut >= '".$request->input('checkIn')."') AND (checkIn <='".$request->input('checkOut')."'), 1, 0))")
+                        ->whereRaw('CASE WHEN ("checkIn" BETWEEN \'2020-06-02\' AND \'2020-06-03\') OR ("checkIn" BETWEEN \'2020-06-02\' AND \'2020-06-03\') THEN true
+                        WHEN ("checkOut" >= \'2020-06-02\' AND "checkIn" <=\'2020-06-03\') THEN true
+                        ELSE false
+                        END)')
                         ->groupBy('room_id')->first();
 
         $rooms = room_details::select('available')->where(['hotel_id' => $dateHotelValidation['hotelId'],'id' => $dateHotelValidation['roomId']])->first();
