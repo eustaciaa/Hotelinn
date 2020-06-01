@@ -3,7 +3,7 @@
 @section('content')
 <script>
     $(document).ready(function(){
-  $(".btn-light").click(function(){
+  $(".rate").click(function(){
     $("#rate").modal();
   });
 });
@@ -34,7 +34,7 @@
                         </li>
                         <li class="nav-item">
                             <a href="#history" class="nav-link a-ijo" id="history-tab" data-toggle="tab" role="tab"
-                                aria-controls="history" aria-selected="false">Riwayat Pemesanan</a>
+                                aria-controls="history" aria-selected="false">Pemesanan Selesai</a>
                         </li>
                     </ul>
                 </div>
@@ -198,7 +198,7 @@
                                                             <div class="d-flex align-items-end">
                                                                 <form action="/history/{{$history->id}}" method="post">
                                                                     @csrf
-                                                                    <button type="submit" class="btn btn-info">
+                                                                    <button type="submit" class="btn btn-light">
                                                                         Detail Pemesanan
                                                                     </button>
                                                                 </form>
@@ -207,7 +207,7 @@
                                                         @if ($history->rating != NULL)
                                                         <div class="col-sm">
                                                             <div class="d-flex align-items-end">
-                                                                <button type="button" class="btn btn-info"
+                                                                <button type="button" class="btn btn-secondary"
                                                                     disabled>Ulasan Sudah Diberikan</button>
                                                             </div>
                                                         </div>
@@ -215,7 +215,7 @@
                                                         <div class="col-sm">
                                                             <div class="d-flex align-items-end">
                                                                 <button type="button" id="{{ $history->id }}"
-                                                                    class="btn btn-light">Tambahkan Ulasan</button>
+                                                                    class="btn btn-primary rate">Berikan Penilaian</button>
                                                             </div>
                                                             @endif
                                                         </div>
@@ -235,7 +235,7 @@
                             @endif
                         </div>
                     </div>
-                    <a href="/" class="btn btn-primary my-3">Kembali</a>
+                    <a href="/" class="btn btn-primary my-3"><i class="fas fa-chevron-left mr-2"></i>Kembali</a>
                 </div>
             </div>
         </div>
@@ -254,13 +254,13 @@
             <div class='modal-body'>
                 <div class="container">
                     <div class="justify-content-center">
-                        <div class="col-md-14 py-5">
-                            <h3><strong>Tuliskan Ulasan</strong></h3>
-                            <div class="h5 text-muted">Ceritakan pengalaman hotelinn kamu!</div>
+                        <div class="col-md-14 pb-5">
+                            <h3><strong>Beri Penilaian</strong></h3>
+                            <div class="h5 text-muted">Bagaimana pengalamanmu nginep dengan hotelinn?</div>
                             <div class="card">
                                 <div class="card-body">
                                     <h5 class="card-title">Isi bintang untuk memberikan penilaian</h5><br>
-                                    <div class="row" id="ratings">
+                                    <div class="row justify-content-center" id="ratings">
                                         <span class="far fa-star" style="font-size:48px"></span>
                                         <span class="far fa-star" style="font-size:48px"></span>
                                         <span class="far fa-star" style="font-size:48px"></span>
@@ -278,10 +278,10 @@
                         </div>
                     </div>
                 </div>
-
-
-                <button type='submit' name='add' class='btn btn-primary'>Tambah Ulasan</button>
-                <button type='submit' data-dismiss="modal" class='btn btn-warning'>Cancel</button>
+                <div class="d-flex justify-content-end pr-3">  
+                    <button type='submit' data-dismiss="modal" class='btn btn-warning mr-3'>Batal</button>
+                    <button type='submit' name='add' class='btn btn-primary'>Nilai</button>
+                </div>
             </div>
             </form>
 
@@ -312,7 +312,7 @@
 </script>
 
 <script>
-    $(document).on("click", ".btn-light",function() {
+    $(document).on("click", ".rate",function() {
         var id = $(this).attr("id");
         // console.log(id);
 

@@ -19,36 +19,36 @@
                     <img src="{{ $room_detail->photo }}" class="card-img-top" alt="{{ $room_detail->photo }}" style="height:100%; object-fit: cover;">
                 </div>
                 <div class="col-md-8">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                        <div class="col">
-                            <h3 class="card-title">{{ $room_detail->name }}</h3>
-                            <h6 class="card-text price mb-4"><strong>Rp{{number_format($room_detail->cost,2,",",".")}} / malam</strong></h6>
-                            @if (($room_detail->freeWifi) == 1)
-                                <p class="my-2">WiFi Gratis <i class="fas fa-check ml-1 text-success"></i></p>
-                            @else
-                                <p class="my-2">WiFi Gratis <i class="fas fa-times ml-1 text-danger"></i></p>
-                            @endif
-                            @if (($room_detail->noSmoking) == 1)
-                                <p class="my-2">Bebas Asap Rokok <i class="fas fa-check ml-1 text-success"></i></p>
-                            @else
-                                <p class="my-2">Bebas Asap Rokok <i class="fas fa-times ml-1 text-danger"></i></p>
-                            @endif
-                            <p class="my-2">Kapasitas {{ $room_detail->capacity }}</p>
-                            <p class="my-2">{{ $room_detail->scenery }}</p>
-                        </div>
-                        <div class="col d-inline-flex justify-content-end">
-                            <div>
-                                <a href="{{ $room_detail->id }}/edit" class="btn btn-primary mx-3"><i class="fas fa-edit mr-2"></i>Ubah</a>
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <div class="col">
+                                <h3 class="card-title">{{ $room_detail->name }}</h3>
+                                <h6 class="card-text price mb-4"><strong>Rp{{number_format($room_detail->cost,2,",",".")}} / malam</strong></h6>
+                                @if (($room_detail->freeWifi) == 1)
+                                    <p class="my-2">WiFi Gratis <i class="fas fa-check ml-1 text-success"></i></p>
+                                @else
+                                    <p class="my-2">WiFi Gratis <i class="fas fa-times ml-1 text-danger"></i></p>
+                                @endif
+                                @if (($room_detail->noSmoking) == 1)
+                                    <p class="my-2">Bebas Asap Rokok <i class="fas fa-check ml-1 text-success"></i></p>
+                                @else
+                                    <p class="my-2">Bebas Asap Rokok <i class="fas fa-times ml-1 text-danger"></i></p>
+                                @endif
+                                <p class="my-2">Kapasitas {{ $room_detail->capacity }}</p>
+                                <p class="my-2">{{ $room_detail->scenery }}</p>
                             </div>
-                            <form action="{{ $room_detail->id }}" method="post" class="d-inline">
-                                @method('delete')
-                                @csrf
-                                <button type="submit" class="btn btn-secondary mx-3"><i class="fas fa-trash-alt mr-2"></i>Hapus</button>
-                            </form>
+                            <div class="col d-inline-flex justify-content-end">
+                                <div>
+                                    <a href="{{ $room_detail->id }}/edit" class="btn btn-primary mx-3"><i class="fas fa-edit mr-2"></i>Ubah</a>
+                                </div>
+                                <form action="{{ $room_detail->id }}" method="post" class="d-inline">
+                                    @method('delete')
+                                    @csrf
+                                    <button type="submit" class="btn btn-secondary mx-3"><i class="fas fa-trash-alt mr-2"></i>Hapus</button>
+                                </form>
+                            </div>
                         </div>
                     </div>
-                </div>
                 </div>
             </div>
         </div>
