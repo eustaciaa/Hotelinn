@@ -67,11 +67,12 @@ class DatabaseSeeder extends Seeder
         $hotel->save();
 
         $alamat = new App\alamat;
+        $alamat->hotel_id = $hotel->id;
         $alamat->provinsi_id = 1;
         $alamat->kota_id = 1;
         $alamat->detailLengkap = "Jl. Menteng Raya No. 60, Menteng Jakarta 10340,Indonesia";
 
-        $hotel->alamat()->save($alamat);
+        $alamat->save();
 
         $room = new App\room_details;
         $room->name = "Studio Executive";
@@ -135,11 +136,12 @@ class DatabaseSeeder extends Seeder
 
 
         $alamat = new App\alamat;
+        $alamat->hotel_id = $hotel->id;
         $alamat->provinsi_id = 1;
         $alamat->kota_id = 1;
         $alamat->detailLengkap = "Jl. Raya Tomang No.51, 11440, Jakarta, Indonesia";
 
-        $hotel->alamat->save($alamat);
+        $alamat->save();
 
         $room = new App\room_details;
         $room->name = "Standard Double Room";
@@ -182,10 +184,11 @@ class DatabaseSeeder extends Seeder
         $hotel->save();
 
         $alamat = new App\Alamat;
+        $alamat->hotel_id = $hotel->id;
         $alamat->provinsi_id = 2;
         $alamat->kota_id = 2;
         $alamat->detailLengkap = "Jl. Gajah Mada No. 67, 55112, Yogyakarta, Indonesia";
-        $hotel->alamat->save($alamat);
+        $alamat->save();
 
         $hotel = new App\hotel;
         $hotel->name = "Grand Tjokro Yogyakarta";
@@ -194,10 +197,11 @@ class DatabaseSeeder extends Seeder
         $hotel->save();
 
         $alamat = new App\Alamat;
+        $alamat->hotel_id = $hotel->id;
         $alamat->provinsi_id = 2;
         $alamat->kota_id = 2;
         $alamat->detailLengkap = "Jalan Gejayan No 37, Sleman, Depok, Gejayan, Yogyakarta, Indonesia, 55281        ";
-        $hotel->alamat->save($alamat);
+        $alamat->save();
 
     }
 }
