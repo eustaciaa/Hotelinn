@@ -294,33 +294,38 @@
                 result = JSON.parse(result);
                 $('.card-hotel').remove();
                 console.log(result);
-                result.forEach(hotel => {
-                    // console.log(hotel);
-                    let div = "<div class='card my-5 card-hotel' style='height=25vh;'>" +
-                        '<div class="row no-gutters">' +
-                        '<div class="col-md-5">' +
-                        '<img src="' + hotel.photo + '" style="height:100%; object-fit: cover;" class="card-img" alt="No Photo">' +
-                        '</div>' +
-                        '<div class="col-md-7">' +
-                        '<div class="card-body">' +
-                        '<h5 class="card-title mb-0">' + hotel.name + '</h5>';
-                    for (var i = 0; i < hotel.star; i++) {
-                        div += ' <i class="fas fa-star"></i>';
-                    }
-                    if (hotel.rating == null) div += '<br><small class="text-muted my-2">Belum ada penilaian</small><br>';
-                    else div += '<h5 class="my-2"><b>' + hotel.rating + '/10 </b>(' + hotel.reviewers + ' ulasan)</h6>'
-                    div += '<span class="badge badge-light txt-lightblack text-uppercase transparent"><i class="fas fa-map-marker-alt mr-1"></i>' + hotel.namaKota + ', ' + hotel.namaProvinsi + '</span>' +
-                        '<p class="card-text">' + hotel.detailLengkap + '</p>' +
-                        '<div class="row justify-content-start">' +
-                        '<form method="get" action="/showRoom">' +
-                        ' <form method="get" action="/showRoom">@csrf' +
-                        '<input type="hidden" id="hotelId'+hotel.hotel_id+'" name="hotelId" value="' + hotel.hotel_id + '">' +
-                        '<button type="submit" class="btn btn-primary ml-3">Lihat Detail</button>' +
-                        '</form></div></div></div></div></div>'
+                if(Object.keys(result).length > 0){
+                    result.forEach(hotel => {
+                        // console.log(hotel);
+                        let div = "<div class='card my-5 card-hotel' style='height=25vh;'>" +
+                            '<div class="row no-gutters">' +
+                            '<div class="col-md-5">' +
+                            '<img src="' + hotel.photo + '" style="height:100%; object-fit: cover;" class="card-img" alt="No Photo">' +
+                            '</div>' +
+                            '<div class="col-md-7">' +
+                            '<div class="card-body">' +
+                            '<h5 class="card-title mb-0">' + hotel.name + '</h5>';
+                        for (var i = 0; i < hotel.star; i++) {
+                            div += ' <i class="fas fa-star"></i>';
+                        }
+                        if (hotel.rating == null) div += '<br><small class="text-muted my-2">Belum ada penilaian</small><br>';
+                        else div += '<h5 class="my-2"><b>' + hotel.rating + '/10 </b>(' + hotel.reviewers + ' ulasan)</h6>'
+                        div += '<span class="badge badge-light txt-lightblack text-uppercase transparent"><i class="fas fa-map-marker-alt mr-1"></i>' + hotel.namaKota + ', ' + hotel.namaProvinsi + '</span>' +
+                            '<p class="card-text">' + hotel.detailLengkap + '</p>' +
+                            '<div class="row justify-content-start">' +
+                            '<form method="get" action="/showRoom">' +
+                            ' <form method="get" action="/showRoom">@csrf' +
+                            '<input type="hidden" id="hotelId'+hotel.hotel_id+'" name="hotelId" value="' + hotel.hotel_id + '">' +
+                            '<button type="submit" class="btn btn-primary ml-3">Lihat Detail</button>' +
+                            '</form></div></div></div></div></div>'
+                        $('#hotel-row').append(div);
+                        div = "";
+                    })
+                }else{
+                    let div = '<div class="alert alert-dark my-5"><p class="text-center text-muted">Belum ada hotel yang terdaftar</p></div>';
                     $('#hotel-row').append(div);
-                    div = "";
-                })
-
+                    div='';
+                }
             }
         })
     });
@@ -361,31 +366,36 @@ function ajaxCallSearch (item) {
                 console.log(result);
                 result = JSON.parse(result);
                 $('.card-hotel').remove();
-                result.forEach(hotel => {
-                    console.log("ho");
-                    var div = "<div class='card my-5 card-hotel' style='height=25vh;'>" +
-                        '<div class="row no-gutters">' +
-                        '<div class="col-md-5">' +
-                        '<img src="' + hotel.photo + '" style="height:100%; object-fit: cover;" class="card-img" alt="No Photo">' +
-                        '</div>' +
-                        '<div class="col-md-7">' +
-                        '<div class="card-body">' +
-                        '<h5 class="card-title mb-0">' + hotel.name + '</h5>';
-                    for (var i = 0; i < hotel.star; i++) {
-                        div += ' <i class="fas fa-star"></i>';
-                    }
-                    if (hotel.rating == null) div += '<br><small class="text-muted my-2">Belum ada penilaian</small><br>';
-                    else div += '<h5 class="my-2"><b>' + hotel.rating + '/10 </b>(' + hotel.reviewers + ' ulasan)</h6>'
-                    div += '<span class="badge badge-light txt-lightblack text-uppercase transparent"><i class="fas fa-map-marker-alt mr-1"></i>' + hotel.namaKota + ', ' + hotel.namaProvinsi + '</span>' +
-                        '<p class="card-text">' + hotel.detailLengkap + '</p>' +
-                        '<div class="row justify-content-start">' +
-                        '<form method="get" action="/showRoom">@csrf' +
-                        '<input type="hidden" id="hotelId'+hotel.hotel_id+'" name="hotelId" value="' + hotel.hotel_id + '">' +
-                        '<button type="submit" class="btn btn-primary ml-3">Lihat Detail</button>' +
-                        '</form></div></div></div></div></div>'
+                if(Object.keys(result).length > 0){
+                    result.forEach(hotel => {
+                        console.log("ho");
+                        var div = "<div class='card my-5 card-hotel' style='height=25vh;'>" +
+                            '<div class="row no-gutters">' +
+                            '<div class="col-md-5">' +
+                            '<img src="' + hotel.photo + '" style="height:100%; object-fit: cover;" class="card-img" alt="No Photo">' +
+                            '</div>' +
+                            '<div class="col-md-7">' +
+                            '<div class="card-body">' +
+                            '<h5 class="card-title mb-0">' + hotel.name + '</h5>';
+                        for (var i = 0; i < hotel.star; i++) {
+                            div += ' <i class="fas fa-star"></i>';
+                        }
+                        if (hotel.rating == null) div += '<br><small class="text-muted my-2">Belum ada penilaian</small><br>';
+                        else div += '<h5 class="my-2"><b>' + hotel.rating + '/10 </b>(' + hotel.reviewers + ' ulasan)</h6>'
+                        div += '<span class="badge badge-light txt-lightblack text-uppercase transparent"><i class="fas fa-map-marker-alt mr-1"></i>' + hotel.namaKota + ', ' + hotel.namaProvinsi + '</span>' +
+                            '<p class="card-text">' + hotel.detailLengkap + '</p>' +
+                            '<div class="row justify-content-start">' +
+                            '<form method="get" action="/showRoom">@csrf' +
+                            '<input type="hidden" id="hotelId'+hotel.hotel_id+'" name="hotelId" value="' + hotel.hotel_id + '">' +
+                            '<button type="submit" class="btn btn-primary ml-3">Lihat Detail</button>' +
+                            '</form></div></div></div></div></div>'
+                        $('#hotel-row').append(div);
+                    })
+                }else{
+                    let div = '<div class="alert alert-dark my-5"><p class="text-center text-muted">Belum ada hotel yang terdaftar</p></div>';
                     $('#hotel-row').append(div);
-                })
-
+                    div='';
+                }
             }
         });
 

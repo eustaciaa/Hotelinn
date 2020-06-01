@@ -138,6 +138,58 @@ class HotelSeeder extends Seeder
         $alamat->detailLengkap = "Jl. Gajah Mada No. 67, 55112, Yogyakarta, Indonesia";
         $hotel->alamat()->save($alamat);
 
+        $room = new App\room_details;
+        $room->name = "Deluxe Double Room";
+        $room->cost = 1140000;
+        $room->capacity = "1 kasur queen size";
+        $room->freeWifi = true;
+        $room->noSmoking = true;
+        $room->scenery = "Pemandangan: Kota";
+        $room->shower = "Pancuran dan bak mandi, perlengkapan mandi, cermin, pengering rambut, handuk";
+        $room->entertainment = "TV satelit/kabel, telepon, dartboard";
+        $room->convenience = "AC, tirai kedap cahaya, sandal dalam kamar";
+        $room->service = "Layanan kebersihan harian, layanan dibangunkan tidur";
+        $room->furniture = "Meja";
+        $room->food = "Air mineral dalam kemasan, minuman selamat datang, mesin pembuat kopi/teh, bar mini";
+        $room->available = 3;
+        $room->photo = '/images/hotel/jambuluwuk-malioboro/deluxe-double-room.jpg';
+        $hotel->room()->save($room);
+
+        $room = new App\room_details;
+        $room->name = "Deluxe Twin Room With Extrabed";
+        $room->cost = 2600000;
+        $room->capacity = "3 kasur single";
+        $room->freeWifi = true;
+        $room->noSmoking = true;
+        $room->scenery = "Pemandangan: Kota";
+        $room->shower = "Pancuran dan bak mandi, perlengkapan mandi, cermin, pengering rambut, handuk";
+        $room->entertainment = "TV satelit/kabel";
+        $room->convenience = "AC, tirai kedap cahaya, sandal dalam kamar";
+        $room->service = "Layanan kebersihan harian, layanan dibangunkan tidur";
+        $room->furniture = "Meja";
+        $room->food = "Air mineral dalam kemasan, minuman selamat datang, mesin pembuat kopi/teh";
+        $room->security_safety = "Brankas";
+        $room->available = 2;
+        $room->photo = '/images/hotel/jambuluwuk-malioboro/deluxe-twin-room-with-extrabed.jpg';
+        $hotel->room()->save($room);
+
+        $room = new App\room_details;
+        $room->name = "Superior Double Room";
+        $room->cost = 989000;
+        $room->capacity = "3 kasur single";
+        $room->freeWifi = true;
+        $room->noSmoking = true;
+        $room->scenery = "Pemandangan: Kota";
+        $room->shower = "Pancuran dan bak mandi, perlengkapan mandi, cermin, pengering rambut, handuk";
+        $room->entertainment = "TV satelit/kabel, telepon, dartboard";
+        $room->convenience = "AC, tirai kedap cahaya, sandal dalam kamar";
+        $room->service = "Layanan kebersihan harian, layanan dibangunkan tidur";
+        $room->furniture = "Meja, kamar dengan pintu penghubungg tersedia";
+        $room->food = "Air mineral dalam kemasan, minuman selamat datang, mesin pembuat kopi/teh, bar mini";
+        $room->available = 2;
+        $room->photo = '/images/hotel/jambuluwuk-malioboro/superior-double-room.jpg';
+        $hotel->room()->save($room);
+
         $hotel = new App\hotel;
         $hotel->name = "Grand Tjokro Yogyakarta";
         $hotel->star = 5;
@@ -147,7 +199,7 @@ class HotelSeeder extends Seeder
         $alamat = new App\Alamat;
         $alamat->provinsi_id = 2;
         $alamat->kota_id = 2;
-        $alamat->detailLengkap = "Jalan Gejayan No 37, Sleman, Depok, Gejayan, Yogyakarta, Indonesia, 55281        ";
+        $alamat->detailLengkap = "Jalan Gejayan No 37, Sleman, Depok, Gejayan, Yogyakarta, Indonesia, 55281";
         $hotel->alamat()->save($alamat);
 
     }

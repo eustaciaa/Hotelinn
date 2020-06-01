@@ -88,7 +88,7 @@
                     <div class="card-deck mb-4">
                 @endif
                     <div class="card room-content">
-                        <img class="card-img-top" src="{{$room->photo}}" alt="Card image cap">
+                        <img class="card-img-top" src="{{$room->photo}}" alt="Card image cap" style="height:40vh; object-fit:cover;">
                         <div class="card-body">
                         <h5 class="card-title">{{$room->name}}</h5>
                         <h6 class="card-text price"><strong>Rp{{number_format($room->cost,2,",",".")}} / malam</strong></h6>
