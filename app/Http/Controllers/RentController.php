@@ -49,7 +49,7 @@ class RentController extends Controller
                         ->whereRaw('CASE WHEN ("checkIn" BETWEEN \'2020-06-02\' AND \'2020-06-03\') OR ("checkIn" BETWEEN \'2020-06-02\' AND \'2020-06-03\') THEN true
                         WHEN ("checkOut" >= \'2020-06-02\' AND "checkIn" <=\'2020-06-03\') THEN true
                         ELSE false
-                        END)')
+                        END')
                         ->groupBy('room_id')->first();
 
         $rooms = room_details::select('available')->where(['hotel_id' => $dateHotelValidation['hotelId'],'id' => $dateHotelValidation['roomId']])->first();
