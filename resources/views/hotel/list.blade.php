@@ -14,7 +14,7 @@
                     @if (is_null($hotel->hotel->rating))
                         <br><small class="text-muted my-2">Belum ada penilaian</small>
                     @else
-                        <h5 class="my-2"><b>{{ $hotel->hotel->rating }}/10 </b>({{ $hotel->hotel->reviewers }} ulasan)</h6>
+                        <h5 class="my-2"><b>{{ $hotel->hotel->rating }}/10 </b>({{ $hotel->hotel->reviewers }} Penilaian)</h6>
                     @endif
                     <span class="badge badge-light txt-lightblack text-uppercase transparent"><i class="fas fa-map-marker-alt mr-1"></i>{{ $hotel->kota->namaKota }}, {{ $hotel->provinsi->namaProvinsi }}</span>
                     <p class="card-text">{{$hotel->detailLengkap}}</p>
@@ -198,7 +198,7 @@
                                                 <input type="hidden" id="roomId" name="roomId" value="{{$room->id}}">
                                                 <input type="hidden" id="checkIn" name="checkIn" value="{{$userInput['checkIn']}}">
                                                 <input type="hidden" id="checkOut" name="checkOut" value="{{$userInput['checkOut']}}">
-                                                <input type="hidden" id="remainedRooms" name="remainedRooms" value="{{$room->available - $booked->booked_rooms}}"> 
+                                                <input type="hidden" id="remainedRooms" name="remainedRooms" value="{{$room->available - $booked->booked_rooms}}">
                                                 <button type="submit" class="btn btn-primary mt-3">Pesan</button>
                                                 <br><small class="card-text text-success text-07"><b> Tersedia {{ $room->available - $booked->booked_rooms }} ruangan</b></small>
                                             </form>
@@ -218,7 +218,7 @@
                                             <input type="hidden" id="roomId" name="roomId" value="{{$room->id}}">
                                             <input type="hidden" id="checkIn" name="checkIn" value="{{$userInput['checkIn']}}">
                                             <input type="hidden" id="checkOut" name="checkOut" value="{{$userInput['checkOut']}}">
-                                            <input type="hidden" id="remainedRooms" name="remainedRooms" value="{{$room->available}}">                                            
+                                            <input type="hidden" id="remainedRooms" name="remainedRooms" value="{{$room->available}}">
                                             <button type="submit" class="btn btn-primary mt-3">Pesan</button>
                                             <br><small class="card-text text-success text-07"><b> Tersedia {{ $room->available }} ruangan</b></small>
                                         </form>
@@ -235,7 +235,7 @@
                                     <input type="hidden" id="roomId" name="roomId" value="{{$room->id}}">
                                     <input type="hidden" id="checkIn" name="checkIn" value="{{$userInput['checkIn']}}">
                                     <input type="hidden" id="checkOut" name="checkOut" value="{{$userInput['checkOut']}}">
-                                    <input type="hidden" id="remainedRooms" name="remainedRooms" value="{{$room->available}}"> 
+                                    <input type="hidden" id="remainedRooms" name="remainedRooms" value="{{$room->available}}">
                                     <button type="submit" class="btn btn-primary mt-3">Pesan</button>
                                     <br><small class="card-text text-success text-07"><b> Tersedia {{ $room->available }} ruangan</b></small>
                                 </form>

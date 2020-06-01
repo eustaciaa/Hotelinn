@@ -23,9 +23,9 @@
                                 @if (is_null($hotel->rating))
                                     <br><small class="text-muted my-2">Belum ada penilaian</small>
                                 @else
-                                    <p class="my-2"><b>{{ $hotel->rating }}/10 </b>({{ $hotel->reviewers }} ulasan)</p>
+                                    <p class="my-2"><b>{{ $hotel->rating }}/10 </b>({{ $hotel->reviewers }} Penilaian)</p>
                                 @endif<br>
-                                
+
                             </div>
                             <div class="col d-inline-flex justify-content-end">
                                 <div>

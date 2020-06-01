@@ -31,7 +31,7 @@
                 </div>
             </div>
             <div class="card mb-4"></div>
-            
+
                 <div class="form-group">
                     <label for="name">{{ __('Nama Hotel') }}</label>
                     <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" placeholder="Masukkan nama hotel" value="{{ old('name') }}" />
@@ -54,7 +54,7 @@
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label for="reviewers">{{ __('Ulasan') }}</label>
+                    <label for="reviewers">{{ __('Penilaian') }}</label>
                     <input type="number" name="reviewers" class="form-control @error('reviewers') is-invalid @enderror" value="{{ old('reviewers') }}"/>
                     @error('reviewers')
                         <div class="invalid-feedback">{{ $message }}</div>

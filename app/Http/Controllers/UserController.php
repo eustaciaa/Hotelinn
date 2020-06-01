@@ -67,7 +67,7 @@ class UserController extends Controller
         ]);
 
 
-        return redirect()->back()->with('success', '<div class="text-center"><h5><strong>Ulasan Berhasil Ditambahkan! <br> <div class="text-muted">Ayo, perbanyak pengalaman Hotelinn kamu!</div></strong></h5></div>');
+        return redirect()->back()->with('success', '<div class="text-center"><h5><strong>Penilaian Berhasil Ditambahkan! <br> <div class="text-muted">Ayo, perbanyak pengalaman Hotelinn kamu!</div></strong></h5></div>');
     }
 
     public function profile (Request $request)

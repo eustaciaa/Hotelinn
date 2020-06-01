@@ -76,14 +76,14 @@
                             <select class="form-control" name="orderBy" id="orderBy">
                                 <option value="none" selected> Urutkan Berdasarkan </option>
                                 <optgroup label="Rating">
-                                    <option value="total_rating Asc">Terendah - Tertinggi</option>
-                                    <option value="total_ating Desc">Tertinggi - Terendah</option>
+                                    <option value="total_rating asc">Terendah - Tertinggi</option>
+                                    <option value="total_ating desc">Tertinggi - Terendah</option>
                                 <optgroup label="Bintang">
-                                    <option value="star Asc">Terendah - Tertinggi</option>
-                                    <option value="star Desc">Tertinggi - Terendah</option>
+                                    <option value="star asc">Terendah - Tertinggi</option>
+                                    <option value="star desc">Tertinggi - Terendah</option>
                                 <optgroup label="Harga">
-                                    <option value="cost Asc">Terendah - Tertinggi</option>
-                                    <option value="cost Desc">Tertinggi - Terendah</option>
+                                    <option value="cost asc">Terendah - Tertinggi</option>
+                                    <option value="cost desc">Tertinggi - Terendah</option>
                             </select>
                         </div>
                     </div>
@@ -140,7 +140,7 @@
                                     <br><small class="text-muted my-2">Belum ada penilaian</small><br>
                                     @else
                                     <h5 class="my-2"><b>{{ $hotel->hotel->rating }}/10
-                                        </b>({{ $hotel->hotel->reviewers }} ulasan)</h6>
+                                        </b>({{ $hotel->hotel->reviewers }} Penilaian)</h6>
                                         @endif
                                         <span class="badge badge-light txt-lightblack text-uppercase transparent"><i
                                                 class="fas fa-map-marker-alt mr-1"></i>{{ $hotel->kota->namaKota }},
@@ -308,7 +308,7 @@
                         div += ' <i class="fas fa-star"></i>';
                     }
                     if (hotel.rating == null) div += '<br><small class="text-muted my-2">Belum ada penilaian</small><br>';
-                    else div += '<h5 class="my-2"><b>' + hotel.rating + '/10 </b>(' + hotel.reviewers + ' ulasan)</h6>'
+                    else div += '<h5 class="my-2"><b>' + hotel.rating + '/10 </b>(' + hotel.reviewers + ' Penilaian)</h6>'
                     div += '<span class="badge badge-light txt-lightblack text-uppercase transparent"><i class="fas fa-map-marker-alt mr-1"></i>' + hotel.namaKota + ', ' + hotel.namaProvinsi + '</span>' +
                         '<p class="card-text">' + hotel.detailLengkap + '</p>' +
                         '<div class="row justify-content-start">' +
@@ -375,7 +375,7 @@ function ajaxCallSearch (item) {
                         div += ' <i class="fas fa-star"></i>';
                     }
                     if (hotel.rating == null) div += '<br><small class="text-muted my-2">Belum ada penilaian</small><br>';
-                    else div += '<h5 class="my-2"><b>' + hotel.rating + '/10 </b>(' + hotel.reviewers + ' ulasan)</h6>'
+                    else div += '<h5 class="my-2"><b>' + hotel.rating + '/10 </b>(' + hotel.reviewers + ' Penilaian)</h6>'
                     div += '<span class="badge badge-light txt-lightblack text-uppercase transparent"><i class="fas fa-map-marker-alt mr-1"></i>' + hotel.namaKota + ', ' + hotel.namaProvinsi + '</span>' +
                         '<p class="card-text">' + hotel.detailLengkap + '</p>' +
                         '<div class="row justify-content-start">' +

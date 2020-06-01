@@ -208,7 +208,7 @@
                                                         <div class="col-sm">
                                                             <div class="d-flex align-items-end">
                                                                 <button type="button" class="btn btn-secondary"
-                                                                    disabled>Ulasan Sudah Diberikan</button>
+                                                                    disabled>Penilaian Sudah Diberikan</button>
                                                             </div>
                                                         </div>
                                                         @elseif ($history->rating == NULL)
@@ -278,7 +278,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="d-flex justify-content-end pr-3">  
+                <div class="d-flex justify-content-end pr-3">
                     <button type='submit' data-dismiss="modal" class='btn btn-warning mr-3'>Batal</button>
                     <button type='submit' name='add' class='btn btn-primary'>Nilai</button>
                 </div>
