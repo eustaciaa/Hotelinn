@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class alamat extends Model
 {
     protected $fillable = [
-        'provinsi', 'kota', 'detailLengkap'
+       'hotel_id','provinsi_id', 'kota_id', 'detailLengkap'
     ];
 
     protected $table = 'alamat';
@@ -15,11 +15,6 @@ class alamat extends Model
     public function hotel()
     {
         return $this->belongsTo('App\hotel');
-    }
-
-    public function hotel_trashed()
-    {
-        return $this->belongsTo('App\hotel')->withTrashed();
     }
 
     public function kota()

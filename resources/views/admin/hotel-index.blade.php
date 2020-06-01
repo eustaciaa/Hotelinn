@@ -27,7 +27,7 @@
             @foreach ($hotels as $hotel)
                 <tr>
                     <td>{{ $hotel->name }}</td>
-                    <td>{{ $hotel->alamat->detailLengkap }} {{ $hotel->deleted_at }}</td>
+                    <td>{{ dd($hotel->alamat) }} {{ $hotel->deleted_at }}</td>
                     <td>
                         @if($hotel->deleted_at == null)
                         <a href="/admin/hotels/{{ $hotel->id }}" class="mx-2 badge badge-info">Detail</a>

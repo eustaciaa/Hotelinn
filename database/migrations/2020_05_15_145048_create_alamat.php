@@ -15,7 +15,7 @@ class CreateAlamat extends Migration
     {
         Schema::create('alamat', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('hotel_id')->constrained('hotel');
+            $table->foreignId('hotel_id')->constrained('hotel')->onDelete('cascade');
             $table->foreignId('provinsi_id')->constrained('provinsi');
             $table->foreignId('kota_id')->constrained('kota');
             $table->string('detailLengkap');
