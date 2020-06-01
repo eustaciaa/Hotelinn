@@ -63,7 +63,10 @@ class MainController extends Controller
         $count = history::selectRaw('room_id, sum("history.roomTotal") as booked_rooms')
                         ->where('hotel_id',$hotelId)
                         ->where('finished','=','false')
-                        ->whereRaw("IF((checkIn BETWEEN '".$checkIn."' AND '".$checkOut."') OR (checkIn BETWEEN '".$checkIn."' AND '".$checkOut."'), 1, IF((checkOut >= '".$checkIn."') AND (checkIn <='".$checkOut."'), 1, 0))")
+                        ->whereRaw('CASE WHEN ("checkIn" BETWEEN \'2020-06-02\' AND \'2020-06-03\') OR ("checkIn" BETWEEN \'2020-06-02\' AND \'2020-06-03\') THEN true
+                        WHEN ("checkOut" >= \'2020-06-02\' AND "checkIn" <=\'2020-06-03\') THEN true
+                        ELSE false
+                        END)')
                         ->groupBy('room_id')->get();
 
 
