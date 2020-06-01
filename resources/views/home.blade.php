@@ -259,8 +259,8 @@
             success: (result) => {
                 result = JSON.parse(result);
                 console.log(result);
-                console.log(result[0].Max);
-                $('#max').attr('max',result[0].Max)
+                console.log(result[0].max);
+                $('#max').attr('max',result[0].max)
 
             }
         })
