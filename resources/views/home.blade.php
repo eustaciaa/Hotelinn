@@ -139,7 +139,7 @@
                                     @if (is_null($hotel->hotel->rating))
                                     <br><small class="text-muted my-2">Belum ada penilaian</small><br>
                                     @else
-                                    <h5 class="my-2"><b>{{ $hotel->hotel->rating }}/5
+                                    <h5 class="my-2"><b>{{ $hotel->hotel->rating }}/10
                                         </b>({{ $hotel->hotel->reviewers }} ulasan)</h6>
                                         @endif
                                         <span class="badge badge-light txt-lightblack text-uppercase transparent"><i
