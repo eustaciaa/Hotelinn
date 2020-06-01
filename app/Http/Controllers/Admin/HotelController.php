@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\hotel;
 use App\alamat;
 use App\provinsi;
+use App\kota;
 use App\history;
 use App\room_details;
 
@@ -39,8 +40,8 @@ class HotelController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        return view('admin/add-hotel');
+    {   
+        return view('admin/add-hotel')->with(['provinsis' => provinsi::all(), 'kotas' => kota::all()]);
     }
 
     /**
@@ -54,19 +55,15 @@ class HotelController extends Controller
         $request->validate([
             'name' => 'required|max:255',
             'star' => 'required',
-            'rating' => 'nullable|numeric',
-            'reviewers' => 'nullable',
             'photo' => 'required|image|max:1000',
-            'namaProvinsi' => 'required',
-            'namaKota' => 'required',
+            'provinsi_id' => 'required',
+            'kota_id' => 'required',
             'detailLengkap' => 'required|max:255'
         ]);
 
         $hotel = new hotel();
         $hotel->name = $request->name;
         $hotel->star = $request->star;
-        $hotel->rating = $request->rating;
-        $hotel->reviewers = $request->reviewers;
 
         $hotelFilename = strtolower(str_replace(" ","-",$request->name));
 
@@ -84,40 +81,42 @@ class HotelController extends Controller
 
         $alamat = new alamat();
         $alamat->hotel_id = $hotel->id;
-        switch ($request->namaProvinsi) {
-            case 'DKI Jakarta':
-                $alamat->provinsi_id = 1;
-                break;
+        $alamat->provinsi_id = $request->provinsi_id;
+        $alamat->kota_id = $request->kota_id;
+        // switch ($request->namaProvinsi) {
+        //     case 'DKI Jakarta':
+        //         $alamat->provinsi_id = 1;
+        //         break;
 
-            case 'D.I Yogyakarta':
-                $alamat->provinsi_id = 2;
-                break;
+        //     case 'D.I Yogyakarta':
+        //         $alamat->provinsi_id = 2;
+        //         break;
 
-            case 'Banten':
-                $alamat->provinsi_id = 3;
-                break;
-        }
-        switch ($request->namaKota) {
-            case 'Jakarta':
-                $alamat->kota_id = 1;
-                break;
+        //     case 'Banten':
+        //         $alamat->provinsi_id = 3;
+        //         break;
+        // }
+        // switch ($request->namaKota) {
+        //     case 'Jakarta':
+        //         $alamat->kota_id = 1;
+        //         break;
 
-            case 'Yogyakarta':
-                $alamat->kota_id = 2;
-                break;
+        //     case 'Yogyakarta':
+        //         $alamat->kota_id = 2;
+        //         break;
 
-            case 'Tangerang':
-                $alamat->kota_id = 3;
-                break;
+        //     case 'Tangerang':
+        //         $alamat->kota_id = 3;
+        //         break;
 
-            case 'Tangerang Selatan':
-                $alamat->kota_id = 4;
-                break;
+        //     case 'Tangerang Selatan':
+        //         $alamat->kota_id = 4;
+        //         break;
 
-            case 'Serang':
-                $alamat->kota_id = 5;
-                break;
-        }
+        //     case 'Serang':
+        //         $alamat->kota_id = 5;
+        //         break;
+        // }
         $alamat->detailLengkap = $request->detailLengkap;
 
         $alamat->save();
