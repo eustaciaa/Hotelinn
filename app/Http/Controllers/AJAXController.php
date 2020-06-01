@@ -89,7 +89,7 @@ class AJAXController extends Controller
             }
         }
 
-        return $alamat->toJson();
+        return json_encode($alamat, JSON_HEX_TAG);
     }
 
     public function getKota(Request $request)
