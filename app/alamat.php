@@ -9,9 +9,6 @@ class alamat extends Model
     protected $fillable = [
         'provinsi', 'kota', 'detailLengkap'
     ];
-    protected $primaryKey = null;
-
-    public $incrementing = false;
 
     protected $table = 'alamat';
 
