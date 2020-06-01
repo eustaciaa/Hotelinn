@@ -174,7 +174,7 @@ class AJAXController extends Controller
             }
         }
 
-        $hotels = $hotels = kota::select('hotel.name', 'hotel.id')->join('alamat', 'kota.id', 'alamat.kota_id')->join('hotel', 'alamat.hotel_id', 'hotel.id')->where('hotel.name', 'like', $query)->orWhere('Hotel.name','like',$inputquery.'%')->get();
+        $hotels = $hotels = kota::select('hotel.name', 'hotel.id')->join('alamat', 'kota.id', 'alamat.kota_id')->join('hotel', 'alamat.hotel_id', 'hotel.id')->where('hotel.name', 'like', $query)->orWhere('hotel.name','like',$inputquery.'%')->get();
 
         if($hotels->count() > 0)
         {
