@@ -83,7 +83,7 @@ class RentController extends Controller
         $history->nama_depan = $request->input('fName');
         $history->nama_belakang = $request->input('lName');
         $history->phone = $request->input('phone');
-        $history->bookDate = Carbon::now();
+        $history->bookdate = Carbon::now();
         $history->save();
 
         return redirect('/')->with('success', 'Asyik! Ruangan hotel berhasil dipesan! Pemesanan yang telah berhasil dilakukan dapat dilihat pada Riwayat Pemesanan Anda.');
