@@ -135,7 +135,7 @@ class RoomsController extends Controller
             'available' => 'required|numeric',
             'capacity' => 'required',
             'cost' => 'required|numeric',
-            'photo' => 'required|image|max:1000',
+            'photo' => 'nullable|image|max:1000',
             'freeWifi' => 'required',
             'noSmoking' => 'required',
             'shower' => 'nullable|max:255',
@@ -178,7 +178,7 @@ class RoomsController extends Controller
             $file->move('images/hotel/'.$roomFilePath.'/', $filename);
             $room_detail->photo = $filename;
         } else {
-            return redirect('/admin/rooms')->with('unstatus', 'Kamar hotel berhasil diubah dengan gambar yang sama !');
+            return redirect('/admin/rooms')->with('status', 'Kamar hotel berhasil diubah dengan gambar yang sama !');
             $room_detail->photo = '';
         }
         $room_detail->save();

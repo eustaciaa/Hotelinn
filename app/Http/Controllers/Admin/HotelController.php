@@ -42,7 +42,7 @@ class HotelController extends Controller
      */
     public function create()
     {
-        return view('admin/add-hotel')->with(['provinsis' => provinsi::all(), 'kotas' => kota::all()]);
+        return view('admin/add-hotel')->with(['provinsis' => provinsi::all()]);
     }
 
     /**
@@ -197,7 +197,8 @@ class HotelController extends Controller
 
     public function editAlamat(Hotel $hotel)
     {
-        return view('admin.edit-alamat', compact('hotel'));
+        $hotelWithAlamat = alamat::where('hotel_id', $hotel->id)->first();
+        return view('admin.edit-alamat', compact('hotel'))->with(['provinsis' => provinsi::all()]);
     }
 
     /**
@@ -218,8 +219,8 @@ class HotelController extends Controller
         Alamat::where('hotel_id', $hotel->id)
         ->update([
             'detailLengkap' => $request->detailLengkap,
-            'provinsi_id' => $request->namaProvinsi,
-            'kota_id' => $request->namaKota
+            'provinsi_id' => $request->provinsi_id,
+            'kota_id' => $request->kota_id
         ]);
 
         return redirect('/admin/hotels')->with('status', 'Alamat Hotel berhasil diubah !');

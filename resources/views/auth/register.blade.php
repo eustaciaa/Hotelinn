@@ -1,25 +1,24 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="bg py-4" style="background-image: url('{{ asset('images/login/viceroy-bali-tonedowned.jpg') }}');">
-    <div class="container mh-100">
-        <div class="row justify-content-center mh-100" style="color: white;">
-            <div class="col-md-5 mh-100">
-                <br><br><br><br><br>
-                <h1 style="font-size:400%;">
-                    <b>Register Now</b>
-                </h1>
-            </div>
-            <div class="col-md-7 pl-3">
-                <div class="mt-4 card" style="background-color: rgba(193, 232, 247, 0.4);">
-                    <div class="card-header">{{ __('Daftar') }}</div>
-
+<div class="container mh-100 my-5">
+    <div class="row justify-content-center ml-5 mh-100" style="height:85vh;">
+        <div class="col-md-4 text-md-right mh-100 m-0 txt-lightblack d-flex flex-column align-items-end">
+            <br><br><br><img src="/images/hotelinn/brand1.png" height="50vh"><br>
+            <h1>
+                <b>Daftar untuk menemukan kenyamanan menginap dengan hotelinn!</b>
+            </h1>
+        </div>
+        <div class="col-md-8 pl-3">
+            <div class="row pl-5">
+                <div class="card col-md-9">
                     <div class="card-body">
+                        <h4 class="card-title text-center"><b>{{ __('Daftar') }}</b></h4><br>
                         <form method="POST" action="{{ route('register') }}">
                             @csrf
 
                             <div class="form-group row">
-                                <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Alamat E-Mail') }}</label>
+                                <label for="email" class="col-md-5 col-form-label text-md-right">{{ __('Alamat E-Mail') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}"  autocomplete="email">
@@ -33,7 +32,7 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="fName" class="col-md-4 col-form-label text-md-right">{{ __('Nama Depan') }}</label>
+                                <label for="fName" class="col-md-5 col-form-label text-md-right">{{ __('Nama Depan') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="fName" type="text" class="form-control @error('fName') is-invalid @enderror" name="fName" value="{{ old('fName') }}"  autocomplete="fName">
@@ -47,7 +46,7 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="lName" class="col-md-4 col-form-label text-md-right">{{ __('Nama Belakang') }}</label>
+                                <label for="lName" class="col-md-5 col-form-label text-md-right">{{ __('Nama Belakang') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="lName" type="text" class="form-control @error('lName') is-invalid @enderror" name="lName" value="{{ old('lName') }}"  autocomplete="lName">
@@ -61,7 +60,7 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="birthdate" class="col-md-4 col-form-label text-md-right">{{ __('Tanggal Lahir') }}</label>
+                                <label for="birthdate" class="col-md-5 col-form-label text-md-right">{{ __('Tanggal Lahir') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="birthdate" type="date" class="form-control @error('birthdate') is-invalid @enderror" name="birthdate" value="{{ old('birthdate') }}"  autocomplete="birthdate">
@@ -75,7 +74,7 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="gender" class="col-md-4 col-form-label text-md-right">{{ __('Jenis Kelamin') }}</label>
+                                <label for="gender" class="col-md-5 col-form-label text-md-right">{{ __('Jenis Kelamin') }}</label>
 
                                 <div class="col-md-6">
                                     <select class="form-control @error('gender') is-invalid @enderror" id="gender"  autocomplete="gender" name="gender">
@@ -98,7 +97,7 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Kata Sandi') }}</label>
+                                <label for="password" class="col-md-5 col-form-label text-md-right">{{ __('Kata Sandi') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password"  autocomplete="new-password">
@@ -112,19 +111,17 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Konfirmasi Kata Sandi') }}</label>
+                                <label for="password-confirm" class="col-md-5 col-form-label text-md-right">{{ __('Konfirmasi Kata Sandi') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="password-confirm" type="password" class="form-control" name="password_confirmation"  autocomplete="new-password">
                                 </div>
                             </div>
 
-                            <div class="form-group row mb-0">
-                                <div class="col-md-6 offset-md-4">
-                                    <button type="submit" class="btn btn-outline-light">
-                                        {{ __('Daftar') }}
-                                    </button>
-                                </div>
+                            <div class="form-group row mt-5 mx-3 mb-2 d-flex justify-content-end flex-column">
+                                <button type="submit" class="btn btn-primary">
+                                    {{ __('Daftar') }}
+                                </button>
                             </div>
                         </form>
                     </div>

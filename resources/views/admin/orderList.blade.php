@@ -1,11 +1,11 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
-@section('content')
+@section('item')
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.21/datatables.min.css"/>
 <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.21/datatables.min.js"></script>
-<div class="container">
+<div class="container my-4 mx-4">
     <div class="col-12">
-        <h2 class="mt-3">Daftar Pemesanan</h2>
+        <h2 class="mt-3">Daftar Pemesanan</h2><br>
         @if (session('status'))
             <div class="alert alert-success">
                 {{ session('status') }}
@@ -50,7 +50,6 @@
             @endforeach
             </tbody>
         </table>
-        <a href="/admin" class="btn btn-primary my-3">Kembali</a>
     </div>
 </div>
 <script>

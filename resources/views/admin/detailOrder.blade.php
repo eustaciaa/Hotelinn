@@ -122,7 +122,7 @@
             </div>
 
         @endforeach
-        <a href="/admin/orderList" class="btn btn-primary my-3">Kembali</a>
+        <a href="/admin/orderList" class="btn btn-primary my-3"><i class="fas fa-chevron-left mr-2"></i>Kembali</a>
         </div>
     </div>
 </div>

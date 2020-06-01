@@ -13,7 +13,6 @@ use App\Rules\MatchOldPass;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\MessageBag;
 
-use Image;
 use App\alamat;
 use App\provinsi;
 use App\hotel;
@@ -87,8 +86,9 @@ class UserController extends Controller
 
         if($request->hasFile('photo')){
             $photo = $request->file('photo');
-            $filename = time() . '.' . $photo->getClientOriginalExtension();
-            Image::make($photo)->resize(300, 300)->save( public_path('/images/profile/' . $filename));
+            $filename = time() . '.' . $_FILES['photo']['name'];
+            $target = 'images/profile';
+            $photo->move($target,$filename);
             $updateProfile = User::where('id', Auth::user()->id)->update([
                 'photo' => $filename
             ]);
