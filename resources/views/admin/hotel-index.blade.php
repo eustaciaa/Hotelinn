@@ -1,11 +1,11 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
-@section('content')
+@section('item')
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.21/datatables.min.css"/>
 <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.21/datatables.min.js"></script>
-<div class="container">
+<div class="container mt-4 mx-4">
     <div class="col-12">
-        <h2 class="mt-3">Daftar Hotel</h2>
+        <h2 class="mt-3">Daftar Hotel</h2><br>
         @if (session('status'))
             <div class="alert alert-success">
                 {{ session('status') }}
@@ -26,18 +26,25 @@
             <tbody>
             @foreach ($hotels as $hotel)
                 <tr>
-                    <td>{{ $hotel->hotel->name }}</td>
-                    <td>{{ $hotel->detailLengkap }}</td>
+                    <td>{{ $hotel->name }}</td>
+                    <td>{{ $hotel->alamat->detailLengkap }} {{ $hotel->deleted_at }}</td>
                     <td>
-                        <a href="/admin/hotels/{{ $hotel->hotel->id }}" class="mx-2 badge badge-info">Detail</a>
-                        <a href="/admin/hotels/alamat/{{ $hotel->hotel->id }}/edit" class="mx-2 badge badge-info">Ubah Alamat</a>
-                        <a href="/admin/rooms/{{ $hotel->hotel->id }}/add-room" class="mx-2 badge badge-info">Tambah Kamar</a>
+                        @if($hotel->deleted_at == null)
+                        <a href="/admin/hotels/{{ $hotel->id }}" class="mx-2 badge badge-info">Detail</a>
+                        <a href="/admin/hotels/alamat/{{ $hotel->id }}/edit" class="mx-2 badge badge-info">Ubah Alamat</a>
+                        <a href="/admin/rooms/{{ $hotel->id }}/add-room" class="mx-2 badge badge-info">Tambah Kamar</a>
+                        @else
+                        <form action="/admin/hotels_restore/{{ $hotel->id }}" method="POST">
+                            @method('PATCH')
+                            @csrf
+                        <button type="submit" class="mx-2 badge badge-success" style="border: none">Pulihkan Kembali</button>
+                        </form>
+                        @endif
                     </td>
                 </tr>
             @endforeach
             </tbody>
         </table>
-        <a href="/admin" class="btn btn-primary my-3">Kembali</a>
     </div>
 </div>
 <script>

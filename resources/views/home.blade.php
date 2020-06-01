@@ -43,9 +43,9 @@
     <div class="bg-lightblue">
         <div class="container">
             <div class="row justify-content-center" id="searchRow">
-                <div class="col-md-6 my-5">
+                <div class="col-md-8 my-5">
 
-                    <div class="row justify-content-center mb-2">
+                    <div class="row justify-content-center mb-3">
                         <div class="col text-center">
                             <h4>Mau nginep di mana?</h4>
                         </div>
@@ -95,15 +95,21 @@
                                 <option value="rating">Rating</option>
                             </select>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-1 d-flex align-items-end pl-3">
+                            <label for="min" class="form-label">Dari</label>
+                        </div>
+                        <div class="col-md-3">
                             <input class="form-control" type="number" name="min" id="min" min="0" value="0">
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-1 d-flex align-items-end pl-3">
+                            <label for="max" class="form-label">Sampai</label>
+                        </div>
+                        <div class="col-md-3">
                             <input class="form-control" type="number" name="max" id="max" max="0" value="0">
                         </div>
                     </div>
                     <div class="row text-center mb-2">
-                        <div class="col-md-12">
+                        <div class="col-md-12 d-flex justify-content-end">
                             <button type="button" class="btn btn-primary" id="search">
                                 Cari
                             </button>

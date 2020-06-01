@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class hotel extends Model
 {
@@ -11,6 +12,9 @@ class hotel extends Model
      *
      * @var string
      */
+
+    use SoftDeletes;
+
     protected $table = 'hotel';
 
     protected $fillable = [

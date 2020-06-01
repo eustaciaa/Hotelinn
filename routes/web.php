@@ -88,9 +88,17 @@ Route::prefix('admin')->group(function(){
 
     Route::get('/userStat','AdminController@showUserStat')->name('admin.userStat');
 
+    Route::get('/orderStat','AdminController@showOrderStat')->name('admin.orderStat');
+
     Route::get('/getUserCountDetails','AdminController@getUserCountDetails')->name('admin.userCountDetail');
 
     Route::get('/getHotelCountDetails','AdminController@getHotelCountDetails')->name('admin.hotelCountDetail');
+
+    Route::get('/getOrderCountDetails','AdminController@getOrderCountDetails')->name('admin.orderCountDetail');
+
+    Route::patch('/hotels_restore/{id}','Admin\HotelController@restore');
+
+    Route::patch('/room_restore/{id}','Admin\RoomsController@restore');
 
 });
 
@@ -101,6 +109,8 @@ Route::get('/profile','UserController@profile');
 Route::post('/changePass','UserController@changePassword');
 
 Route::post('/profile','UserController@profile');
+
+Route::post('/changePass', 'UserController@changePassword');
 
 Route::post('/rentFinal','RentController@rentFinal');
 

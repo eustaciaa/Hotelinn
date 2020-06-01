@@ -7,10 +7,21 @@ use Illuminate\Http\Request;
 use App\hotel;
 use App\alamat;
 use App\provinsi;
+use App\kota;
 use App\history;
+use App\room_details;
 
 class HotelController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth:admin');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -18,7 +29,9 @@ class HotelController extends Controller
      */
     public function index()
     {
-        return view('admin.hotel-index')->with(['hotels' => alamat::all(), 'provinsis' => provinsi::all()]);
+        // dd(alamat::all());
+        // dd(hotel::all());
+        return view('admin.hotel-index')->with(['hotels' => hotel::withTrashed()->get(), 'provinsis' => provinsi::all()]);
     }
 
     /**
@@ -27,8 +40,8 @@ class HotelController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        return view('admin/add-hotel');
+    {   
+        return view('admin/add-hotel')->with(['provinsis' => provinsi::all(), 'kotas' => kota::all()]);
     }
 
     /**
@@ -42,19 +55,15 @@ class HotelController extends Controller
         $request->validate([
             'name' => 'required|max:255',
             'star' => 'required',
-            'rating' => 'nullable|numeric',
-            'reviewers' => 'nullable',
             'photo' => 'required|image|max:1000',
-            'namaProvinsi' => 'required',
-            'namaKota' => 'required',
+            'provinsi_id' => 'required',
+            'kota_id' => 'required',
             'detailLengkap' => 'required|max:255'
         ]);
 
         $hotel = new hotel();
         $hotel->name = $request->name;
         $hotel->star = $request->star;
-        $hotel->rating = $request->rating;
-        $hotel->reviewers = $request->reviewers;
 
         $hotelFilename = strtolower(str_replace(" ","-",$request->name));
 
@@ -72,40 +81,42 @@ class HotelController extends Controller
 
         $alamat = new alamat();
         $alamat->hotel_id = $hotel->id;
-        switch ($request->namaProvinsi) {
-            case 'DKI Jakarta':
-                $alamat->provinsi_id = 1;
-                break;
+        $alamat->provinsi_id = $request->provinsi_id;
+        $alamat->kota_id = $request->kota_id;
+        // switch ($request->namaProvinsi) {
+        //     case 'DKI Jakarta':
+        //         $alamat->provinsi_id = 1;
+        //         break;
 
-            case 'D.I Yogyakarta':
-                $alamat->provinsi_id = 2;
-                break;
+        //     case 'D.I Yogyakarta':
+        //         $alamat->provinsi_id = 2;
+        //         break;
 
-            case 'Banten':
-                $alamat->provinsi_id = 3;
-                break;
-        }
-        switch ($request->namaKota) {
-            case 'Jakarta':
-                $alamat->kota_id = 1;
-                break;
+        //     case 'Banten':
+        //         $alamat->provinsi_id = 3;
+        //         break;
+        // }
+        // switch ($request->namaKota) {
+        //     case 'Jakarta':
+        //         $alamat->kota_id = 1;
+        //         break;
 
-            case 'Yogyakarta':
-                $alamat->kota_id = 2;
-                break;
+        //     case 'Yogyakarta':
+        //         $alamat->kota_id = 2;
+        //         break;
 
-            case 'Tangerang':
-                $alamat->kota_id = 3;
-                break;
+        //     case 'Tangerang':
+        //         $alamat->kota_id = 3;
+        //         break;
 
-            case 'Tangerang Selatan':
-                $alamat->kota_id = 4;
-                break;
+        //     case 'Tangerang Selatan':
+        //         $alamat->kota_id = 4;
+        //         break;
 
-            case 'Serang':
-                $alamat->kota_id = 5;
-                break;
-        }
+        //     case 'Serang':
+        //         $alamat->kota_id = 5;
+        //         break;
+        // }
         $alamat->detailLengkap = $request->detailLengkap;
 
         $alamat->save();
@@ -221,15 +232,22 @@ class HotelController extends Controller
      */
     public function destroy(Hotel $hotel)
     {
-        $alamat = alamat::where('hotel_id', $hotel->id)->delete();
+
         Hotel::destroy($hotel->id);
+        $rooms = room_details::where('hotel_id',$hotel->id)->get();
+        foreach($rooms as $room)
+        {
+            $room->delete();
+        }
+
+
         return redirect('/admin/hotels')->with('status', 'Hotel berhasil dihapus !');
     }
 
     public function orderList(){
         return view('admin.orderList')->with(['histories' => history::all()]);
     }
-    
+
     public function detailOrder($history){
         $order = history::where('id',$history)->get()->all();
 
@@ -271,4 +289,17 @@ class HotelController extends Controller
 
         return redirect()->back();
     }
+
+    public function restore($id)
+    {
+         hotel::onlyTrashed()->find($id)->restore();
+
+         $rooms = room_details::where('hotel_id',$id)->onlyTrashed()->get();
+        foreach($rooms as $room)
+        {
+            $room->restore();
+        }
+         return redirect('/admin/hotels')->with('status', 'Hotel berhasil dipulihkan !');
+    }
+
 }

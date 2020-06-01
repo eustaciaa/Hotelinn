@@ -29,76 +29,91 @@
 
 <div class="container">
     <div class="row justify-content-center">
-    
-        <div class="col-md-8">
-
-                <div class="card my-5">
-                    <div class="card-header justify-content-center"><i>{{__('Ubah Profil')}}</i></div>
+        <div class="col-md-8 py-4">
+            <div class="row justify-content-start mb-3 ml-1">
+                <a href="/" class="btn btn-primary my-3"><i class="fas fa-chevron-left mr-2"></i>Kembali</a>
+            </div>
+                <div class="card mb-5">
                     <div class="card-body">
+                        <h3 class="card-title">Ubah Profil</h3><br>
                         <form enctype="multipart/form-data" action="/updateProfile" method="POST">
-                                @csrf
-                                <div class="form-group col">
-                                @if (Auth::user()->photo != NULL)
-                                    <img src="images/profile/{{ Auth::user()->photo }}" class="img-thumbnail" style="width:150px; height:150px; float:left; border-radius:50%; margin-right:25px;"  onclick="triggerClick()" id="display_photo"></img>
-                                @else
-                                    <img src="images/profile/default.png" class=" img-thumbnail" style="width:150px; height:150px; float:left; border-radius:50%; margin-right:25px;" onclick="triggerClick()" id="display_photo"></img>
-                                @endif
-                                <input type="file"  onchange="displayImage(this)" name="photo" id="input_photo">
-                                </div>
-
-                                <div class="form-group row">
-                                    <label for="fName" class="col-md-4 col-form-label text-md-right">{{ __('Nama Depan') }}</label>
-                            
-                                    <div class="col-md-6">
-                                        <input id="fName" type="text" class="form-control" name="fName" value="{{ Auth::user()->fName }}" required autofocus>
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label for="lName" class="col-md-4 col-form-label text-md-right">{{ __('Nama Belakang') }}</label>
-
-                                    <div class="col-md-6">
-                                        <input id="lName" type="text" class="form-control" name="lName" value="{{ Auth::user()->lName }}" required autofocus>
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label for="email" class="col-md-4 col-form-label text-md-right"><i>{{ __('Email') }}</i></label>
-
-                                    <div class="col-md-6">
-                                        <input id="email" type="email" class="form-control" name="email" value="{{ Auth::user()->email }}" required disabled>
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label for="gender" class="col-md-4 col-form-label text-md-right"><i>{{ __('Jenis Kelamin') }}</i></label>
-
-                                    <div class="col-md-6">
-                                        <select class="form-control" id="gender" name="gender">
-                                        @if (Auth::user()->gender=='M')
-                                            <option value="M" selected>Pria</option>
-                                            <option value="F">Wanita</option>
-                                        @elseif (Auth::user()->gender=='F')
-                                            <option value="M">Pria</option>
-                                            <option value="F" selected>Wanita</option>
+                            @csrf
+                            <div class="row px-5">
+                                <div class="col-md-4">
+                                    <div class="form-group row d-flex justify-content-center">
+                                        @if (Auth::user()->photo != NULL)
+                                            <img src="images/profile/{{ Auth::user()->photo }}" class="img-thumbnail" style="width:150px; height:150px; border-radius:50%;"  onclick="triggerClick()" id="display_photo"></img>
+                                        @else
+                                            <img src="images/profile/default.png" class=" img-thumbnail" style="width:150px; height:150px; border-radius:50%;" onclick="triggerClick()" id="display_photo"></img>
                                         @endif
-                                    </select>
+                                    </div>
+                                    <div class="form-group row d-flex justify-content-center">
+                                        <div class="input-group mb-3">
+                                            <div class="custom-file">
+                                                <input type="file"  onchange="displayImage(this)" name="photo" id="input_photo" class="custom-file-input">
+                                                <label class="custom-file-label" for="input_photo">Choose file</label>
+                                            </div>
+                                        </div>
+                                        
                                     </div>
                                 </div>
+                                <div class="col">
+                                    <div class="form-group row">
+                                        <label for="fName" class="col-md-4 col-form-label text-md-right">{{ __('Nama Depan') }}</label>
+                                
+                                        <div class="col-md-8">
+                                            <input id="fName" type="text" class="form-control" name="fName" value="{{ Auth::user()->fName }}" required autofocus>
+                                        </div>
+                                    </div>
 
-                                <div class="form-group row">
-                                    <label for="birtdate" class="col-md-4 col-form-label text-md-right">{{ __('Tanggal Lahir') }}</label>
+                                    <div class="form-group row">
+                                        <label for="lName" class="col-md-4 col-form-label text-md-right">{{ __('Nama Belakang') }}</label>
 
-                                    <div class="col-md-6">
-                                        <input id="date" type="date" class="form-control" name="birthdate" value="{{ Auth::user()->birthdate }}" required>
+                                        <div class="col-md-8">
+                                            <input id="lName" type="text" class="form-control" name="lName" value="{{ Auth::user()->lName }}" required autofocus>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Email') }}</label>
+
+                                        <div class="col-md-8">
+                                            <input id="email" type="email" class="form-control" name="email" value="{{ Auth::user()->email }}" required disabled>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="gender" class="col-md-4 col-form-label text-md-right">{{ __('Jenis Kelamin') }}</label>
+
+                                        <div class="col-md-8">
+                                            <select class="form-control" id="gender" name="gender">
+                                            @if (Auth::user()->gender=='M')
+                                                <option value="M" selected>Pria</option>
+                                                <option value="F">Wanita</option>
+                                            @elseif (Auth::user()->gender=='F')
+                                                <option value="M">Pria</option>
+                                                <option value="F" selected>Wanita</option>
+                                            @endif
+                                        </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="birtdate" class="col-md-4 col-form-label text-md-right">{{ __('Tanggal Lahir') }}</label>
+
+                                        <div class="col-md-8">
+                                            <input id="date" type="date" class="form-control" name="birthdate" value="{{ Auth::user()->birthdate }}" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row d-flex justify-content-end pr-3 mt-5">
+                                        <button id="submit" class="btn btn-primary " type="submit">Ubah Profil</button>
                                     </div>
                                 </div>
-
-                                <div class="form-group row">
-                                    <button id="submit" class="btn btn-primary offset-md-4 " type="submit">Ubah Profil</button>
-                                </div>
+                            </div>
                         </form>
                     </div>
+                </div>
                 <div class="accordion md-accordion" id="accordionEx" role="tablist" aria-multiselectable="true">
 
         <!-- Accordion card -->
@@ -165,11 +180,6 @@
                     </form>
                 </div>
         </div>
-    </div>
-    </div>
-    </div>
-                <a href="/" class="btn btn-primary my-3">Kembali</a>
-        
     </div>
 </div>
 @endsection

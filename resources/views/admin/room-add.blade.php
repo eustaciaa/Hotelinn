@@ -1,12 +1,37 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
-@section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-6 offset-md-3">
-            <form action="{{route('post.add-room')}}" method="POST" enctype="multipart/form-data">
-                @csrf
-                <h4>Tambahkan Kamar Hotel</h4>
+@section('item')
+<div class="container my-5 mx-4">
+    <h4>Tambah Hotel</h4>
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <form action="{{route('post.add-room')}}" method="POST" enctype="multipart/form-data">
+                                @csrf
+                            <div class="form-group row d-flex justify-content-center px-4 pt-3">
+                                <img src="/images/hotel/default-image.png" class="img-thumbnail" style="width:100%; object-fit: cover;" onclick="triggerClick()" id="display_photo"></img>
+                            </div>
+                            <label for="photo">{{ __('Foto Kamar') }}</label>
+                            <div class="input-group mb-3">
+                                <div class="form-group row d-flex justify-content-center px-4">
+                                <div class="custom-file">
+                                        <input type="file"  onchange="displayImage(this)" name="photo" id="input_photo" class="custom-file-input @error('photo') is-invalid @enderror" value="{{ old('photo') }}">
+                                        <label class="custom-file-label" for="input_photo">Choose file</label>
+                                        @error('photo')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card mb-4"></div>
+            
                 <div class="form-group">
                     <label for="name">{{ __('Nama Hotel') }}</label>
                     <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" placeholder="Masukkan nama hotel" value="{{ old('name') }}" />

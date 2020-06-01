@@ -60,6 +60,12 @@ class DatabaseSeeder extends Seeder
         $kota->namaKota = "Serang";
         $provinsi->kota()->save($kota);
 
+        $hotel = new App\hotel;
+        $hotel->name = "Fraser Residence Menteng";
+        $hotel->star = 5;
+        $hotel->photo = "/images/hotel/fraser-residence-menteng/home.jpg";
+        $hotel->save();
+
         $this->call([
             HotelSeeder::class,
         ]);

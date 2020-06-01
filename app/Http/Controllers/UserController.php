@@ -30,12 +30,12 @@ class UserController extends Controller
         $history_wait = history::where(['user_id'=>Auth::user()->id, 'confirmed' => 0, 'finished' => 0])->orderBy('id','asc')->get();
         $history_confirm = history::where(['user_id'=>Auth::user()->id, 'confirmed' => 1, 'finished' => 0])->orderBy('id','asc')->get();
         $history_finish = history::where(['user_id'=>Auth::user()->id, 'confirmed' => 1, 'finished' => 1])->orderBy('id','asc')->get();
-        
+
         return view('user.history')->with(['histories_wait' => $history_wait, 'histories_confirm' => $history_confirm, 'histories_finish' => $history_finish]);
     }
 
     public function history_detail($id)
-    {   
+    {
         $detail = history::where('id',$id)->get()->all();
 
         return view('user.history_detail')->with('details',$detail);
@@ -43,7 +43,7 @@ class UserController extends Controller
     }
 
     public function rating(Request $request)
-    {   
+    {
         $id = $request->input('historyId');
         $ratingValue = $request->input('ratingValue') * 2;
 
@@ -53,7 +53,7 @@ class UserController extends Controller
 
 
         $hotelId = history::select('hotel_id')->where('id',$id)->first();
-        
+
         $hotel = hotel::select('total_rating','reviewers','rating')->where('id',$hotelId->hotel_id)->first();
 
         $addRatingTotal = $hotel->total_rating + $ratingValue;
@@ -67,7 +67,7 @@ class UserController extends Controller
         ]);
 
 
-        return redirect()->back()->with('success', '<div class="text-center"><h5><strong>Ulasan Berhasil Ditambahkan! <br> <div class="text-muted">Ayo, perbanyak pengalaman Hotelinn kamu!</div></strong></h5></div>');   
+        return redirect()->back()->with('success', '<div class="text-center"><h5><strong>Ulasan Berhasil Ditambahkan! <br> <div class="text-muted">Ayo, perbanyak pengalaman Hotelinn kamu!</div></strong></h5></div>');
     }
 
     public function profile (Request $request)
@@ -116,7 +116,7 @@ class UserController extends Controller
 
         $change = User::find(Auth::user()->id)->update(['password'=> Hash::make($request->new_password)]);
 
-        return redirect()->back()->with('success', '<div class="text-center"><h5><strong>Kata Sandi berhasil diubah!</strong></h5></div>');   
+        return redirect()->back()->with('success', '<div class="text-center"><h5><strong>Kata Sandi berhasil diubah!</strong></h5></div>');
     }
 
 }
