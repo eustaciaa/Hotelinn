@@ -29,9 +29,9 @@ class HotelController extends Controller
      */
     public function index()
     {
-        //dd(alamat::all());
-        $hotel = hotel::first();
-        dd($hotel->room());
+        // //dd(alamat::all());
+        // $hotel = hotel::first();
+        // dd($hotel->room());
         return view('admin.hotel-index')->with(['hotels' => hotel::withTrashed()->get(), 'provinsis' => provinsi::all()]);
     }
 
