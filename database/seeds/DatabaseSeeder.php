@@ -139,7 +139,7 @@ class DatabaseSeeder extends Seeder
         $alamat->kota_id = 1;
         $alamat->detailLengkap = "Jl. Raya Tomang No.51, 11440, Jakarta, Indonesia";
 
-        $hotel->alamat()->save($alamat);
+        $hotel->alamat->save($alamat);
 
         $room = new App\room_details;
         $room->name = "Standard Double Room";
@@ -185,7 +185,7 @@ class DatabaseSeeder extends Seeder
         $alamat->provinsi_id = 2;
         $alamat->kota_id = 2;
         $alamat->detailLengkap = "Jl. Gajah Mada No. 67, 55112, Yogyakarta, Indonesia";
-        $hotel->alamat()->save($alamat);
+        $hotel->alamat->save($alamat);
 
         $hotel = new App\hotel;
         $hotel->name = "Grand Tjokro Yogyakarta";
@@ -197,7 +197,7 @@ class DatabaseSeeder extends Seeder
         $alamat->provinsi_id = 2;
         $alamat->kota_id = 2;
         $alamat->detailLengkap = "Jalan Gejayan No 37, Sleman, Depok, Gejayan, Yogyakarta, Indonesia, 55281        ";
-        $hotel->alamat()->save($alamat);
+        $hotel->alamat->save($alamat);
 
     }
 }
