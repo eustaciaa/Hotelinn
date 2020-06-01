@@ -10,19 +10,20 @@
             </div>
         @elseif (session('unstatus'))
             <div class="alert alert-danger">
-                {{ __('Maaf terjadi kesalahan') }}
+                {{ __('Maaf, terjadi kesalahan') }}
             </div>
         @endif
         <div class="card mb-3">
             <div class="row no-gutters">
                 <div class="col-md-4">
-                    <img src="{{ $room_detail->photo }}" class="card-img-top" alt="...">
+                    <img src="{{ $room_detail->photo }}" class="card-img-top" alt="{{ $room_detail->photo }}" style="height:100%; object-fit: cover;">
                 </div>
                 <div class="col-md-8">
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
                         <div class="col">
                             <h3 class="card-title">{{ $room_detail->name }}</h3>
+                            <h6 class="card-text price mb-4"><strong>Rp{{number_format($room_detail->cost,2,",",".")}} / malam</strong></h6>
                             @if (($room_detail->freeWifi) == 1)
                                 <p class="my-2">WiFi Gratis <i class="fas fa-check ml-1 text-success"></i></p>
                             @else
