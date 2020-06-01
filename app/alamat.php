@@ -24,12 +24,12 @@ class alamat extends Model
 
     public function kota()
     {
-        return $this->belongsTo('App\Kota');
+        return $this->belongsTo('App\kota');
     }
 
     public function provinsi()
     {
-        return $this->belongsTo('App\Provinsi');
+        return $this->belongsTo('App\provinsi');
     }
 
 }
