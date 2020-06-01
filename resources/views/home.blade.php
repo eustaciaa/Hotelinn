@@ -76,14 +76,14 @@
                             <select class="form-control" name="orderBy" id="orderBy">
                                 <option value="none" selected> Urutkan Berdasarkan </option>
                                 <optgroup label="Rating">
-                                    <option value="Rating Asc">Terendah - Tertinggi</option>
-                                    <option value="Rating Desc">Tertinggi - Terendah</option>
+                                    <option value="total_rating Asc">Terendah - Tertinggi</option>
+                                    <option value="total_ating Desc">Tertinggi - Terendah</option>
                                 <optgroup label="Bintang">
-                                    <option value="Star Asc">Terendah - Tertinggi</option>
-                                    <option value="Star Desc">Tertinggi - Terendah</option>
+                                    <option value="star Asc">Terendah - Tertinggi</option>
+                                    <option value="star Desc">Tertinggi - Terendah</option>
                                 <optgroup label="Harga">
-                                    <option value="Cost Asc">Terendah - Tertinggi</option>
-                                    <option value="Cost Desc">Tertinggi - Terendah</option>
+                                    <option value="cost Asc">Terendah - Tertinggi</option>
+                                    <option value="cost Desc">Tertinggi - Terendah</option>
                             </select>
                         </div>
                     </div>
