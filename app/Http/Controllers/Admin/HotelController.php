@@ -159,7 +159,6 @@ class HotelController extends Controller
             'name' => 'required|max:255',
             'star' => 'required',
             'rating' => 'nullable|numeric',
-            'reviewers' => 'nullable',
             'photo' => 'image|max:1000'
         ]);
 
@@ -168,7 +167,6 @@ class HotelController extends Controller
             'name' => $request->name,
             'star' => $request->star,
             'rating' => $request->rating,
-            'reviewers' => $request->reviewers
         ]);
 
         $hotelFilename = strtolower(str_replace(" ","-",$request->name));
