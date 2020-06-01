@@ -29,36 +29,36 @@ class AJAXController extends Controller
         if ($field != "none" && $order != "none" && $filter != "none") {
             if ($kotaId == 'all' && $provinsiId == 'all'){
                 $alamat = alamat::select('alamat.hotel_id as hotel_id','hotel.photo as photo','hotel.name as name','hotel.star as star','hotel.total_rating as rating','hotel.reviewers as reviewers','alamat.detailLengkap as detailLengkap','kota.namaKota as namaKota','provinsi.namaProvinsi as namaProvinsi')->join('hotel', 'alamat.hotel_id', '=', 'hotel.id')->join('kota','alamat.kota_id','=','kota.id')->join('provinsi','alamat.provinsi_id','=','provinsi.id')->join('room_details','hotel.id','=','room_details.hotel_id')->whereBetween($filter, [$min , $max])->orderBy($field, $order)->get();
-                $alamat = $alamat->orderBy($field,$order);
+                $alamat = $alamat->sortBy($field);
             } elseif ($kotaId == 'all') {
                 $query = ['alamat.provinsi_id' => $provinsiId];
                 $alamat = alamat::select('alamat.hotel_id as hotel_id','hotel.photo as photo','hotel.name as name','hotel.star as star','hotel.total_rating as rating','hotel.reviewers as reviewers','alamat.detailLengkap as detailLengkap','kota.namaKota as namaKota','provinsi.namaProvinsi as namaProvinsi')->where($query)->join('hotel', 'alamat.hotel_id', '=', 'hotel.id')->join('kota','alamat.kota_id','=','kota.id')->join('provinsi','alamat.provinsi_id','=','provinsi.id')->join('room_details','hotel.id','=','room_details.hotel_id')->whereBetween($filter, [$min , $max])->orderBy($field, $order)->get();
-                $alamat = $alamat->orderBy($field,$order);
+                $alamat = $alamat->sortBy($field);
             } elseif ($provinsiId == 'all') {
                 $query = ['kota_id' => $kotaId];
                 $alamat = alamat::select('alamat.hotel_id as hotel_id','hotel.photo as photo','hotel.name as name','hotel.star as star','hotel.total_rating as rating','hotel.reviewers as reviewers','alamat.detailLengkap as detailLengkap','kota.namaKota as namaKota','provinsi.namaProvinsi as namaProvinsi')->where($query)->join('hotel', 'alamat.hotel_id', '=', 'hotel.id')->join('kota','alamat.kota_id','=','kota.id')->join('provinsi','alamat.provinsi_id','=','provinsi.id')->join('room_details','hotel.id','=','room_details.hotel_id')->whereBetween($filter, [$min , $max])->orderBy($field, $order)->get();
-                $alamat = $alamat->orderBy($field,$order);
+                $alamat = $alamat->sortBy($field);
             } else {
                 $query = ['alamat.provinsi_id' => $provinsiId, 'kota_id' => $kotaId];
                 $alamat = alamat::select('alamat.hotel_id as hotel_id','hotel.photo as photo','hotel.name as name','hotel.star as star','hotel.total_rating as rating','hotel.reviewers as reviewers','alamat.detailLengkap as detailLengkap','kota.namaKota as namaKota','provinsi.namaProvinsi as namaProvinsi')->where($query)->join('hotel', 'alamat.hotel_id', '=', 'hotel.id')->join('kota','alamat.kota_id','=','kota.id')->join('provinsi','alamat.provinsi_id','=','provinsi.id')->join('room_details','hotel.id','=','room_details.hotel_id')->whereBetween($filter, [$min , $max])->orderBy($field, $order)->get();
-                $alamat = $alamat->orderBy($field,$order);
+                $alamat = $alamat->sortBy($field);
             }
         } elseif ($field != "none" && $order != "none") {
             if ($kotaId == 'all' && $provinsiId == 'all') {
                 $alamat = alamat::select('alamat.hotel_id as hotel_id','hotel.photo as photo','hotel.name as name','hotel.star as star','hotel.total_rating as rating','hotel.reviewers as reviewers','alamat.detailLengkap as detailLengkap','kota.namaKota as namaKota','provinsi.namaProvinsi as namaProvinsi')->join('hotel', 'alamat.hotel_id', '=', 'hotel.id')->join('kota','alamat.kota_id','=','kota.id')->join('provinsi','alamat.provinsi_id','=','provinsi.id')->join('room_details','hotel.id','=','room_details.hotel_id')->orderBy($field, $order)->get();
-                $alamat = $alamat->orderBy($field,$order);
+                $alamat = $alamat->sortBy($field);
             } elseif ($kotaId == 'all') {
                 $query = ['alamat.provinsi_id' => $provinsiId];
                 $alamat = alamat::select('alamat.hotel_id as hotel_id','hotel.photo as photo','hotel.name as name','hotel.star as star','hotel.total_rating as rating','hotel.reviewers as reviewers','alamat.detailLengkap as detailLengkap','kota.namaKota as namaKota','provinsi.namaProvinsi as namaProvinsi')->where($query)->join('hotel', 'alamat.hotel_id', '=', 'hotel.id')->join('kota','alamat.kota_id','=','kota.id')->join('provinsi','alamat.provinsi_id','=','provinsi.id')->join('room_details','hotel.id','=','room_details.hotel_id')->orderBy($field, $order)->get();
-                $alamat = $alamat->orderBy($field,$order);
+                $alamat = $alamat->sortBy($field);
             } elseif ($provinsiId == 'all') {
                 $query = ['kota_id' => $kotaId];
                 $alamat = alamat::select('alamat.hotel_id as hotel_id','hotel.photo as photo','hotel.name as name','hotel.star as star','hotel.total_rating as rating','hotel.reviewers as reviewers','alamat.detailLengkap as detailLengkap','kota.namaKota as namaKota','provinsi.namaProvinsi as namaProvinsi')->where($query)->join('hotel', 'alamat.hotel_id', '=', 'hotel.id')->join('kota','alamat.kota_id','=','kota.id')->join('provinsi','alamat.provinsi_id','=','provinsi.id')->join('room_details','hotel.id','=','room_details.hotel_id')->orderBy($field, $order)->get();
-                $alamat = $alamat->orderBy($field,$order);
+                $alamat = $alamat->sortBy($field);
             } else {
                 $query = ['alamat.provinsi_id' => $provinsiId, 'kota_id' => $kotaId];
                 $alamat = alamat::select('alamat.hotel_id as hotel_id','hotel.photo as photo','hotel.name as name','hotel.star as star','hotel.total_rating as rating','hotel.reviewers as reviewers','alamat.detailLengkap as detailLengkap','kota.namaKota as namaKota','provinsi.namaProvinsi as namaProvinsi')->where($query)->join('hotel', 'alamat.hotel_id', '=', 'hotel.id')->join('kota','alamat.kota_id','=','kota.id')->join('provinsi','alamat.provinsi_id','=','provinsi.id')->join('room_details','hotel.id','=','room_details.hotel_id')->orderBy($field, $order)->get();
-                $alamat = $alamat->orderBy($field,$order);
+                $alamat = $alamat->sortBy($field);
             }
         } elseif ($filter != "none") {
             if ($kotaId == 'all' && $provinsiId == 'all') {
@@ -166,7 +166,7 @@ class AJAXController extends Controller
             }
         }
 
-        $hotels = $hotels = kota::select('hotel.nam', 'hotel.id')->join('alamat', 'kota.id', 'alamat.kota_id')->join('hotel', 'alamat.hotel_id', 'hotel.id')->where('hotel.name', 'like', $query)->get();
+        $hotels = $hotels = kota::select('hotel.name', 'hotel.id')->join('alamat', 'kota.id', 'alamat.kota_id')->join('hotel', 'alamat.hotel_id', 'hotel.id')->where('hotel.name', 'like', $query)->get();
 
         if($hotels->count() > 0)
         {
