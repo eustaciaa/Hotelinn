@@ -46,14 +46,15 @@ class ResetPasswordNotification extends Notification
         $link = url( "/password/reset/?token=" . $this->token );
 
         return (new MailMessage)
+                    ->view('vendor.notifications.email')
                     ->subject('Memulihkan Password')
                     ->greeting('Halo')
                     ->line('Kamu menerima email ini karena kami menerima permintaan kamu untuk memulihkan password')
-                    ->action('Notification Action', $link)
+                    ->action('Pulihkan password', $link)
                     ->line('Link ini akan kadarluwarsa dalam 60 menit')
                     ->line('Abaikan jika kamu tidak meminta untuk memulihkan password')
-                    ->line('Salam')
-                    ->line('Hotelin');
+                    ->salutation("Salam,
+                    Hotelinn");
     }
 
     /**
