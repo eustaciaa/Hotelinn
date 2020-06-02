@@ -97,7 +97,7 @@ class AJAXController extends Controller
             }
         }
 
-        return json_encode($alamat, JSON_HEX_TAG);
+        return json_encode($alamat->unique('hotel_id')->values()->all(), JSON_HEX_TAG);
     }
 
     public function getKota(Request $request)

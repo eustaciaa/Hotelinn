@@ -323,7 +323,7 @@
                         div = "";
                     })
                 }else{
-                    let div = '<div class="alert alert-dark my-5"><p class="text-center text-muted">Belum ada hotel yang terdaftar</p></div>';
+                    let div = '<div class="alert alert-dark my-5 card-hotel"><p class="text-center text-muted">Belum ada hotel yang terdaftar</p></div>';
                     $('#hotel-row').append(div);
                     div='';
                 }
@@ -393,7 +393,7 @@ function ajaxCallSearch (item) {
                         $('#hotel-row').append(div);
                     })
                 }else{
-                    let div = '<div class="alert alert-dark my-5"><p class="text-center text-muted">Belum ada hotel yang terdaftar</p></div>';
+                    let div = '<div class="alert alert-dark my-5 card-hotel"><p class="text-center text-muted">Belum ada hotel yang terdaftar</p></div>';
                     $('#hotel-row').append(div);
                     div='';
                 }
