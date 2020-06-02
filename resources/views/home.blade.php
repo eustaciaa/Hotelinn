@@ -76,8 +76,8 @@
                             <select class="form-control" name="orderBy" id="orderBy">
                                 <option value="none" selected> Urutkan Berdasarkan </option>
                                 <optgroup label="Rating">
-                                    <option value="total_rating asc">Terendah - Tertinggi</option>
-                                    <option value="total_ating desc">Tertinggi - Terendah</option>
+                                    <option value="rating asc">Terendah - Tertinggi</option>
+                                    <option value="rating desc">Tertinggi - Terendah</option>
                                 <optgroup label="Bintang">
                                     <option value="star asc">Terendah - Tertinggi</option>
                                     <option value="star desc">Tertinggi - Terendah</option>
