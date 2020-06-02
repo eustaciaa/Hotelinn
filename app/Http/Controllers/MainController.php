@@ -63,10 +63,7 @@ class MainController extends Controller
         $count = history::selectRaw('"room_id", sum("roomTotal") as booked_rooms')
                         ->where('hotel_id',$hotelId)
                         ->where('finished','=','false')
-                        ->whereRaw("CASE WHEN (\"checkIn\" BETWEEN '$checkIn' AND '$checkOut') OR (\"checkIn\" BETWEEN '$checkIn' AND '$checkOut') THEN true
-                        WHEN (\"checkOut\" >= '$checkIn' AND \"checkIn\" <='$checkOut') THEN true
-                        ELSE  false
-                        END")->groupBy('room_id')->get();
+                        ->whereRaw("IF((checkIn BETWEEN '".$checkIn."' AND '".$checkOut."') OR (checkIn BETWEEN '".$checkIn."' AND '".$checkOut."'), 1, IF((checkOut >= '".$checkIn."') AND (checkIn <='".$checkOut."'), 1, 0))")->groupBy('room_id')->get();
 
 
         $hotel = alamat::where('hotel_id', $hotelId)->first();
