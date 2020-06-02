@@ -78,7 +78,7 @@
                                                     <div class="d-flex align-items-end">
                                                         <form action="/history/{{$history->id}}" method="post">
                                                             @csrf
-                                                            <button type="submit" class="btn btn-info">
+                                                            <button type="submit" class="btn btn-light">
                                                                 Detail Pemesanan
                                                             </button>
                                                         </form>
@@ -138,7 +138,7 @@
                                                     <div class="d-flex align-items-end">
                                                         <form action="/history/{{$history->id}}" method="post">
                                                             @csrf
-                                                            <button type="submit" class="btn btn-info">
+                                                            <button type="submit" class="btn btn-light">
                                                                 Detail Pemesanan
                                                             </button>
                                                         </form>

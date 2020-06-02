@@ -9,8 +9,8 @@
                 <b>Daftar untuk menemukan kenyamanan menginap dengan hotelinn!</b>
             </h1>
         </div>
-        <div class="col-md-8 pl-3">
-            <div class="row pl-5">
+        <div class="col-md-8 pl-3 form">
+            <div class="row pl-5 form">
                 <div class="card col-md-9">
                     <div class="card-body">
                         <h4 class="card-title text-center"><b>{{ __('Daftar') }}</b></h4><br>

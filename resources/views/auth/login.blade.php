@@ -9,8 +9,8 @@
                 <b>Masuk sekarang untuk dapat memesan hotel yang kamu mau!</b>
             </h1><br><br><br>
         </div>
-        <div class="col-md-6 pl-5">
-            <div class="row pl-5">
+        <div class="col-md-6 pl-5 form">
+            <div class="row pl-5 form">
                 <div class="card col-md-9">
                     <div class="card-body">
                         <h4 class="card-title text-center"><b>{{ __('Masuk') }}</b></h4><br>

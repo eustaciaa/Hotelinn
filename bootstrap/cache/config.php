@@ -496,7 +496,7 @@
         'port' => '587',
         'encryption' => 'tls',
         'username' => 'uashotelinn@yandex.com',
-        'password' => 'hotelinnapp2020',
+        'password' => 'hotelinapp2020',
         'timeout' => NULL,
         'auth_mode' => NULL,
       ),
